@@ -1,0 +1,574 @@
+<!--
+  =====================================================
+  PDC 2026 - Ready to paste into Elementor HTML widget
+  =====================================================
+  HOW TO USE:
+  1. Edit page with Elementor
+  2. Add a new section (full width, no padding)
+  3. Drag in the "HTML" widget
+  4. Paste this ENTIRE file into the widget
+  5. Click Update / Publish
+
+  IMAGES TO REPLACE (search for "YOUR_IMAGE_URL"):
+  - HERO_BG         : full-width hero background image
+  - HERO_LOGO       : PDC center logo (the plane/logo asset)
+  - HERO_TEXT_IMG   : "Pradita Dirgantara Competition" text image
+  - BTN_1 to BTN_7  : 7 competition button images
+  - FOOTER_BG       : footer background image
+  - PDC_LOGO        : PDC logo in footer (bottom left)
+  - SOCIAL_ICON_1-5 : 5 social media icons
+
+  Upload all images to WordPress Media Library first,
+  then copy each image URL and replace the placeholders.
+  =====================================================
+-->
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap');
+
+  .pdc-root * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .pdc-root,
+.pdc-root * {
+  font-family: 'Nunito', Arial, sans-serif !important;
+  font-size: unset;
+}
+
+  .pdc-root {
+    width: 100%;
+    font-family: 'Nunito', Arial, sans-serif;
+    background: #fff;
+    overflow-x: hidden;
+    background: #3F3FA4;
+  }
+
+  /* ── NAVBAR ── */
+  .pdc-nav { width: 100% !important; height: 71px !important; background: #000 !important; display: flex !important; align-items: center !important; justify-content: space-between !important; padding: 0 34px !important; position: sticky !important; top: 0 !important; z-index: 100 !important; }
+
+.pdc-nav-links { display: flex !important; align-items: center !important; gap: 34px !important; list-style: none !important; }
+.pdc-nav-links li { list-style: none !important; }
+.pdc-nav-links a { color: #fff !important; text-decoration: none !important; font-size: 18px !important; font-weight: 600 !important; letter-spacing: -0.02em !important; }
+.pdc-nav-links a:hover { opacity: 0.8 !important; }
+.pdc-nav-links a.active { text-decoration: underline !important; }
+
+.pdc-burger { display: none !important; background: none !important; border: none !important; cursor: pointer !important; color: #fff !important; padding: 4px !important; }
+
+.pdc-drawer-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; }
+.pdc-drawer { position: fixed !important; top: 0 !important; left: -280px !important; width: 260px !important; height: 100vh !important; background: #111 !important; z-index: 201 !important; display: flex !important; flex-direction: column !important; padding: 20px !important; gap: 4px !important; transition: left 0.3s ease !important; }
+.pdc-drawer.pdc-open { left: 0 !important; }
+.pdc-drawer-close { background: none !important; border: none !important; cursor: pointer !important; color: #fff !important; align-self: flex-end !important; padding: 4px !important; margin-bottom: 16px !important; }
+.pdc-drawer a { color: #fff !important; font-size: 18px !important; font-weight: 600 !important; text-decoration: none !important; padding: 12px 8px !important; border-bottom: 1px solid rgba(255,255,255,0.1) !important; display: block !important; }
+
+  .pdc-register-btn {
+    position: relative;
+    height: 41px;
+    width: 127px;
+    cursor: pointer;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 16px;
+    box-shadow: 0 2px 4px rgba(255,255,255,0.25) inset;
+    backdrop-filter: blur(10px);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Nunito', Arial, sans-serif;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+
+  .pdc-register-btn:hover {
+    background: rgba(255,255,255,0.08);
+  }
+
+  /* ── HERO ── */
+  .pdc-hero {
+    width: 100%;
+    min-height: 537px;
+    background: url('https://github.com/caatz38/pdc-gassin/blob/main/assets/bege%20ungu.png?raw=true') center top / cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 99px 33px 120px 30px;
+  }
+
+  .pdc-hero-inner {
+    max-width: 468px;
+    width: 100%;
+    position: relative;
+    background: url('YOUR_IMAGE_URL_HERO_LOGO') center top / contain no-repeat;
+    min-height: 261px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .pdc-hero-inner img {
+    width: 100%;
+    max-width: 468px;
+    object-fit: contain;
+  }
+
+  /* ── COMPETITIONS SECTION ── */
+  .pdc-competitions {
+    width: 100%;
+    background: #3f3fa4;
+ 
+    padding: 60px 32px 40px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pdc-competitions-title {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 32px;
+    text-shadow: 0px 2px 6px rgba(0,0,0,0.25);
+    margin-bottom: 6px;
+    align-self: flex-start;
+    padding-left: 27px;
+  }
+
+  .pdc-competitions-sub {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 32px;
+    text-shadow: 0px 2px 6px rgba(0,0,0,0.25);
+    margin-bottom: 30px;
+    align-self: flex-start;
+    padding-left: 27px;
+  }
+
+  .pdc-competitions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 320.8px);
+    gap: 37px 42px;
+    max-width: 726px;
+    justify-content: center;
+  }
+
+  .pdc-competitions-grid img {
+    width: 320.8px;
+    height: 133.2px;
+    object-fit: cover;
+    display: block;
+    cursor: pointer;
+    transition: transform 0.4s, drop-shadow 0.2s;
+    border-radius: 4px;
+  }
+
+  .pdc-competitions-grid img:hover {
+    transform: translateY(-3px);
+    filter: drop-shadow()
+  }
+
+  /* 7th button centered */
+  .pdc-competitions-grid .pdc-btn-last {
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+
+  /* ── FOOTER ── */
+  .pdc-footer {
+    width: 100%;
+    background: url('https://github.com/caatz38/pdc-gassin/blob/main/assets/footer.png?raw=true') center top / cover no-repeat;
+    padding: 190px 16px 40px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    color: #fff;
+    font-family: 'Nunito', Arial, sans-serif;
+  }
+
+  .pdc-footer-left {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    min-width: 220px;
+    max-width: 305px;
+    flex: 1;
+    padding: 14px 0 100px;
+    position: relative;
+  }
+
+  .pdc-footer-logo {
+    width: 220px;
+    object-fit: cover;
+  }
+
+  .pdc-footer-brand {
+    position: absolute;
+    bottom: 38px;
+    right: -117px;
+    width: 358px;
+  }
+
+  .pdc-footer-brand h3 {
+      color: #fff;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 32px;
+    text-shadow: 0px 2px 6px rgba(0,0,0,0.25);
+    margin: 0;
+  }
+
+  .pdc-footer-brand p {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 32px;
+    text-shadow: 0px 2px 6px rgba(0,0,0,0.25);
+  }
+
+  .pdc-footer-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 15px;
+    min-width: 310px;
+    max-width: 625px;
+  }
+
+  .pdc-footer-nav-row {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .pdc-footer-nav-col {
+      
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 126px;
+    max-width: 126px;
+  }
+
+  .pdc-footer-nav-col h3 {
+      color: #fff;
+    font-size: 25px;
+    font-weight: 700;
+    text-shadow: 0px 2px 7px rgba(0,0,0,0.2);
+    margin: 0;
+  }
+
+  .pdc-footer-nav-col a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 600;
+    text-shadow: 0px 2px 7px rgba(0,0,0,0.2);
+    padding-bottom: 6px;
+    display: block;
+  }
+
+  .pdc-footer-comp-col {
+      color: #fff;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 289px;
+    padding: 0 3px;
+  }
+
+  .pdc-footer-comp-col h3 {
+      color: #fff;
+    font-size: 25px;
+    font-weight: 700;
+    text-shadow: 0px 2px 7px rgba(0,0,0,0.2);
+    width: 311px;
+    margin: 0;
+  }
+
+  .pdc-footer-comp-links {
+    display: flex;
+    gap: 8px;
+    width: 311px;
+  }
+
+  .pdc-footer-comp-links div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pdc-footer-comp-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 600;
+    text-shadow: 0px 2px 7px rgba(0,0,0,0.2);
+  }
+
+  .pdc-footer-socials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 379px;
+    flex-wrap: wrap;
+    padding-left: 20px;
+  }
+
+  .pdc-footer-socials img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .pdc-footer-socials img:hover {
+    transform: scale(1.1);
+  }
+  
+  .pdc-root a,
+.pdc-root a:hover,
+.pdc-root a:focus,
+.pdc-root a:active,
+.pdc-root a:visited {
+  font-size: inherit !important;
+  font-family: 'Nunito', Arial, sans-serif !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  line-height: inherit !important;
+  transition: opacity 0.2s !important;
+}
+
+.pdc-root a:hover {
+  opacity: 0.8 !important;
+}
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 750px) {
+      
+    .pdc-hero {
+      padding: 64px 20px 120px;
+    }
+    .pdc-competitions-grid {
+      grid-template-columns: 1fr;
+      max-width: 100%;
+    }
+    .pdc-competitions-grid img {
+      width: 100%;
+      height: auto;
+    }
+    .pdc-competitions-grid .pdc-btn-last {
+      grid-column: auto;
+      justify-self: auto;
+    }
+  }
+
+  @media (max-width: 675px) {
+       .pdc-nav-links { display: none !important; }
+  .pdc-burger { display: flex !important; align-items: center !important; justify-content: center !important; }
+    .pdc-footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 60px 20px;
+  }
+
+  .pdc-footer-left {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+  }
+
+  .pdc-footer-brand {
+    position: static;
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .pdc-footer-right {
+    width: 100%;
+    min-width: unset;
+    align-items: center;
+  }
+
+  .pdc-footer-nav-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .pdc-footer-nav-col,
+  .pdc-footer-comp-col {
+    min-width: unset;
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .pdc-footer-comp-col h3,
+  .pdc-footer-comp-links {
+    width: 100%;
+  }
+
+  .pdc-footer-socials {
+    justify-content: center;
+    padding-left: 0;
+  }
+  }
+
+  @media (max-width: 450px) {
+      
+    .pdc-nav-links {
+      gap: 17px;
+    }
+    .pdc-footer-nav-col h3,
+    .pdc-footer-comp-col h3 {
+      font-size: 20px;
+    }
+    .pdc-footer-socials {
+      flex-wrap: wrap;
+    }
+  }
+  
+  
+
+</style>
+
+<div class="pdc-root">
+
+  <!-- ══ NAVBAR ══ -->
+  <nav class="pdc-nav">
+  <button class="pdc-burger" id="pdcBurger" aria-label="Open menu">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+  </button>
+  <ul class="pdc-nav-links">
+    <li><a href="/home">Home</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/competitions" class="active">Competitions</a></li>
+    <li><a href="/faqs">FAQs</a></li>
+  </ul>
+  <a href="/signup"><button class="pdc-register-btn">Register Now!</button></a>
+</nav>
+
+<div class="pdc-drawer-overlay" id="pdcOverlay"></div>
+<div class="pdc-drawer" id="pdcDrawer">
+  <button class="pdc-drawer-close" id="pdcClose" aria-label="Close menu">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <a href="/home">Home</a>
+  <a href="/about">About</a>
+  <a href="/competitions">Competitions</a>
+  <a href="/faqs">FAQs</a>
+</div>
+
+<script>
+  var pdcB = document.getElementById('pdcBurger');
+  var pdcD = document.getElementById('pdcDrawer');
+  var pdcO = document.getElementById('pdcOverlay');
+  var pdcC = document.getElementById('pdcClose');
+  function pdcOpen() { pdcD.classList.add('pdc-open'); pdcO.style.display = 'block'; }
+  function pdcClose() { pdcD.classList.remove('pdc-open'); pdcO.style.display = 'none'; }
+  pdcB.addEventListener('click', pdcOpen);
+  pdcC.addEventListener('click', pdcClose);
+  pdcO.addEventListener('click', pdcClose);
+</script>
+
+  <!-- ══ HERO ══
+       Replace YOUR_IMAGE_URL_HERO_BG with your hero background URL
+       Replace YOUR_IMAGE_URL_HERO_ASSET with your merged hero asset URL
+  -->
+  <section class="pdc-hero">
+    <div class="pdc-hero-inner">
+      <!-- 📌 REPLACE src below with your hero logo/asset from Media Library -->
+      <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/pdc%20plus%20compe.png?raw=true" alt="Pradita Dirgantara Competition 2026" />
+      
+    </div>
+  </section>
+
+  <!-- ══ COMPETITIONS ══ -->
+  <main class="pdc-competitions">
+
+    <div class="pdc-competitions-grid">
+      <!-- 📌 REPLACE each src with your competition button images from Media Library -->
+      <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/comps/math%20olympiad.png?raw=true" alt="Competition 1" />
+      <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/comps/scienolymp.png?raw=true" alt="Competition 2" />
+      <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/comps/sciriwirirr.png?raw=true" alt="Competition 3" />
+      <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/comps/logicz.png?raw=true" alt="Competition 4" />
+      <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/comps/solvocc.png?raw=true" alt="Competition 5" />
+      <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/comps/speechv.png?raw=true" alt="Competition 6" />
+      <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/comps/b%20asqet.png?raw=true" alt="Competition 7" class="pdc-btn-last" />
+    </div>
+  </main>
+
+  <!-- ══ FOOTER ══
+       Replace YOUR_IMAGE_URL_FOOTER_BG with your footer background URL
+  -->
+  <footer class="pdc-footer">
+
+    <div class="pdc-footer-left">
+      <!-- 📌 REPLACE src below with your PDC logo from Media Library -->
+      <img class="pdc-footer-logo" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/pdc%20logo.png?raw=true" alt="PDC Logo" />
+      <div class="pdc-footer-brand">
+        <h3>Pradita Dirgantara Competition 2026</h3>
+        <p>© IT Administration &amp; Creative Publication 2026</p>
+      </div>
+    </div>
+
+    <div class="pdc-footer-right">
+      <div class="pdc-footer-nav-row">
+
+        <div class="pdc-footer-nav-col">
+          <h3>Navigation</h3>
+          <a href="/home">Home</a>
+          <a href="/about">About</a>
+          <a href="/competitions">Competition</a>
+          <a href="/faqs">FAQs</a>
+        </div>
+
+        <div class="pdc-footer-comp-col">
+          <h3>Competitions</h3>
+          <div class="pdc-footer-comp-links">
+            <div>
+              <a href="/math">Math Olympiad</a>
+              <a href="/logic">Logic Olympiad</a>
+              <a href="/science">Science Olympiad</a>
+            </div>
+            <div>
+              <a href="/sw">Scientific Writing</a>
+              <a href="/solvoc">Solo Vocal</a>
+              <a href="/speech">Speech</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pdc-footer-socials">
+        <!-- 📌 REPLACE each src with your social media icons from Media Library -->
+        <a href="https://praditadirgantara.sch.id/id/"><img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/web.png?raw=true" alt="Social 1" /></a>
+        <a href="https://www.tiktok.com/@smapraditadirgantara">
+        <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/tiktk.png?raw=true" alt="Social 2" /></a>
+        <a href="https://www.instagram.com/smapraditadirgantara/">
+        <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/instag.png?raw=true" alt="Social 3" /></a>
+        <a href="https://www.youtube.com/@smapraditadirgantara">
+        <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/ytb.png?raw=true" alt="Social 5" /></a>
+      </div>
+    </div>
+
+  </footer>
+
+</div>
