@@ -27,6 +27,7 @@
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
       background: linear-gradient(180deg, #a5c4ff 66.83%, #4d81e3 97.2%) !important;
       overflow-y: auto !important;
+      overflow-x: hidden !important;
       display: flex !important;
       flex-direction: column !important;
       align-items: center !important;
@@ -39,24 +40,22 @@
     .pdc-root .background1-icon {
       position: absolute !important;
       margin: 0 !important;
-      flex-shrink: 0 !important;
+      width: 100% !important;
+      left: 0 !important;
     }
 
     .pdc-root .background1-icon {
-      width: 1278px !important;
       height: 358px !important;
-      top: 355px !important;
-      left: 2px !important;
-      object-fit: contain !important;
+      bottom: 0 !important;
+      top: auto !important;
+      object-fit: cover !important; 
       z-index: 0 !important;
     }
 
     .pdc-root .background {
-      width: 1164px !important;
-      height: 944px !important;
-      top: -589px !important;
-      left: 116px !important;
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
+      height: 355px !important;
+      top: 0 !important;
+      box-shadow: none !important;
       z-index: 1 !important;
     }
 
@@ -69,183 +68,125 @@
       object-fit: cover !important;
     }
 
-    .pdc-root .background-child,
     .pdc-root .sidebar {
       position: absolute !important;
-      top: 455px !important;
-      left: 1px !important;
-      width: 1163px !important;
-      height: 489px !important;
-    }
-
-    /* CHANGED: Sidebar now uses a flat hex background instead of an image link */
-    .pdc-root .sidebar {
       width: 120px !important;
-      height: 1003px !important;
+      height: 100% !important;
+      min-height: 713px !important;
       margin: 0 !important;
       top: 0 !important;
-      left: -3px !important;
+      left: 0 !important;
       flex-shrink: 0 !important;
       z-index: 2 !important;
       text-align: center !important;
       font-size: 8px !important;
       color: #fff !important;
       background-color: #3F3FA4 !important;
-    }
-
-    /* REMOVED: .sidebar-child rule hidden because background is handled by the parent container now */
-    .pdc-root .sidebar-child {
-      display: none !important;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
     }
 
     .pdc-root .pdc-logo-scaled-1-icon {
       position: absolute !important;
-      top: 0 !important;
-      left: calc(50% - 44px) !important;
+      top: 15px !important;
+      left: calc(50% - 46px) !important;
       width: 92px !important;
-      height: 122px !important;
-      object-fit: cover !important;
+      height: 92px !important;
+      object-fit: contain !important;
     }
 
     .pdc-root .pradita-dirgantara-competition {
       position: absolute !important;
-      top: 101px !important;
+      top: 115px !important;
       left: 5px !important;
-      line-height: 10px !important;
+      line-height: 12px !important;
       display: inline-block !important;
-      width: 114px !important;
+      width: 110px !important;
+      text-align: center !important;
     }
 
     .pdc-root .home-menu,
-    .pdc-root .home-menu-child {
-      position: absolute !important;
-      height: 118px !important;
-    }
-
-    .pdc-root .home-menu {
-      cursor: pointer !important;
-      border: 0 !important;
-      padding: 0 !important;
-      background-color: transparent !important;
-      top: 157px !important;
-      left: 2px !important;
-      width: 100% !important;
-    }
-
-    .pdc-root .home-menu-child {
-      top: 0 !important;
-      left: 0 !important;
-      background-color: #282899 !important;
-      width: 118px !important;
-    }
-
-    .pdc-root .frame-icon,
-    .pdc-root .frame-parent {
-      position: absolute !important;
-      top: 19.5px !important;
-      left: 25px !important;
-      width: 68px !important;
-      height: 79px !important;
-    }
-
-    .pdc-root .frame-icon {
-      left: 22px !important;
-      width: 22px !important;
-      height: 22px !important;
-    }
-
-    .pdc-root .home {
-      position: absolute !important;
-      top: 44.5px !important;
-      left: 19px !important;
-      font-size: 10px !important;
-      line-height: 16.4px !important;
-      color: #fff !important;
-      text-align: center !important;
-      text-shadow: 0px 1.8px 5.5px rgba(0, 0, 0, 0.25) !important;
-    }
-
     .pdc-root .profile-menu {
       cursor: pointer !important;
       border: 0 !important;
       padding: 0 !important;
       background-color: transparent !important;
       position: absolute !important;
-      top: 275px !important;
-      left: 2px !important;
+      left: 0 !important;
       width: 100% !important;
-      height: 118px !important;
+      height: 90px !important;
     }
 
+    .pdc-root .home-menu {
+      top: 170px !important;
+    }
+
+    .pdc-root .profile-menu {
+      top: 260px !important;
+    }
+
+    .pdc-root .home-menu-child {
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      background-color: transparent !important;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .pdc-root .frame-parent,
     .pdc-root .frame-group {
       position: absolute !important;
-      top: 18.5px !important;
-      left: 23.5px !important;
-      width: 71px !important;
-      height: 81px !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      background-color: #323289;
     }
 
-    .pdc-root .frame-icon2,
-    .pdc-root .profile {
-      position: absolute !important;
-      flex-shrink: 0 !important;
-    }
-
-    .pdc-root .frame-icon2 {
-      top: 19.5px !important;
-      left: 22.5px !important;
+    .pdc-root .frame-parent svg,
+    .pdc-root .frame-group svg {
+      stroke: #ffffff !important;
       width: 24px !important;
       height: 24px !important;
+      margin-bottom: 6px !important;
     }
 
+    .pdc-root .home,
     .pdc-root .profile {
-      top: 46.5px !important;
-      left: -6.5px !important;
-      font-size: 10px !important;
-      line-height: 16.4px !important;
+      font-size: 11px !important;
+      line-height: normal !important;
       color: #fff !important;
       text-align: center !important;
       text-shadow: 0px 1.8px 5.5px rgba(0, 0, 0, 0.25) !important;
     }
 
-    .pdc-root .divider-icon {
-      position: absolute !important;
-      top: 157px !important;
-      left: 0 !important;
-      width: 120px !important;
-      height: 236px !important;
-    }
-
+    /* FIX: Changed to Flexbox to center contents dynamically */
     .pdc-root .card {
-      width: 1037px !important;
+      width: calc(100% - 120px) !important; /* Fills remaining space next to sidebar */
       position: absolute !important;
       margin: 0 !important;
-      top: 61px !important;
-      left: 179px !important;
-      max-width: 100% !important;
+      top: 100px !important;
+      left: 120px !important; /* Starts exactly after the sidebar */
       z-index: 3 !important;
-      flex-shrink: 0 !important;
-      text-align: center !important;
-      font-size: 42px !important;
-      color: #323289 !important;
+      display: flex !important;
+      justify-content: center !important;
+      flex-wrap: wrap !important;
+      gap: 24px !important; /* Spacing between cards */
+      padding: 0 20px 40px 20px !important;
     }
 
-    .pdc-root .profile-child,
+    /* FIX: Relative positioning allows it to align gracefully within Flexbox */
     .pdc-root .profile2 {
-      position: absolute !important;
-      left: 0 !important;
+      position: relative !important;
       width: 256px !important;
-    }
-
-    .pdc-root .profile2 {
-      top: 0 !important;
       height: 513px !important;
-      text-align: center !important;
-      font-size: 20px !important;
-      color: #323289 !important;
+      flex-shrink: 0 !important;
     }
 
-    /* CHANGED: Swapped structural image background for a clean white container layout */
     .pdc-root .profile-card-bg {
       position: absolute !important;
       top: 75px !important;
@@ -260,7 +201,7 @@
     .pdc-root .profile-icon {
       position: absolute !important;
       top: 0 !important;
-      left: 54px !important;
+      left: calc(50% - 73.5px) !important;
       width: 147px !important;
       height: 146px !important;
     }
@@ -269,18 +210,13 @@
       margin: 0 !important;
       position: absolute !important;
       top: 157px !important;
-      left: calc(50% - 96px) !important;
-      font-size: 30px !important;
+      left: 0 !important;
+      width: 100% !important;
+      font-size: 26px !important;
       line-height: 40px !important;
       font-weight: 800 !important;
-      display: inline-block !important;
-      width: 191px !important;
-      min-width: 78px !important;
-    }
-
-    .pdc-root .school {
-      top: 251px !important;
-      min-width: 61px !important;
+      text-align: center !important;
+      color: #323289 !important;
     }
 
     .pdc-root .grade,
@@ -288,135 +224,119 @@
     .pdc-root .phone-number,
     .pdc-root .school {
       position: absolute !important;
-      left: calc(50% - 96px) !important;
-      line-height: 40px !important;
-      display: inline-block !important;
-      width: 191px !important;
+      left: 0 !important;
+      width: 100% !important;
+      line-height: 34px !important;
+      text-align: center !important;
+      font-size: 15px !important;
+      color: #323289 !important;
     }
 
-    .pdc-root .nisn {
-      top: 284px !important;
-      min-width: 39px !important;
-    }
-
-    .pdc-root .grade,
-    .pdc-root .phone-number {
-      top: 318px !important;
-    }
-
-    .pdc-root .grade {
-      top: 351px !important;
-      min-width: 54px !important;
-    }
+    .pdc-root .school { top: 235px !important; }
+    .pdc-root .nisn { top: 265px !important; }
+    .pdc-root .phone-number { top: 295px !important; }
+    .pdc-root .grade { top: 325px !important; }
 
     .pdc-root .profile-item {
-      top: 442px !important;
-      left: calc(50% - 96px) !important;
+      position: absolute !important;
+      top: 420px !important;
+      left: calc(50% - 85px) !important;
       border-radius: 12px !important;
       background-color: #797980 !important;
-      width: 193px !important;
-      height: 44px !important;
-    }
-
-    .pdc-root .profile-item,
-    .pdc-root .status,
-    .pdc-root .widget {
-      position: absolute !important;
+      width: 170px !important;
+      height: 40px !important;
     }
 
     .pdc-root .status {
-      top: 444px !important;
-      left: calc(50% - 45.5px) !important;
-      font-size: 18px !important;
-      line-height: 40px !important;
-      display: inline-block !important;
-      color: #fff !important;
-      width: 92px !important;
-      box-sizing: border-box !important;
-      padding-left: 20px !important;
-      padding-right: 20px !important;
-    }
-
-    .pdc-root .widget {
+      position: absolute !important;
+      top: 420px !important;
+      left: 0 !important;
       width: 100% !important;
-      top: 75px !important;
-      left: 299px !important;
-      min-height: 438px !important;
-      max-width: 100% !important;
+      font-size: 16px !important;
+      line-height: 40px !important;
+      text-align: center !important;
+      color: #fff !important;
     }
 
-    /* CHANGED: Swapped structural image background for a clean white container layout */
+    /* FIX: Made responsive. Takes up available space but maxes out cleanly */
+    .pdc-root .widget {
+      position: relative !important;
+      width: 100% !important;
+      max-width: 760px !important; /* Caps width so it doesn't stretch infinitely */
+      flex: 1 1 300px !important; /* Can grow and shrink */
+      height: 438px !important;
+      margin-top: 75px !important; /* Pushes it down to perfectly align with the profile card's background */
+    }
+
     .pdc-root .widget-card-bg {
       position: absolute !important;
       top: 0 !important;
       left: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
       box-shadow: 0px 5px 0px #3f3fa4 !important;
       border-radius: 30px !important;
-      width: 738px !important;
-      height: 438px !important;
       background-color: #ffffff !important;
     }
 
     .pdc-root .please-complete-your {
       position: absolute !important;
-      top: 159px !important;
-      left: calc(50% - 215px) !important;
-      line-height: 40px !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      padding: 40px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
       font-weight: 800 !important;
-      display: inline-block !important;
-      width: 429px !important;
+      font-size: 32px !important;
+      line-height: 42px !important;
+      color: #323289 !important;
+    }
+
+    /* MEDIA QUERIES */
+    @media screen and (max-width: 850px) {
+      .pdc-root .widget {
+        margin-top: 0 !important; /* Removes alignment gap if the cards stack on small screens */
+      }
     }
 
     @media screen and (max-width: 750px) {
-      .pdc-root .name,
+      .pdc-root .name {
+        font-size: 22px !important;
+      }
       .pdc-root .please-complete-your {
         font-size: 24px !important;
         line-height: 32px !important;
       }
-      .pdc-root .please-complete-your {
-        font-size: 34px !important;
-      }
     }
 
     @media screen and (max-width: 450px) {
-      .pdc-root .name {
-        font-size: 18px !important;
-        line-height: 24px !important;
-      }
-      .pdc-root .grade,
-      .pdc-root .nisn,
-      .pdc-root .phone-number,
-      .pdc-root .school {
-        font-size: 16px !important;
-        line-height: 32px !important;
-      }
       .pdc-root .please-complete-your {
-        font-size: 25px !important;
-        line-height: 24px !important;
-        max-width: 100% !important;
+        font-size: 20px !important;
+        line-height: 28px !important;
       }
     }
   </style>
 
   <div class="desktop">
-    <img class="background1-icon" alt="" src="YOUR_IMAGE_URL_BACKGROUND1" />
-
     <section class="background">
-      <img class="calling-1-icon" alt="" src="YOUR_IMAGE_URL_CALLING_1" />
-      <img class="background-child" alt="" src="YOUR_IMAGE_URL_SECONDARY_RECT" />
+      <img class="calling-1-icon" alt="" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/dashboard/top.png?raw=true" />
     </section>
+
+    <img class="background1-icon" alt="" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/dashboard/bottom.png?raw=true" />
     
     <section class="sidebar">
-      <div class="sidebar-child" style="display: none !important;"></div>
-
-      <img class="pdc-logo-scaled-1-icon" alt="" src="YOUR_IMAGE_URL_PDC_LOGO" />
+      <img class="pdc-logo-scaled-1-icon" alt="PDC Logo" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/pdc%20logo.avif?raw=true" />
 
       <b class="pradita-dirgantara-competition">Pradita Dirgantara<br />Competition 2026</b>
       
       <button class="home-menu">
         <div class="home-menu-child"></div>
         <div class="frame-parent">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house-icon lucide-house"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
           <b class="home">Home</b>
         </div>
       </button>
@@ -424,7 +344,7 @@
       <button class="profile-menu">
         <div class="home-menu-child"></div>
         <div class="frame-group">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-pen-icon lucide-user-pen"><path d="M11.5 15H7a4 4 0 0 0-4 4v2"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="7" r="4"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.5 15H7a4 4 0 0 0-4 4v2"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="7" r="4"/></svg>
           <b class="profile">Profile</b>
         </div>
       </button>
@@ -434,20 +354,17 @@
       <section class="profile2">
         <div class="profile-card-bg"></div>
 
-        <img class="profile-icon" alt="" src="YOUR_IMAGE_URL_PROFILE_AVATAR" />
-
         <h3 class="name">name</h3>
         <b class="school">school</b>
         <b class="nisn">nisn</b>
         <b class="phone-number">phone number</b>
         <b class="grade">grade</b>
         <div class="profile-item"></div>
-        <b class="status">status<br /></b>
+        <b class="status">status</b>
       </section>
       
       <div class="widget">
         <div class="widget-card-bg"></div>
-
         <div class="please-complete-your">
           Please complete your profile to register a competition!
         </div>
