@@ -1,6 +1,6 @@
 <div class="pdc-root">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght=700;800&display=swap');
 
     /* Global resets forced within root wrapper */
     .pdc-root, .pdc-root * {
@@ -105,7 +105,8 @@
     }
 
     .pdc-root .home-menu,
-    .pdc-root .profile-menu {
+    .pdc-root .profile-menu,
+    .pdc-root .logout-menu {
       cursor: pointer !important;
       border: 0 !important;
       padding: 0 !important;
@@ -124,6 +125,10 @@
       top: 260px !important;
     }
 
+    .pdc-root .logout-menu {
+      top: 350px !important;
+    }
+
     .pdc-root .home-menu-child {
       position: absolute !important;
       top: 0 !important;
@@ -134,7 +139,8 @@
     }
 
     .pdc-root .frame-parent,
-    .pdc-root .frame-group {
+    .pdc-root .frame-group,
+    .pdc-root .frame-logout {
       position: absolute !important;
       top: 0 !important;
       left: 0 !important;
@@ -148,7 +154,8 @@
     }
 
     .pdc-root .frame-parent svg,
-    .pdc-root .frame-group svg {
+    .pdc-root .frame-group svg,
+    .pdc-root .frame-logout svg {
       stroke: #ffffff !important;
       width: 24px !important;
       height: 24px !important;
@@ -156,7 +163,8 @@
     }
 
     .pdc-root .home,
-    .pdc-root .profile {
+    .pdc-root .profile,
+    .pdc-root .logout {
       font-size: 11px !important;
       line-height: normal !important;
       color: #fff !important;
@@ -323,7 +331,7 @@
 
   <div class="desktop">
     <section class="background">
-      <img class="calling-1-icon" alt="" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/dashboard/top.png?raw=true" />
+      <img class="calling-1-icon" alt="" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/dashboard/Vector.png?raw=true" />
     </section>
 
     <img class="background1-icon" alt="" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/dashboard/bottom.png?raw=true" />
@@ -346,6 +354,14 @@
         <div class="frame-group">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.5 15H7a4 4 0 0 0-4 4v2"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="7" r="4"/></svg>
           <b class="profile">Profile</b>
+        </div>
+      </button>
+
+      <button class="logout-menu">
+        <div class="home-menu-child"></div>
+        <div class="frame-logout">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <b class="logout">Logout</b>
         </div>
       </button>
     </section>

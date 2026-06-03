@@ -33,40 +33,158 @@
     padding-top: 63px !important;
   }
 
+  /* ══════════════════════════════════════════════════════════
+     ANIMATIONS
+     ══════════════════════════════════════════════════════════ */
+  
+  @keyframes pdcFadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pdcFadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes pdcFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes pdcSlideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes pdcSlideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Base state for animated elements */
+  .pdc-animate {
+    opacity: 0;
+  }
+
+  /* When visible */
+  .pdc-animate.pdc-visible {
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Animation variants */
+  .pdc-animate.pdc-fade-up.pdc-visible {
+    animation-name: pdcFadeInUp;
+    animation-duration: 0.8s;
+  }
+
+  .pdc-animate.pdc-fade-scale.pdc-visible {
+    animation-name: pdcFadeInScale;
+    animation-duration: 0.7s;
+  }
+
+  .pdc-animate.pdc-fade.pdc-visible {
+    animation-name: pdcFadeIn;
+    animation-duration: 0.6s;
+  }
+
+  .pdc-animate.pdc-slide-left.pdc-visible {
+    animation-name: pdcSlideInLeft;
+    animation-duration: 0.8s;
+  }
+
+  .pdc-animate.pdc-slide-right.pdc-visible {
+    animation-name: pdcSlideInRight;
+    animation-duration: 0.8s;
+  }
+
+  /* Stagger delays for cards */
+  .pdc-animate.pdc-delay-1 { animation-delay: 0.1s !important; }
+  .pdc-animate.pdc-delay-2 { animation-delay: 0.2s !important; }
+  .pdc-animate.pdc-delay-3 { animation-delay: 0.3s !important; }
+  .pdc-animate.pdc-delay-4 { animation-delay: 0.4s !important; }
+  .pdc-animate.pdc-delay-5 { animation-delay: 0.5s !important; }
+
+  /* Hero-specific: animate on load, not scroll */
+  .pdc-hero-animate {
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .pdc-hero-animate.pdc-hero-asset {
+    animation: pdcFadeInScale 1s 0.2s forwards;
+  }
+
+  .pdc-hero-animate.pdc-hero-desc {
+    animation: pdcFadeInUp 0.9s 0.5s forwards;
+  }
+
+  .pdc-hero-animate.pdc-hero-pill {
+    animation: pdcFadeInUp 0.8s 0.8s forwards;
+  }
+
   /* ── NAVBAR ── */
-
-
   .pdc-nav { 
     width: 100% !important; 
-    height: 71px !important; 
-    background: #000 !important; /* Starts transparent */
+    height: 71px !important;
+    background: #000 !important;
     display: flex !important; 
     align-items: center !important; 
     justify-content: space-between !important; 
     padding: 0 24px !important; 
-    position: fixed !important; /* Changed from sticky to fixed */
+    position: fixed !important;
     top: 0 !important; 
     left: 0 !important;
     right: 0 !important;
     z-index: 100 !important; 
-    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important; /* Smooth animation */
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
   }
 
   .pdc-nav.pdc-scrolled {
     top: 15px !important;
-    width: 90% !important; /* Detaches from the sides */
+    width: 90% !important;
     max-width: 1200px !important;
     margin: 0 auto !important;
     padding: 0 30px !important;
-    border-radius: 50px !important; /* Creates the pill shape */
-    background: rgba(0, 0, 0, 0.4) !important; /* Semi-transparent dark background */
-    backdrop-filter: blur(16px) !important; /* The background blur */
-    -webkit-backdrop-filter: blur(16px) !important; /* For Safari compatibility */
-    border: 1px solid rgba(255, 255, 255, 0.15) !important; /* Subtle inner highlight */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important; /* Floating drop shadow */
+    border-radius: 50px !important;
+    background: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
   }
 
-  .pdc-nav-links { display: flex !important; align-items: center !important; gap: 34px !important; list-style: none !important; }
+  .pdc-nav-links { display: flex !important; align-items: center !important; gap: 34px !important; list-style: none !important; padding-left: 12px !important;}
   .pdc-nav-links li { list-style: none !important; }
   .pdc-nav-links a { color: #fff !important; text-decoration: none !important; font-size: 18px !important; font-weight: 600 !important; letter-spacing: -0.02em !important; }
   .pdc-nav-links a:hover { opacity: 0.8 !important; }
@@ -123,7 +241,6 @@
     z-index: 0 !important;
   }
 
-  /* gradient fade at bottom */
   .pdc-math-hero::after {
     content: '' !important;
     position: absolute !important;
@@ -145,7 +262,6 @@
     padding-top: 100px !important;
   }
 
-  /* Hero main asset (logo + compe text) */
   .pdc-math-hero-asset {
     width: 100% !important;
     max-width: 340px !important;
@@ -154,7 +270,6 @@
     margin-bottom: 2px !important;
   }
 
-  /* Description box */
   .pdc-math-desc-box {
     position: relative !important;
     width: 100% !important;
@@ -185,7 +300,6 @@
     opacity: 0.8 !important;
   }
 
-  /* Registrasi / Guidebook pill */
   .pdc-math-pill {
     display: inline-flex !important;
     align-items: center !important;
@@ -205,12 +319,17 @@
     gap: 6px !important;
     border: none !important;
     border-radius: 60px 30px 30px 60px !important;
-    padding: 7px 10px 7px 13px !important;
+    padding: 7px 12px 7px 13px !important;
     color: #fff !important;
     font-size: 15px !important;
     font-weight: 700 !important;
     cursor: pointer !important;
     white-space: nowrap !important;
+    transition: transform 0.2s, box-shadow 0.2s !important;
+  }
+
+  .pdc-math-pill-btn:hover {
+    box-shadow: 0 4px 20px rgba(174, 166, 253, 0.4) !important;
   }
 
   .pdc-math-pill-btn2 {
@@ -220,12 +339,17 @@
     background: #aea6fd !important;
     border: none !important;
     border-radius: 30px 60px 60px 30px !important;
-    padding: 7px 13px 7px 8px !important;
+    padding: 7px 13px 7px 9px !important;
     color: #fff !important;
     font-size: 15px !important;
     font-weight: 700 !important;
     cursor: pointer !important;
     white-space: nowrap !important;
+    transition: transform 0.2s, box-shadow 0.2s !important;
+  }
+
+  .pdc-math-pill-btn2:hover {
+    box-shadow: 0 4px 20px rgba(174, 166, 253, 0.4) !important;
   }
 
   .pdc-math-pill-btn svg {
@@ -251,22 +375,20 @@
     position: relative !important;
   }
 
-  /* WhatsApp CP button */
   .pdc-math-wa-btn {
     display: flex !important;
     align-items: center !important;
-    gap: 10px !important;
+    gap: 6px !important;
     background: #59c468 !important;
     border: none !important;
     border-radius: 113px !important;
-    padding: 8px 14px 8px 17px !important;
+    padding: 8px 15px 8px 14px !important;
     color: #fff !important;
     font-size: 20px !important;
     font-weight: 700 !important;
     cursor: pointer !important;
-    margin-bottom: 50px !important;
     white-space: nowrap !important;
-    transition: background 0.2s !important;
+    transition: background 0.2s, transform 0.2s !important;
   }
 
   .pdc-math-wa-btn:hover {
@@ -278,7 +400,6 @@
     flex-shrink: 0 !important;
   }
 
-  /* Benefits section */
   .pdc-math-benefits-title img {
     width: 259px !important;
     object-fit: contain !important;
@@ -291,7 +412,7 @@
     flex-direction: column !important;
     align-items: center !important;
     gap: 24px !important;
-    margin-bottom: 60px !important;
+    margin-bottom: 140px !important;
   }
 
   .pdc-math-benefits-cards {
@@ -313,7 +434,9 @@
     align-items: flex-start !important;
     padding: 50px 32px 40px 32px !important;
     gap: 12px !important;
+    transition: transform 0.3s, box-shadow 0.3s !important;
   }
+
 
   .pdc-math-card-title-row {
     display: flex !important;
@@ -344,7 +467,6 @@
     max-width: 230px !important;
   }
 
-  /* Prizes section */
   .pdc-math-prizes-wrap {
     width: 100% !important;
     max-width: 882px !important;
@@ -381,80 +503,100 @@
 
   .pdc-math-prizes-box {
     width: 100% !important;
-    max-width: 857px !important;
-    background: url('https://github.com/caatz38/pdc-gassin/blob/main/assets/winnerz.avif?raw=true') center top / cover !important;
-    padding: 39px 42px !important;
+    max-width: 657px !important;
+    position: relative !important;
     display: flex !important;
     flex-direction: column !important;
-    align-items: flex-end !important;
-    gap: 61px !important;
+    gap: 0 !important;
+    padding: 0 !important;
+    background: none !important;
   }
 
-  .pdc-math-gold {
+  .pdc-prize-bg-img {
     width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    border-radius: 16px !important;
+  }
+
+  .pdc-prize-overlay {
+    position: absolute !important;
+    inset: 0 !important;
     display: flex !important;
     flex-direction: column !important;
-    align-items: flex-start !important;
+    padding: 4% 5% !important;
+    gap: 4% !important;
+  }
+
+  .pdc-prize-gold-row {
+    flex: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-left: 10% !important;
+  }
+
+  .pdc-prize-gold-row .label {
+    color: #b8860b !important;
+    font-size: clamp(12px, 2.5vw, 28px) !important;
+    font-weight: 800 !important;
+    display: block !important;
+    padding-bottom: 20px !important;
+  }
+
+  .pdc-prize-gold-row .amount {
+    color: #fff !important;
+    font-size: clamp(18px, 5vw, 60px) !important;
+    font-weight: 900 !important;
+    text-shadow: 3px 0 0 #c8a000, 0 3px 0 #c8a000, -3px 0 0 #c8a000, 0 -3px 0 #c8a000 !important;
+    white-space: nowrap !important;
+    display: block !important;
+    text-align: center !important;
+  }
+
+  .pdc-prize-silver-bronze-row {
+    flex: 1 !important;
+    display: flex !important;
+    gap: 10% !important;
+    margin-top: 44px !important;
+    width: 100% !important;
+  }
+
+  .pdc-prize-silver-col,
+  .pdc-prize-bronze-col {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
     gap: 4px !important;
   }
 
-  .pdc-math-gold-label {
-    color: #cfb53b !important;
-    font-size: 40px !important;
-    font-weight: 900 !important;
-    padding-top: 30px !important;
-    padding-left: 194px !important;
-  }
-
-  .pdc-math-gold-amount {
+  .pdc-prize-silver-col .label,
+  .pdc-prize-bronze-col .label {
     color: #fff !important;
-    font-size: 80px !important;
-    font-weight: 900 !important;
-    padding-top: 50px !important;
-    padding-left: 194px !important;
-    text-shadow: 5px 0 0 #e8c700, 0 5px 0 #e8c700, -5px 0 0 #e8c700, 0 -5px 0 #e8c700 !important;
-    white-space: nowrap !important;
-  }
-
-  .pdc-math-silver-bronze {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    padding-top: 80px !important;
-    gap: 20px !important;
-    width: 100% !important;
-    justify-content: space-between !important;
-  }
-
-  .pdc-math-prize-block {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 33px !important;
-    min-width: 280px !important;
-  }
-
-  .pdc-math-prize-block .label {
-    color: #fff !important;
-    font-size: 45px !important;
+    font-size: clamp(10px, 2vw, 22px) !important;
     font-weight: 700 !important;
-    letter-spacing: -0.02em !important;
     text-align: center !important;
   }
 
-  .pdc-math-prize-block .amount {
+  .pdc-prize-silver-col .amount,
+  .pdc-prize-bronze-col .amount {
     color: #ddd !important;
-    font-size: 55px !important;
+    font-size: clamp(12px, 2.5vw, 28px) !important;
     font-weight: 900 !important;
     text-align: center !important;
     white-space: nowrap !important;
+    display: block !important;
   }
 
-  /* Any questions */
   .pdc-math-any-q {
     color: #fff !important;
-    font-size: 33px !important;
+    font-size: 23px !important;
     font-weight: 700 !important;
-    margin-bottom: 10px !important;
+    margin-top: 93px !important;
     text-align: center !important;
+    margin-bottom: 10px !important;
   }
 
   /* ── FOOTER ── */
@@ -619,7 +761,7 @@
   .pdc-footer-socials img:hover {
     transform: scale(1.1) !important;
   }
-  
+
   .pdc-root a,
 .pdc-root a:hover,
 .pdc-root a:focus,
@@ -637,26 +779,13 @@
   opacity: 0.8 !important;
 }
 
-
-
   /* ── RESPONSIVE ── */
   @media (max-width: 750px) {
     .pdc-math-gold-amount { font-size: 40px !important; padding-left: 20px !important; }
     .pdc-math-gold-label { font-size: 28px !important; padding-left: 20px !important; }
-    .pdc-math-prize-block .label { font-size: 27px !important; }
-    .pdc-math-prize-block .amount { font-size: 33px !important; }
+    .pdc-math-prize-block-s .label { font-size: 27px !important; }
+    .pdc-math-prize-block-s .amount { font-size: 33px !important; }
     .pdc-math-any-q { font-size: 26px !important; }
-    .pdc-math-prizes-box {
-      width: 100% !important;
-      max-width: 857px !important;
-      background: url('https://github.com/caatz38/pdc-gassin/blob/main/assets/winnerz.avif?raw=true') center top / cover no-repeat !important;
-      border-radius: 16px !important;
-      padding: 39px 42px !important;
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: flex-end !important;
-      gap: 61px !important;
-    }
   }
 
   @media (max-width: 675px) {
@@ -686,7 +815,6 @@
       width: 100% !important;
       min-width: unset !important;
       align-items: center !important;
-      
     }
 
     .pdc-footer-nav-row {
@@ -712,8 +840,8 @@
       padding-left: 0 !important;
     }
     .pdc-math-hero-asset {
-    width: 100% !important;
-  }
+      width: 100% !important;
+    }
   }
 
   @media (max-width: 450px) {
@@ -724,9 +852,7 @@
     .pdc-footer-nav-col h3, .pdc-footer-comp-col h3 { font-size: 20px !important; }
     .pdc-footer-socials { flex-wrap: wrap !important; }
     .pdc-math-benefits-cards { gap: 4px !important; }
-    
   }
-
 </style>
 
 <div class="pdc-root">
@@ -755,67 +881,32 @@
     <a href="/faqs">FAQs</a>
   </div>
 
-  <script>
-    var pdcB = document.getElementById('pdcBurger');
-    var pdcD = document.getElementById('pdcDrawer');
-    var pdcO = document.getElementById('pdcOverlay');
-    var pdcC = document.getElementById('pdcClose');
-    function pdcOpen() { pdcD.classList.add('pdc-open'); pdcO.style.display = 'block'; }
-    function pdcClose() { pdcD.classList.remove('pdc-open'); pdcO.style.display = 'none'; }
-    pdcB.addEventListener('click', pdcOpen);
-    pdcC.addEventListener('click', pdcClose);
-    pdcO.addEventListener('click', pdcClose);
-  </script>
-
-  <script>
-    // Existing Burger Menu Logic
-    var pdcB = document.getElementById('pdcBurger');
-    var pdcD = document.getElementById('pdcDrawer');
-    var pdcO = document.getElementById('pdcOverlay');
-    var pdcC = document.getElementById('pdcClose');
-    function pdcOpen() { pdcD.classList.add('pdc-open'); pdcO.style.display = 'block'; }
-    function pdcClose() { pdcD.classList.remove('pdc-open'); pdcO.style.display = 'none'; }
-    pdcB.addEventListener('click', pdcOpen);
-    pdcC.addEventListener('click', pdcClose);
-    pdcO.addEventListener('click', pdcClose);
-
-    // NEW: Floating Navbar Scroll Logic
-    var nav = document.querySelector('.pdc-nav');
-    window.addEventListener('scroll', function() {
-      if (window.scrollY > 50) {
-        nav.classList.add('pdc-scrolled');
-      } else {
-        nav.classList.remove('pdc-scrolled');
-      }
-    });
-  </script>
-
   <section class="pdc-math-hero">
     <img class="pdc-math-hero-bg" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/bege%20ungu.avif?raw=true" alt="" />
 
     <div class="pdc-math-hero-content">
-      <img class="pdc-math-hero-asset" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/texts/math%20olympiad%20text.avif?raw=true" alt="Math Olympiad" />
+      <img class="pdc-math-hero-asset pdc-hero-animate pdc-hero-asset" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/texts/math%20olympiad%20text.avif?raw=true" alt="Math Olympiad" />
 
-      <div class="pdc-math-desc-box">
+      <div class="pdc-math-desc-box pdc-hero-animate pdc-hero-desc">
         <div class="pdc-math-desc-box-bg"></div>
         <p class="pdc-math-desc-text">
-          Math Olympiad adalah kompetisi yang menguji kemampuan peserta dalam berpikir logis, analitis, dan kreatif melalui berbagai soal matematika yang menantang. Kompetisi ini dirancang untuk mengembangkan kemampuan pemecahan masalah serta meningkatkan minat peserta terhadap matematika.
+          Pengen asah otak pakai cara yang beda dan seru? Yuk, ikutan Logic Olympiad di Pradita Dirgantara Competition! Di sini kamu gak bakal pusing sama rumus hafalan yang membosankan. Kakak-kakak Pradita punya banyak tantangan logika interaktif, teka-teki pola, dan riddle keren yang siap menguji ketelitian serta strategi berpikirmu. Yuk, tantang dirimu dan buktikan kemampuan terbaikmu!
         </p>
       </div>
 
-      <div class="pdc-math-pill">
+      <div class="pdc-math-pill pdc-hero-animate pdc-hero-pill">
         <a href="/dashboard">
-<button class="pdc-math-pill-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line-icon lucide-pen-line"><path d="M13 21h8"/><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></svg>
-          Registrasi
-        </button>
+          <button class="pdc-math-pill-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line-icon lucide-pen-line"><path d="M13 21h8"/><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></svg>
+            Registrasi
+          </button>
         </a>
         <a href="#">
-        <button class="pdc-math-pill-btn2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-check-icon lucide-book-check"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/><path d="m9 9.5 2 2 4-4"/></svg>
-          Guidebook
-        </button>
-      </a>
+          <button class="pdc-math-pill-btn2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-check-icon lucide-book-check"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/><path d="m9 9.5 2 2 4-4"/></svg>
+            Guidebook
+          </button>
+        </a>
       </div>
     </div>
   </section>
@@ -823,28 +914,28 @@
   <main class="pdc-math-main">
 
     <div class="pdc-math-benefits">
-      <div class="pdc-math-benefits-title">
+      <div class="pdc-math-benefits-title pdc-animate pdc-fade-up">
         <img src="https://raw.githubusercontent.com/caatz38/pdc-gassin/refs/heads/main/assets/texts/benefits.avif" alt="Benefits" />
       </div>
 
       <div class="pdc-math-benefits-cards">
-        <div class="pdc-math-card">
+        <div class="pdc-math-card pdc-animate pdc-fade-up pdc-delay-1">
           <div class="pdc-math-card-title-row">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pdc-math-card-icon lucide lucide-clock"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-            <h3>Sertifikat &amp; Penghargaan</h3>
+            <h3>Sertifikat Keren </h3>
           </div>
           <p>Dapatkan sertifikat resmi dari Pradita Dirgantara Competition serta penghargaan sebagai bentuk apresiasi</p>
         </div>
 
-        <div class="pdc-math-card">
+        <div class="pdc-math-card pdc-animate pdc-fade-up pdc-delay-2">
           <div class="pdc-math-card-title-row">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-target-icon lucide-target"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-            <h3>Meningkatkan Keterampilan</h3>
+            <h3>Level Up Otak Kanan-Kiri!</h3>
           </div>
           <p>Melatih berpikir kreatif dalam menyelesaikan soal, keterampilan yang sangat berguna dalam dunia akademik maupun kehidupan sehari-hari.</p>
         </div>
 
-        <div class="pdc-math-card">
+        <div class="pdc-math-card pdc-animate pdc-fade-up pdc-delay-3">
           <div class="pdc-math-card-title-row">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up-icon lucide-trending-up"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg>
             <h3>Membangun Pengalaman</h3>
@@ -855,40 +946,45 @@
     </div>
 
     <div class="pdc-math-prizes-wrap">
-      <div class="pdc-math-prizes-heading">
+      <div class="pdc-math-prizes-heading pdc-animate pdc-fade-up">
         <h2>These are waiting for</h2>
         <img src="https://raw.githubusercontent.com/caatz38/pdc-gassin/refs/heads/main/assets/texts/you.avif" alt="you" />
       </div>
 
-      <div class="pdc-math-prizes-box">
-        <div class="pdc-math-gold">
-          <div class="pdc-math-gold-label">Gold Medalist</div>
-          <div class="pdc-math-gold-amount">Rp3.000.000</div>
-        </div>
-        <div class="pdc-math-silver-bronze">
-          <div class="pdc-math-prize-block">
-            <div class="label">Silver Medalist</div>
-            <div class="amount">Rp2.000.000</div>
+      <div class="pdc-math-prizes-box pdc-animate pdc-fade-scale pdc-delay-2">
+        <img class="pdc-prize-bg-img" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/winnerz.avif?raw=true" alt="" />
+
+        <div class="pdc-prize-overlay">
+          <div class="pdc-prize-gold-row">
+            <div>
+              <span class="label">Gold Medalist</span>
+              <span class="amount">Rp2.000.000</span>
+            </div>
           </div>
-          <div class="pdc-math-prize-block">
-            <div class="label">Bronze Medalist</div>
-            <div class="amount">Rp1.500.000</div>
+
+          <div class="pdc-prize-silver-bronze-row">
+            <div class="pdc-prize-silver-col">
+              <span class="label">Silver Medalist</span>
+              <span class="amount">Rp1.500.000</span>
+            </div>
+            <div class="pdc-prize-bronze-col">
+              <span class="label">Bronze Medalist</span>
+              <span class="amount">Rp1.000.000</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <h2 class="pdc-math-any-q">Any questions?</h2>
-    <button class="pdc-math-wa-btn" onclick="window.open('https://wa.me/YOUR_PHONE_NUMBER','_blank')">
-      
-      <img  src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/whatsupzpz.avif?raw=true">
+    <h2 class="pdc-math-any-q pdc-animate pdc-fade-up">Any questions?</h2>
+    <button class="pdc-math-wa-btn pdc-animate pdc-fade-up pdc-delay-1" onclick="window.open('https://wa.me/+6281318997958','_blank')">
+      <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/whatsupzpz.avif?raw=true" alt="WhatsApp" />
       CP Math (Bona)
     </button>
   </main>
 
   <footer class="pdc-footer">
-
-    <div class="pdc-footer-left">
+    <div class="pdc-footer-left pdc-animate pdc-slide-left">
       <img class="pdc-footer-logo" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/pdc%20logo.avif?raw=true" alt="PDC Logo" />
       <div class="pdc-footer-brand">
         <h3>Pradita Dirgantara Competition 2026</h3>
@@ -896,9 +992,8 @@
       </div>
     </div>
 
-    <div class="pdc-footer-right">
+    <div class="pdc-footer-right pdc-animate pdc-slide-right">
       <div class="pdc-footer-nav-row">
-
         <div class="pdc-footer-nav-col">
           <h3>Navigation</h3>
           <a href="/home">Home</a>
@@ -911,31 +1006,82 @@
           <h3>Competitions</h3>
           <div class="pdc-footer-comp-links">
             <div>
-              <a href="/math">Math Olympiad</a>
-              <a href="/logic">Logic Olympiad</a>
-              <a href="/science">Science Olympiad</a>
+              <a href="/math-olympiade">Math Olympiad</a>
+              <a href="/logic-olympiade">Logic Olympiad</a>
+              <a href="/science-olympiade">Science Olympiad</a>
+              <a href="/basket">Basket</a>
             </div>
             <div>
               <a href="/sw">Scientific Writing</a>
-              <a href="/solvoc">Solo Vocal</a>
-              <a href="/speech">Speech</a>
+              <a href="/solo-vocal">Solo Vocal</a>
+              <a href="/speechs">Speech</a>
             </div>
           </div>
         </div>
-
       </div>
 
       <div class="pdc-footer-socials">
-        <a href="https://praditadirgantara.sch.id/id/"><img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/web.avif?raw=true" alt="Social 1" /></a>
-        <a href="https://www.tiktok.com/@smapraditadirgantara">
-          <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/tiktk.avif?raw=true" alt="Social 2" /></a>
-        <a href="https://www.instagram.com/smapraditadirgantara/">
-          <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/instag.avif?raw=true" alt="Social 3" /></a>
-        <a href="https://www.youtube.com/@smapraditadirgantara">
-          <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/ytb.avif?raw=true" alt="Social 5" /></a>
+        <a href="https://praditadirgantara.sch.id/id/" target="_blank">
+          <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/web.avif?raw=true" alt="Social 1" />
+        </a>
+        <a href="https://www.tiktok.com/@smapraditadirgantara" target="_blank">
+          <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/tiktk.avif?raw=true" alt="Social 2" />
+        </a>
+        <a href="https://www.instagram.com/smapraditadirgantara/" target="_blank">
+          <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/instag.avif?raw=true" alt="Social 3" />
+        </a>
+        <a href="https://www.youtube.com/@smapraditadirgantara" target="_blank">
+          <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/ytb.avif?raw=true" alt="Social 5" />
+        </a>
       </div>
     </div>
-
   </footer>
 
 </div>
+
+<script>
+  // Burger Menu Logic
+  var pdcB = document.getElementById('pdcBurger');
+  var pdcD = document.getElementById('pdcDrawer');
+  var pdcO = document.getElementById('pdcOverlay');
+  var pdcC = document.getElementById('pdcClose');
+  function pdcOpen() { pdcD.classList.add('pdc-open'); pdcO.style.display = 'block'; }
+  function pdcClose() { pdcD.classList.remove('pdc-open'); pdcO.style.display = 'none'; }
+  pdcB.addEventListener('click', pdcOpen);
+  pdcC.addEventListener('click', pdcClose);
+  pdcO.addEventListener('click', pdcClose);
+
+  // Floating Navbar Scroll Logic
+  var nav = document.querySelector('.pdc-nav');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 50) {
+      nav.classList.add('pdc-scrolled');
+    } else {
+      nav.classList.remove('pdc-scrolled');
+    }
+  });
+
+  // Scroll-triggered animations using IntersectionObserver
+  (function() {
+    var animatedElements = document.querySelectorAll('.pdc-animate');
+    
+    var observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -80px 0px',
+      threshold: 0.1
+    };
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('pdc-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    animatedElements.forEach(function(el) {
+      observer.observe(el);
+    });
+  })();
+</script>
