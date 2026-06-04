@@ -1,45 +1,76 @@
-<!-- 
-IMAGE PLACEHOLDERS:
-  - ./public/About-Us@2x.png -> YOUR_IMAGE_URL_ABOUT_US_2X_PNG
-  - ./public/Footer-Background@2x.png -> YOUR_IMAGE_URL_FOOTER_BACKGROUND_2X_PNG
-  - ./public/Footer@3x.png -> YOUR_IMAGE_URL_FOOTER_3X_PNG
-  - ./public/Frame@3x.png -> YOUR_IMAGE_URL_FRAME_3X_PNG
-  - ./public/Memories-Background@2x.png -> YOUR_IMAGE_URL_MEMORIES_BACKGROUND_2X_PNG
-  - ./public/Memories-Photos@3x.png -> YOUR_IMAGE_URL_MEMORIES_PHOTOS_3X_PNG
-  - ./public/Our-Previous-Text@2x.png -> YOUR_IMAGE_URL_OUR_PREVIOUS_TEXT_2X_PNG
-  - ./public/PDC-logo-scaled-1@2x.png -> YOUR_IMAGE_URL_PDC_LOGO_SCALED_1_2X_PNG
-  - ./public/Placeholder-Values.svg -> YOUR_IMAGE_URL_PLACEHOLDER_VALUES_SVG
-  - ./public/Vector-2@2x.png -> YOUR_IMAGE_URL_VECTOR_2_2X_PNG
-  - ./public/Vector-3@2x.png -> YOUR_IMAGE_URL_VECTOR_3_2X_PNG
-  - ./public/Vector-4@2x.png -> YOUR_IMAGE_URL_VECTOR_4_2X_PNG
-  - ./public/Winners-Element@3x.png -> YOUR_IMAGE_URL_WINNERS_ELEMENT_3X_PNG
-  - ./public/merged-asset-1@2x.png -> YOUR_IMAGE_URL_MERGED_ASSET_1_2X_PNG
-  - ./public/merged-asset-2@2x.png -> YOUR_IMAGE_URL_MERGED_ASSET_2_2X_PNG
+<!--
+=======================================================
+  About Us Page — PDC
+  - Navbar & footer ported from Logic Olympiad page
+  - Winners element centered fix
+=======================================================
 -->
 <style>
+/* ── Google Font ───────────────────────────────────── */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
 
-/* ══════════════════════════════════════════════════════════
-   BASE RESET & SCOPING
-   ══════════════════════════════════════════════════════════ */
+/* ── CSS Variables ─────────────────────────────────── */
+.pdc-root {
+  --pdc-white: #fff;
+  --pdc-gap-20: 20px;
+  --pdc-p0: 0px;
+  --pdc-p1: 1px;
+  --pdc-p2: 2px;
+  --pdc-p6: 6px;
+  --pdc-p8: 8px;
+  --pdc-p24: 24px;
+  --pdc-br100: 100px;
+  --pdc-font: 'Nunito', Arial, sans-serif;
+  --pdc-fs15: 15px;
+  --pdc-fs16: 16px;
+  --pdc-fs17: 17px;
+  --pdc-fs18: 18px;
+  --pdc-fs20: 20px;
+  --pdc-fs24: 24px;
+  --pdc-fs32: 32px;
+  --pdc-fs40: 40px;
+  --pdc-border1: 1px solid transparent;
+  --pdc-shadow-drop:   0px 6px 4px rgba(0,0,0,.25);
+  --pdc-shadow-drop1:  0px 4px 4px rgba(0,0,0,.25);
+  --pdc-shadow-drop2:  0px 5px 4px rgba(0,0,0,.25);
+  --pdc-shadow-drop3:  0px 7px 4px rgba(0,0,0,.25);
+  --pdc-shadow-inner:  0px 2px 4px rgba(255,255,255,.25) inset;
+  --pdc-ts1: 0px 0px 10px rgba(0,0,0,.25);
+  --pdc-ts2: 0px 2px 6px  rgba(0,0,0,.25);
+  --pdc-ts3: 0px 2px 7px  rgba(0,0,0,.2);
+  --pdc-grad1: rgba(255,255,255,.02) padding-box,
+    linear-gradient(264.53deg, rgba(255,255,255,.03), rgba(255,255,255,.5) 50%, rgba(255,255,255,.03)) border-box;
+  --pdc-grad2: linear-gradient(180deg,rgba(45,39,209,0),#14356b) padding-box,
+    linear-gradient(180deg,rgba(45,39,209,0),#2d27d1) border-box;
+  --pdc-grad3: linear-gradient(180deg,rgba(45,39,209,0),rgba(20,53,107,.88));
+  --pdc-grad4: linear-gradient(180deg,rgba(39,118,209,0),#143d6b) padding-box,
+    linear-gradient(180deg,rgba(39,118,209,0),#2776d1) border-box;
+  --pdc-w203: 203px;
+  --pdc-lh24: 24px;
+  --pdc-lh26: 26px;
+  --pdc-lh32: 32px;
+  --pdc-lh40: 40px;
+}
+
+/* ── Universal font override ───────────────────────── */
 .pdc-root,
 .pdc-root * {
+  font-family: var(--pdc-font) !important;
   box-sizing: border-box !important;
   margin: 0 !important;
   padding: 0 !important;
-  font-family: 'Nunito', Arial, sans-serif !important;
 }
 
+/* ── Link resets ────────────────────────────────────── */
 .pdc-root a,
 .pdc-root a:hover,
 .pdc-root a:focus,
 .pdc-root a:active,
 .pdc-root a:visited {
-  font-size: inherit !important;
-  font-family: 'Nunito', Arial, sans-serif !important;
   color: #fff !important;
+  font-size: inherit !important;
   text-decoration: none !important;
-  line-height: inherit !important;
+  font-family: var(--pdc-font) !important;
   transition: opacity 0.2s !important;
 }
 
@@ -47,57 +78,20 @@ IMAGE PLACEHOLDERS:
   opacity: 0.8 !important;
 }
 
+/* ══════════════════════════════════════════════════════
+   ROOT WRAPPER
+══════════════════════════════════════════════════════ */
 .pdc-root {
   width: 100% !important;
-  background: linear-gradient(180deg, #26266a 24.52%, #4b4bd0) !important;
+  position: relative !important;
+  background: #3f3fa4 !important;
   overflow-x: hidden !important;
-  padding-top: 71px !important;
+  padding-top: 71px !important; /* offset for fixed nav */
 }
 
-/* ══════════════════════════════════════════════════════════
-   ANIMATIONS
-   ══════════════════════════════════════════════════════════ */
-@keyframes pdcFadeInUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes pdcFadeInScale {
-  from { opacity: 0; transform: scale(0.92); }
-  to   { opacity: 1; transform: scale(1); }
-}
-@keyframes pdcFadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-@keyframes pdcSlideInLeft {
-  from { opacity: 0; transform: translateX(-50px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-@keyframes pdcSlideInRight {
-  from { opacity: 0; transform: translateX(50px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-.pdc-animate { opacity: 0; }
-.pdc-animate.pdc-visible {
-  animation-fill-mode: forwards;
-  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-}
-.pdc-animate.pdc-fade-up.pdc-visible      { animation-name: pdcFadeInUp;    animation-duration: 0.8s; }
-.pdc-animate.pdc-fade-scale.pdc-visible   { animation-name: pdcFadeInScale; animation-duration: 0.7s; }
-.pdc-animate.pdc-fade.pdc-visible         { animation-name: pdcFadeIn;      animation-duration: 0.6s; }
-.pdc-animate.pdc-slide-left.pdc-visible   { animation-name: pdcSlideInLeft; animation-duration: 0.8s; }
-.pdc-animate.pdc-slide-right.pdc-visible  { animation-name: pdcSlideInRight; animation-duration: 0.8s; }
-
-.pdc-animate.pdc-delay-1 { animation-delay: 0.1s !important; }
-.pdc-animate.pdc-delay-2 { animation-delay: 0.2s !important; }
-.pdc-animate.pdc-delay-3 { animation-delay: 0.3s !important; }
-.pdc-animate.pdc-delay-4 { animation-delay: 0.4s !important; }
-.pdc-animate.pdc-delay-5 { animation-delay: 0.5s !important; }
-
-/* ══════════════════════════════════════════════════════════
-   NAVBAR  (from logic-olympiad.html)
-   ══════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════
+   NAVBAR (ported from Logic Olympiad)
+══════════════════════════════════════════════════════ */
 .pdc-nav {
   width: 100% !important;
   height: 71px !important;
@@ -119,6 +113,8 @@ IMAGE PLACEHOLDERS:
   width: 90% !important;
   max-width: 1200px !important;
   margin: 0 auto !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
   padding: 0 30px !important;
   border-radius: 50px !important;
   background: rgba(0, 0, 0, 0.4) !important;
@@ -128,11 +124,91 @@ IMAGE PLACEHOLDERS:
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
 }
 
-.pdc-nav-links { display: flex !important; align-items: center !important; gap: 34px !important; list-style: none !important; padding-left: 12px !important; }
-.pdc-nav-links li { list-style: none !important; }
-.pdc-nav-links a { color: #fff !important; text-decoration: none !important; font-size: 18px !important; font-weight: 600 !important; letter-spacing: -0.02em !important; }
-.pdc-nav-links a:hover { opacity: 0.8 !important; }
-.pdc-nav-links a.active { text-decoration: underline !important; }
+.pdc-nav-links {
+  display: flex !important;
+  align-items: center !important;
+  gap: 34px !important;
+  list-style: none !important;
+  padding-left: 12px !important;
+}
+
+.pdc-nav-links li {
+  list-style: none !important;
+}
+
+.pdc-nav-links a {
+  color: #fff !important;
+  text-decoration: none !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.pdc-nav-links a.active {
+  text-decoration: underline !important;
+}
+
+.pdc-burger {
+  display: none !important;
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  color: #fff !important;
+  padding: 4px !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.pdc-drawer-overlay {
+  display: none !important;
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(0,0,0,0.5) !important;
+  z-index: 200 !important;
+}
+
+.pdc-drawer {
+  position: fixed !important;
+  top: 0 !important;
+  left: -280px !important;
+  width: 260px !important;
+  height: 100vh !important;
+  background: #111 !important;
+  z-index: 201 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 20px !important;
+  gap: 4px !important;
+  transition: left 0.3s ease !important;
+}
+
+.pdc-drawer.pdc-open {
+  left: 0 !important;
+}
+
+.pdc-drawer-close {
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  color: #fff !important;
+  align-self: flex-end !important;
+  padding: 4px !important;
+  margin-bottom: 16px !important;
+}
+
+.pdc-drawer a {
+  color: #fff !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  padding: 12px 8px !important;
+  border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+  display: block !important;
+}
+
+.pdc-drawer a.active {
+  text-decoration: underline !important;
+}
 
 .pdc-register-btn {
   position: relative !important;
@@ -151,132 +227,519 @@ IMAGE PLACEHOLDERS:
   white-space: nowrap !important;
   transition: background 0.2s !important;
 }
+
 .pdc-register-btn:hover {
   background: rgba(255,255,255,0.08) !important;
 }
 
-/* Burger */
-.pdc-burger {
-  display: none !important;
-  background: none !important;
-  border: none !important;
-  cursor: pointer !important;
-  color: #fff !important;
-  padding: 0px !important;
-}
-
-/* Drawer */
-.pdc-drawer-overlay {
-  display: none !important;
-  position: fixed !important;
-  inset: 0 !important;
-  background: rgba(0,0,0,0.5) !important;
-  z-index: 200 !important;
-}
-.pdc-drawer {
-  position: fixed !important;
-  top: 0 !important;
-  left: -280px !important;
-  width: 260px !important;
-  height: 100vh !important;
-  background: #111 !important;
-  z-index: 201 !important;
+/* ══════════════════════════════════════════════════════
+   MAIN PAGE BODY
+══════════════════════════════════════════════════════ */
+.desktop-about-us {
+  background: linear-gradient(180deg,#26266a 24.52%,#4b4bd0) !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
   display: flex !important;
   flex-direction: column !important;
-  padding: 20px !important;
-  gap: 4px !important;
-  transition: left 0.3s ease !important;
-}
-.pdc-drawer.pdc-open { left: 0 !important; }
-.pdc-drawer-close {
-  background: none !important;
-  border: none !important;
-  cursor: pointer !important;
-  color: #fff !important;
-  align-self: flex-end !important;
-  padding: 4px !important;
-  margin-bottom: 16px !important;
-}
-.pdc-drawer a {
-  color: #fff !important;
-  font-size: 18px !important;
-  font-weight: 600 !important;
-  text-decoration: none !important;
-  padding: 12px 8px !important;
-  border-bottom: 1px solid rgba(255,255,255,0.1) !important;
-  display: block !important;
+  align-items: center !important;
+  padding: 0 0 2416px !important;
+  isolation: isolate !important;
+  min-height: 1080px !important;
+  line-height: normal !important;
+  letter-spacing: normal !important;
+  z-index: 0 !important;
+  text-align: left !important;
+  font-size: var(--pdc-fs17) !important;
+  color: var(--pdc-white) !important;
+  position: relative !important;
 }
 
-/* ══════════════════════════════════════════════════════════
-   FOOTER  (from logic-olympiad.html)
-   ══════════════════════════════════════════════════════════ */
-.pdc-footer {
+/* ══════════════════════════════════════════════════════
+   HERO SECTION
+══════════════════════════════════════════════════════ */
+.home-background-icon {
+  width: 1279px !important;
+  min-height: 100vh !important;
+  position: absolute !important;
+  margin: 0 !important;
+  top: 0 !important;
+  left: calc(50% - 3319.5px) !important;
+  flex-shrink: 0 !important;
+  object-fit: cover !important;
+  z-index: 0 !important;
+}
+
+.frame {
   width: 100% !important;
-  background: #000 !important;
+  max-width: 100% !important;
+  height: 725px !important;
+  position: relative !important;
+  flex-shrink: 0 !important;
+  background-image: url('https://pdc.praditadirgantara.sch.id/wp-content/uploads/2026/06/Background-Web-1-1.png') !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: top !important;
+  min-width: 1288px !important;
+  z-index: 10 !important;
+  text-align: center !important;
+  font-size: var(--pdc-fs17) !important;
+  color: var(--pdc-white) !important;
+}
+
+.frame::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 300px !important;
+    background: linear-gradient(0deg, #262666 0%, rgba(63,63,164,0) 100%) !important;
+  }
+
+.about,
+.about-panel {
+  position: absolute !important;
+  width: 776px !important;
+}
+
+.about {
+  top: 240px !important;
+  left: calc(50% - 388px) !important;
+  height: 200px !important;
+}
+
+.about-panel {
+  top: 26px !important;
+  left: -4.5px !important;
+  box-shadow: var(--pdc-shadow-inner) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-radius: 35px !important;
+  background: var(--pdc-grad1) !important;
+  border: var(--pdc-border1) !important;
+  height: 170px !important;
+  flex-shrink: 0 !important;
+}
+
+.pradita-dirgantara-competition-container {
+  position: absolute !important;
+  top: 0 !important;
+  left: 13.5px !important;
+  letter-spacing: -0.02em !important;
+  line-height: 145% !important;
+  display: flex !important;
+  align-items: center !important;
+  width: 739.7px !important;
+  text-shadow: var(--pdc-ts1) !important;
+  opacity: 0.8 !important;
+  flex-shrink: 0 !important;
+}
+
+.pradita-dirgantara-competition-container2 {
+  width: 100% !important;
+}
+
+.span {
+  font-weight: 800 !important;
+  line-height: 145% !important;
+}
+
+.pradita-dirgantara-competition {
+  font-weight: 900 !important;
+  line-height: 145% !important;
+}
+
+.merupakan-ajang-tahunan {
+  line-height: 145% !important;
+}
+
+.about-us-icon {
+  position: absolute !important;
+  top: 170px !important;
+  left: calc(50% - 141px) !important;
+  width: 264px !important;
+  height: 72px !important;
+  object-fit: cover !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   PREVIOUS WINNERS / HERO IMAGES
+══════════════════════════════════════════════════════ */
+.our-previous-text {
+  position: absolute !important;
+  margin: 0 !important;
+  flex-shrink: 0 !important;
+  width: 706px !important;
+  top: 735px !important;
+  left: calc(50% - 352.5px) !important;
+  max-height: 100% !important;
+  object-fit: cover !important;
+  z-index: 7 !important;
+}
+
+/* FIXED: winners element centered */
+.winners-element {
+  position: absolute !important;
+  margin: 0 !important;
+  flex-shrink: 0 !important;
+  width: 1264px !important;
+  height: 666.7px !important;
+  top: calc(50% - 777.5px) !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  right: auto !important;
+  background-image: url('https://raw.githubusercontent.com/caatz38/pdc-gassin/main/assets/aboutus/Winners%20Element.png') !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: top !important;
+  z-index: 6 !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   BACKGROUND COLOR + MEMORIES BACKGROUND
+══════════════════════════════════════════════════════ */
+.background-color,
+.memories-background-icon {
+  position: absolute !important;
+  margin: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+.background-color {
+  width: 1279px !important;
+  height: 2336px !important;
+  bottom: 7px !important;
+  left: calc(50% - 3319.5px) !important;
+  background: radial-gradient(50% 50% at 50% 50%,rgba(128,90,255,.13) 29.81%,rgba(94,69,255,.13) 74.52%,rgba(36,24,255,.1)),
+    linear-gradient(180deg,#28285d 24.52%,#4b4bd0) !important;
+  z-index: 9 !important;
+}
+
+.memories-background-icon {
+  width: 3007.4px !important;
+  height: 2011px !important;
+  bottom: -308px !important;
+  left: calc(50% - 1340.5px) !important;
+  filter: blur(10px) !important;
+  object-fit: contain !important;
+  z-index: 2 !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   GALLERY INFO CARD
+══════════════════════════════════════════════════════ */
+.gallery-info,
+.gallery-info-child {
+  position: absolute !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  flex-shrink: 0 !important;
+}
+
+.gallery-info {
+  width: 242px !important;
+  height: 170px !important;
+  top: calc(50% - 113.5px) !important;
+  left: 46px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  padding: var(--pdc-p24) 21px !important;
+  isolation: isolate !important;
+  gap: 6px !important;
+  z-index: 8 !important;
+}
+
+.gallery-info-child {
+  width: 100% !important;
+  height: 100% !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  box-shadow: var(--pdc-shadow-inner) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-radius: 25px !important;
+  background: var(--pdc-grad1) !important;
+  border: var(--pdc-border1) !important;
+  z-index: 0 !important;
+}
+
+.d-gallery {
+  position: absolute !important;
+  margin: 0 !important;
+  flex-shrink: 0 !important;
+  top: 15px !important;
+  left: 23px !important;
+  font-size: 13px !important;
+  display: inline-block !important;
+  min-width: 62px !important;
+  z-index: 4 !important;
+}
+
+.gallery-info-item {
+  position: absolute !important;
+  margin: 0 !important;
+  flex-shrink: 0 !important;
+  width: 200px !important;
+  top: calc(50% - 15px) !important;
+  left: calc(50% - 100px) !important;
+  border-radius: var(--pdc-br100) !important;
+  max-height: 100% !important;
+  object-fit: cover !important;
+  z-index: 2 !important;
+}
+
+.pdc-2025 {
+  position: absolute !important;
+  margin: 0 !important;
+  flex-shrink: 0 !important;
+  top: 30px !important;
+  left: 22px !important;
+  font-size: 27px !important;
+  font-weight: 700 !important;
+  display: inline-block !important;
+  min-width: 129px !important;
+  z-index: 5 !important;
+  color: var(--pdc-white) !important;
+}
+
+.total-photos-row {
+  width: 100% !important;
   display: flex !important;
   align-items: flex-start !important;
   justify-content: space-between !important;
+  padding: 1px 6px 1px 1px !important;
+  gap: var(--pdc-gap-20) !important;
+  max-width: 200px !important;
+  z-index: 6 !important;
+  flex-shrink: 0 !important;
+}
+
+.total-photos {
+  position: relative !important;
+}
+
+.gallery-info-inner {
+  align-self: stretch !important;
+  height: 3px !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  z-index: 7 !important;
+  flex-shrink: 0 !important;
+}
+
+.frame-child {
+  width: 200px !important;
+  position: relative !important;
+  border-radius: var(--pdc-br100) !important;
+  max-height: 100% !important;
+  object-fit: cover !important;
+}
+
+.album-separator {
+  position: absolute !important;
+  margin: 0 !important;
+  right: 26px !important;
+  bottom: 30px !important;
+  display: inline-block !important;
+  min-width: 11px !important;
+  z-index: 3 !important;
+  flex-shrink: 0 !important;
+}
+
+.my-album,
+.vector-icon {
+  align-self: stretch !important;
+  position: relative !important;
+  z-index: 7 !important;
+  flex-shrink: 0 !important;
+}
+
+.vector-icon {
+  border-radius: var(--pdc-br100) !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  max-height: 100% !important;
+  object-fit: cover !important;
+  z-index: 8 !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   MEMORIES PHOTOS SECTION
+══════════════════════════════════════════════════════ */
+.memories-photos {
+  width: 1220px !important;
+  height: 1060px !important;
+  position: absolute !important;
+  margin: 0 !important;
+  top: calc(50% - 65.8px) !important;
+  left: calc(50% - 600.1px) !important;
+  flex-shrink: 0 !important;
+  background-image: url('https://raw.githubusercontent.com/caatz38/pdc-gassin/main/assets/aboutus/Memories%20Photos.png') !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: top !important;
+  z-index: 5 !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   LAST YEAR'S MEMORIES TEXT
+══════════════════════════════════════════════════════ */
+.last-year-text,
+.last-years {
+  display: flex !important;
+  align-items: flex-start !important;
+}
+
+.last-year-text {
+  width: 255px !important;
+  margin: 0 !important;
+  position: absolute !important;
+  top: calc(50% + 92.2px) !important;
+  left: 164.4px !important;
+  flex-direction: column !important;
+  padding: 0 var(--pdc-p2) !important;
+  z-index: 4 !important;
+  flex-shrink: 0 !important;
+  text-align: right !important;
+  font-size: var(--pdc-fs40) !important;
+}
+
+.last-years {
+  align-self: stretch !important;
+  padding: 0 0 var(--pdc-p8) !important;
+  z-index: 1 !important;
+}
+
+.last-years2 {
+  margin: 0 !important;
+  flex: 1 !important;
+  position: relative !important;
+  font-size: inherit !important;
+  line-height: var(--pdc-lh40) !important;
+  font-weight: 700 !important;
+  filter: blur(0.5px) !important;
+}
+
+.memories {
+  align-self: stretch !important;
+  position: relative !important;
+  font-size: inherit !important;
+  line-height: var(--pdc-lh40) !important;
+  font-weight: 700 !important;
+  filter: blur(0.7px) !important;
+  opacity: 0.95 !important;
+  z-index: 2 !important;
+  margin: -12px 0 0 !important;
+}
+
+.photos {
+  align-self: stretch !important;
+  position: relative !important;
+  font-size: var(--pdc-fs20) !important;
+  line-height: 50px !important;
+  filter: blur(1px) !important;
+  opacity: 0.75 !important;
+  z-index: 3 !important;
+  margin-top: -12px !important;
+}
+
+.last-years2,
+.memories,
+.photos {
+  color: var(--pdc-white) !important;
+}
+
+/* ══════════════════════════════════════════════════════
+   FOOTER (ported from Logic Olympiad)
+══════════════════════════════════════════════════════ */
+.pdc-footer {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  background: url('https://raw.githubusercontent.com/caatz38/pdc-gassin/main/assets/footer.avif') center top / cover no-repeat !important;
+  padding: 190px 19px 40px !important;
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: space-between !important;
   flex-wrap: wrap !important;
-  gap: 40px !important;
-  padding: 48px 40px 48px 40px !important;
+  gap: 20px !important;
+  color: #fff !important;
+  font-family: var(--pdc-font) !important;
+  z-index: 3 !important;
+  overflow: hidden !important;
 }
 
 .pdc-footer-left {
   display: flex !important;
-  align-items: center !important;
-  gap: 20px !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  min-width: 220px !important;
+  max-width: 305px !important;
+  flex: 1 !important;
+  padding: 14px 0 100px !important;
   position: relative !important;
-  min-width: 260px !important;
 }
 
 .pdc-footer-logo {
-  width: 80px !important;
-  height: auto !important;
-  object-fit: contain !important;
-  flex-shrink: 0 !important;
+  width: 220px !important;
+  object-fit: cover !important;
 }
 
 .pdc-footer-brand {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 6px !important;
+  position: absolute !important;
+  bottom: 38px !important;
+  right: -117px !important;
+  width: 358px !important;
 }
 
 .pdc-footer-brand h3 {
   color: #fff !important;
-  font-size: 18px !important;
-  font-weight: 700 !important;
-  letter-spacing: -0.02em !important;
-  line-height: 130% !important;
-  max-width: 220px !important;
+  font-size: 20px !important;
+  font-weight: 800 !important;
+  line-height: 32px !important;
+  text-shadow: 0px 2px 6px rgba(0,0,0,0.25) !important;
+  margin: 0 !important;
 }
 
 .pdc-footer-brand p {
-  color: rgba(255,255,255,0.7) !important;
-  font-size: 13px !important;
-  font-weight: 600 !important;
-  letter-spacing: -0.01em !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  line-height: 32px !important;
+  text-shadow: 0px 2px 6px rgba(0,0,0,0.25) !important;
 }
 
 .pdc-footer-right {
+  flex: 1 !important;
   display: flex !important;
   flex-direction: column !important;
-  gap: 24px !important;
-  min-width: 380px !important;
-  max-width: 600px !important;
+  align-items: flex-end !important;
+  gap: 15px !important;
+  min-width: 310px !important;
+  max-width: 625px !important;
 }
 
 .pdc-footer-nav-row {
   display: flex !important;
-  gap: 40px !important;
+  align-items: flex-start !important;
   flex-wrap: wrap !important;
+  gap: 0 !important;
+  width: 100% !important;
+  justify-content: center !important;
 }
 
 .pdc-footer-nav-col {
+  flex: 1 !important;
   display: flex !important;
   flex-direction: column !important;
   gap: 8px !important;
-  min-width: 100px !important;
+  min-width: 126px !important;
+  max-width: 126px !important;
 }
 
 .pdc-footer-nav-col h3 {
@@ -284,22 +747,28 @@ IMAGE PLACEHOLDERS:
   font-size: 25px !important;
   font-weight: 700 !important;
   text-shadow: 0px 2px 7px rgba(0,0,0,0.2) !important;
-  margin-bottom: 4px !important;
+  margin: 0 !important;
 }
 
 .pdc-footer-nav-col a {
   color: #fff !important;
+  text-decoration: none !important;
   font-size: 17px !important;
   font-weight: 600 !important;
   text-shadow: 0px 2px 7px rgba(0,0,0,0.2) !important;
+  padding-bottom: 6px !important;
+  display: block !important;
 }
 
 .pdc-footer-comp-col {
   color: #fff !important;
+  flex: 1 !important;
   display: flex !important;
   flex-direction: column !important;
+  align-items: center !important;
   gap: 8px !important;
-  min-width: 200px !important;
+  min-width: 289px !important;
+  padding: 0 3px !important;
 }
 
 .pdc-footer-comp-col h3 {
@@ -307,12 +776,14 @@ IMAGE PLACEHOLDERS:
   font-size: 25px !important;
   font-weight: 700 !important;
   text-shadow: 0px 2px 7px rgba(0,0,0,0.2) !important;
-  margin-bottom: 4px !important;
+  width: 311px !important;
+  margin: 0 !important;
 }
 
 .pdc-footer-comp-links {
   display: flex !important;
   gap: 8px !important;
+  width: 311px !important;
 }
 
 .pdc-footer-comp-links div {
@@ -324,6 +795,7 @@ IMAGE PLACEHOLDERS:
 
 .pdc-footer-comp-links a {
   color: #fff !important;
+  text-decoration: none !important;
   font-size: 17px !important;
   font-weight: 600 !important;
   text-shadow: 0px 2px 7px rgba(0,0,0,0.2) !important;
@@ -332,8 +804,12 @@ IMAGE PLACEHOLDERS:
 .pdc-footer-socials {
   display: flex !important;
   align-items: center !important;
+  justify-content: center !important;
   gap: 12px !important;
+  width: 100% !important;
+  max-width: 379px !important;
   flex-wrap: wrap !important;
+  padding-left: 20px !important;
 }
 
 .pdc-footer-socials img {
@@ -343,393 +819,105 @@ IMAGE PLACEHOLDERS:
   cursor: pointer !important;
   transition: transform 0.2s !important;
 }
-.pdc-footer-socials img:hover { transform: scale(1.1) !important; }
 
-/* ══════════════════════════════════════════════════════════
-   ABOUT US BODY CONTENT (unchanged from about_us.html)
-   ══════════════════════════════════════════════════════════ */
-.pdc-root {
-  --color-white: #fff;
-  --gap-20: 20px;
-  --padding-0: 0px; --padding-1: 1px; --padding-2: 2px; --padding-8: 8px; --padding-24: 24px;
-  --br-100: 100px;
-  --font-nunito: Nunito, Arial, sans-serif;
-  --fs-15: 15px; --fs-16: 16px; --fs-17: 17px; --fs-18: 18px; --fs-20: 20px;
-  --fs-24: 24px; --fs-32: 32px; --fs-40: 40px;
-  --border-1: 1px solid transparent;
-  --shadow-drop: 0px 6px 4px rgba(0,0,0,0.25);
-  --shadow-drop-1: 0px 4px 4px rgba(0,0,0,0.25);
-  --shadow-drop-2: 0px 5px 4px rgba(0,0,0,0.25);
-  --shadow-drop-3: 0px 7px 4px rgba(0,0,0,0.25);
-  --shadow-inner: 0px 2px 4px rgba(255,255,255,0.25) inset;
-  --text-shadow-1: 0px 0px 10px rgba(0,0,0,0.25);
-  --text-shadow-2: 0px 2px 6px rgba(0,0,0,0.25);
-  --text-shadow-3: 0px 2px 7px rgba(0,0,0,0.2);
-  --gradient-1: rgba(255,255,255,0.02) padding-box,
-    linear-gradient(264.53deg, rgba(255,255,255,0.03), rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.03)) border-box;
-  --gradient-2: linear-gradient(180deg, rgba(45,39,209,0), #14356b) padding-box,
-    linear-gradient(180deg, rgba(45,39,209,0), #2d27d1) border-box;
-  --gradient-3: linear-gradient(180deg, rgba(45,39,209,0), rgba(20,53,107,0.88));
-  --gradient-4: linear-gradient(180deg, rgba(39,118,209,0), #143d6b) padding-box,
-    linear-gradient(180deg, rgba(39,118,209,0), #2776d1) border-box;
-  --height-36: 36px; --width-200: 200px; --width-203: 203px;
-  --lh-24: 24px; --lh-26: 26px; --lh-32: 32px; --lh-40: 40px;
-  --ls--0_02: -0.02;
-  --left-0: 0px; --top-0: 0px;
+.pdc-footer-socials img:hover {
+  transform: scale(1.1) !important;
 }
 
-.pdc-root .desktop-about-us {
-  width: 100% !important;
-  height: 3141px !important;
-  position: relative !important;
-  background: linear-gradient(180deg, #26266a 24.52%, #4b4bd0) !important;
-  overflow-y: auto !important;
-  min-height: 1080px !important;
-  line-height: normal !important;
-  letter-spacing: normal !important;
-}
-.pdc-root .background {
-  position: absolute !important;
-  top: 0 !important;
-  left: calc(50% - 1310.8px) !important;
-  width: 3007.4px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  isolation: isolate !important;
-  gap: 616.6px !important;
-  z-index: 0 !important;
-  flex-shrink: 0 !important;
-  text-align: left !important;
-  font-size: var(--fs-17) !important;
-  color: var(--color-white) !important;
-  font-family: var(--font-nunito) !important;
-}
-.pdc-root .competition {
-  width: 100% !important;
-  display: flex !important;
-  align-items: flex-start !important;
-  padding: var(--padding-0) 385px var(--padding-0) var(--padding-0) !important;
-  box-sizing: border-box !important;
-  max-width: 1664.7px !important;
-  z-index: 2 !important;
-}
-.pdc-root .frame, .pdc-root .about-header-placeholder {
-  display: flex !important;
-  align-items: center !important;
-}
-.pdc-root .frame {
-  flex: 1 !important;
-  padding: 60px var(--padding-0) 280px !important;
-  box-sizing: border-box !important;
-  position: relative !important;
-  isolation: isolate !important;
-  background-image: url(https://raw.githubusercontent.com/caatz38/pdc-gassin/refs/heads/main/assets/bege%20ungu.avif) !important;
-  background-size: cover !important;
-  background-repeat: no-repeat !important;
-  background-position: top !important;
-  max-width: 100% !important;
-}
-.pdc-root .about-content {
-  height: 270px !important;
-  flex: 1 !important;
-  position: relative !important;
-  max-width: 100% !important;
-  z-index: 1 !important;
-  flex-shrink: 0 !important;
-  text-align: center !important;
-  font-size: var(--fs-17) !important;
-  color: var(--color-white) !important;
-  font-family: var(--font-nunito) !important;
-}
-.pdc-root .about-panel, .pdc-root .about2 {
-  position: absolute !important;
-  width: 776px !important;
-}
-.pdc-root .about2 {
-  bottom: 0 !important;
-  left: calc(50% - 383.6px) !important;
-  height: 200px !important;
-}
-.pdc-root .about-panel {
-  top: 26px !important;
-  left: 255.95px !important;
-  box-shadow: var(--shadow-inner) !important;
-  backdrop-filter: blur(20px) !important;
-  border-radius: 35px !important;
-  background: var(--gradient-1) !important;
-  border: var(--border-1) !important;
-  box-sizing: border-box !important;
-  height: 170px !important;
-  flex-shrink: 0 !important;
-}
-.pdc-root .pradita-dirgantara-competition-container {
-  position: absolute !important;
-  top: 0 !important;
-  left: 273.95px !important;
-  letter-spacing: -0.02em !important;
-  line-height: 145% !important;
-  display: flex !important;
-  align-items: center !important;
-  width: 739.7px !important;
-  text-shadow: var(--text-shadow-1) !important;
-  opacity: 0.8 !important;
-  flex-shrink: 0 !important;
-}
-.pdc-root .pradita-dirgantara-competition-container2 { width: 100% !important; }
-.pdc-root .span { font-weight: 800 !important; line-height: 145% !important; }
-.pdc-root .pradita-dirgantara-competition { font-weight: 900 !important; line-height: 145% !important; }
-.pdc-root .merupakan-ajang-tahunan { line-height: 145% !important; }
-.pdc-root .about-us-icon {
-  position: absolute !important;
-  top: 0 !important;
-  left: 502.9px !important;
-  width: 264px !important;
-  height: 72px !important;
-  object-fit: cover !important;
-}
-.pdc-root .our-previous-text {
-  width: 706px !important;
-  position: absolute !important;
-  margin: 0 !important;
-  top: 735px !important;
-  left: calc(50% - 545.4px) !important;
-  max-height: 100% !important;
-  object-fit: cover !important;
-  z-index: 8 !important;
-}
-.pdc-root .winners-element {
-  width: 1264px !important;
-  height: 666.7px !important;
-  position: absolute !important;
-  margin: 0 !important;
-  top: calc(50% - 880.8px) !important;
-  left: calc(50% - 789.4px) !important;
-  background-image: url(https://github.com/caatz38/pdc-gassin/blob/main/assets/aboutus/Winners%20Element.png?raw=true) !important;
-  background-size: cover !important;
-  background-repeat: no-repeat !important;
-  background-position: top !important;
-  z-index: 7 !important;
-}
-.pdc-root .merged-asset-1-icon {
-  position: absolute !important;
-  top: -3px !important; left: -3px !important;
-  width: 100% !important; height: 100% !important;
-  object-fit: cover !important;
-  display: none !important;
-  flex-shrink: 0 !important;
-}
-.pdc-root .background-color {
-  width: 1279px !important;
-  height: 2336px !important;
-  position: absolute !important;
-  margin: 0 !important;
-  bottom: 213.6px !important;
-  left: calc(50% - 832.4px) !important;
-  background: radial-gradient(50% 50% at 50% 50%, rgba(128,90,255,0.13) 29.81%, rgba(94,69,255,0.13) 74.52%, rgba(36,24,255,0.1)),
-    linear-gradient(180deg, #28285d 24.52%, #4b4bd0) !important;
-  z-index: 1 !important;
-}
-.pdc-root .memories-background-icon {
-  align-self: stretch !important;
-  height: 2011px !important;
-  position: relative !important;
-  filter: blur(10px) !important;
-  max-width: 100% !important;
-  overflow: hidden !important;
-  flex-shrink: 0 !important;
-  object-fit: contain !important;
-  z-index: 3 !important;
-}
-.pdc-root .gallery-info, .pdc-root .gallery-info-child {
-  position: absolute !important;
-  margin: 0 !important;
-  box-sizing: border-box !important;
-}
-.pdc-root .gallery-info {
-  width: 242px !important;
-  height: 170px !important;
-  top: calc(50% - 216.8px) !important;
-  left: calc(50% - 786.4px) !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: flex-end !important;
-  padding: var(--padding-24) var(--padding-0) !important;
-  isolation: isolate !important;
-  gap: 6px !important;
-  z-index: 9 !important;
-}
-.pdc-root .gallery-info-child {
-  width: 100% !important; height: 100% !important;
-  top: 0 !important; right: 0 !important; bottom: 0 !important; left: 0 !important;
-  box-shadow: var(--shadow-inner) !important;
-  backdrop-filter: blur(20px) !important;
-  border-radius: 25px !important;
-  background: var(--gradient-1) !important;
-  border: var(--border-1) !important;
-  z-index: 0 !important;
-  flex-shrink: 0 !important;
-}
-.pdc-root .d-gallery {
-  top: 15px !important; left: 23px !important;
-  font-size: 13px !important;
-  display: inline-block !important;
-  min-width: 62px !important;
-  z-index: 4 !important;
-}
-.pdc-root .d-gallery, .pdc-root .gallery-info-item, .pdc-root .pdc-2025 {
-  position: absolute !important;
-  margin: 0 !important;
-  flex-shrink: 0 !important;
-}
-.pdc-root .pdc-2025 {
-  top: 30px !important; left: 22px !important;
-  font-size: 27px !important; font-weight: 700 !important;
-  font-family: inherit !important;
-  display: inline-block !important;
-  min-width: 129px !important;
-  z-index: 5 !important;
-}
-.pdc-root .gallery-info-item {
-  width: var(--width-200) !important;
-  top: calc(50% - 15px) !important;
-  left: calc(50% - 100px) !important;
-  border-radius: var(--br-100) !important;
-  max-height: 100% !important;
-  object-fit: cover !important;
-  z-index: 2 !important;
-}
-.pdc-root .total-photos-row {
-  width: 100% !important;
-  display: flex !important;
-  align-items: flex-start !important;
-  justify-content: space-between !important;
-  padding: var(--padding-1) 3px var(--padding-1) var(--padding-0) !important;
-  box-sizing: border-box !important;
-  gap: var(--gap-20) !important;
-  max-width: 196.2px !important;
-  z-index: 6 !important;
-  flex-shrink: 0 !important;
-}
-.pdc-root .total-photos { position: relative !important; }
-.pdc-root .gallery-info-inner {
-  width: var(--width-200) !important;
-  height: 3px !important;
-  display: flex !important;
-  align-items: flex-start !important;
-  z-index: 7 !important;
-  flex-shrink: 0 !important;
-}
-.pdc-root .frame-child {
-  width: var(--width-200) !important;
-  position: relative !important;
-  border-radius: var(--br-100) !important;
-  max-height: 100% !important;
-  object-fit: cover !important;
-}
-.pdc-root .album-separator {
-  position: absolute !important;
-  margin: 0 !important;
-  right: 26px !important; bottom: 30px !important;
-  display: inline-block !important;
-  min-width: 11px !important;
-  z-index: 3 !important;
-  flex-shrink: 0 !important;
-}
-.pdc-root .my-album, .pdc-root .vector-icon {
-  width: var(--width-200) !important;
-  position: relative !important;
-  flex-shrink: 0 !important;
-}
-.pdc-root .my-album { display: inline-block !important; max-width: 200px !important; z-index: 7 !important; }
-.pdc-root .vector-icon { border-radius: var(--br-100) !important; max-height: 100% !important; object-fit: cover !important; z-index: 8 !important; }
-.pdc-root .memories-photos {
-  width: 1220px !important; height: 1060px !important;
-  position: absolute !important; margin: 0 !important;
-  top: calc(50% - 169.1px) !important;
-  left: calc(50% - 793px) !important;
-  background-image: url(https://github.com/caatz38/pdc-gassin/blob/main/assets/aboutus/Memories%20Photos.png?raw=true) !important;
-  background-size: cover !important; background-repeat: no-repeat !important; background-position: top !important;
-  z-index: 6 !important;
-}
-.pdc-root .merged-asset-2-icon {
-  position: absolute !important; top: -0.05px !important; left: -4px !important;
-  width: 100% !important; height: 100% !important;
-  object-fit: cover !important; display: none !important; flex-shrink: 0 !important;
-}
-.pdc-root .last-year-text, .pdc-root .last-years { display: flex !important; align-items: flex-start !important; }
-.pdc-root .last-year-text {
-  width: 255px !important; margin: 0 !important;
-  position: absolute !important;
-  top: calc(50% - 11.1px) !important;
-  left: calc(50% - 668px) !important;
-  flex-direction: column !important;
-  padding: var(--padding-0) var(--padding-2) !important;
-  box-sizing: border-box !important;
-  z-index: 5 !important;
-  text-align: right !important;
-  font-size: var(--fs-40) !important;
-}
-.pdc-root .last-years { align-self: stretch !important; padding: var(--padding-0) var(--padding-0) var(--padding-8) !important; z-index: 1 !important; }
-.pdc-root .last-years2 { margin: 0 !important; flex: 1 !important; font-size: inherit !important; font-weight: 800 !important; font-family: inherit !important; position: relative !important; line-height: var(--lh-40) !important; }
-.pdc-root .memories { margin: 0 !important; align-self: stretch !important; position: relative !important; font-size: inherit !important; font-weight: 800 !important; font-family: inherit !important; }
-.pdc-root .photos { position: relative !important; font-size: var(--fs-20) !important; font-weight: 800 !important; }
-
-/* Footer from about_us (replaced by pdc-footer above, keeping .footer selector for layout) */
-.pdc-root .footer {
-  width: 100% !important;
-  position: relative !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  gap: 24px !important;
-  padding: 48px 40px !important;
-  box-sizing: border-box !important;
-  background-size: cover !important;
-  background-repeat: no-repeat !important;
-  background-position: top !important;
-  z-index: 4 !important;
-  text-align: left !important;
-  font-size: var(--fs-15) !important;
-  color: var(--color-white) !important;
-  font-family: var(--font-nunito) !important;
-  background: #000 !important;
-}
-
-/* ══════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════════════════
    RESPONSIVE
-   ══════════════════════════════════════════════════════════ */
-@media (max-width: 675px) {
+══════════════════════════════════════════════════════ */
+@media screen and (max-width: 675px) {
   .pdc-nav-links { display: none !important; }
-  .pdc-burger { display: flex !important; align-items: center !important; justify-content: center !important; }
+  .pdc-burger { display: flex !important; }
 
-  .pdc-footer { flex-direction: column !important; align-items: center !important; text-align: center !important; }
-  .pdc-footer-left { flex-direction: column !important; align-items: center !important; padding: 0 !important; }
-  .pdc-footer-brand { text-align: center !important; }
-  .pdc-footer-right { width: 100% !important; min-width: unset !important; align-items: center !important; }
-  .pdc-footer-nav-row { flex-direction: column !important; align-items: center !important; gap: 30px !important; }
-  .pdc-footer-nav-col, .pdc-footer-comp-col { min-width: unset !important; max-width: 100% !important; text-align: left !important; }
-  .pdc-footer-socials { justify-content: center !important; padding-left: 0 !important; }
+  .pdc-footer {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .pdc-footer-left {
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 0 !important;
+  }
+
+  .pdc-footer-brand {
+    position: static !important;
+    width: 120% !important;
+    margin-top: 20px !important;
+    text-align: center !important;
+  }
+
+  .pdc-footer-right {
+    width: 100% !important;
+    min-width: unset !important;
+    align-items: center !important;
+  }
+
+  .pdc-footer-nav-row {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 30px !important;
+  }
+
+  .pdc-footer-nav-col,
+  .pdc-footer-comp-col {
+    min-width: unset !important;
+    max-width: 100% !important;
+    text-align: left !important;
+  }
+
+  .pdc-footer-comp-col h3,
+  .pdc-footer-comp-links {
+    width: 100% !important;
+  }
+
+  .pdc-footer-socials {
+    justify-content: center !important;
+    padding-left: 0 !important;
+  }
+
+  .frame {
+    min-width: 100% !important;
+    height: auto !important;
+    min-height: 520px !important;
+  }
 }
-@media (max-width: 750px) {
-  .pdc-root .last-years2, .pdc-root .memories { font-size: var(--fs-32) !important; line-height: var(--lh-32) !important; }
+
+@media screen and (max-width: 750px) {
+  .last-years2,
+  .memories {
+    font-size: var(--pdc-fs32) !important;
+    line-height: var(--pdc-lh32) !important;
+  }
 }
-@media (max-width: 450px) {
-  .pdc-nav-links { gap: 17px !important; }
-  .pdc-root .desktop-about-us { height: auto !important; min-height: 3141px !important; }
-  .pdc-root .pdc-2025 { font-size: 22px !important; }
-  .pdc-root .last-years2, .pdc-root .memories { font-size: var(--fs-24) !important; line-height: var(--lh-24) !important; }
-  .pdc-root .photos { font-size: var(--fs-16) !important; line-height: var(--lh-40) !important; }
+
+@media screen and (max-width: 450px) {
+  .pdc-footer-nav-col h3,
+  .pdc-footer-comp-col h3 { font-size: 20px !important; }
+  .pdc-footer-socials { flex-wrap: wrap !important; }
+
+  .last-years2,
+  .memories {
+    font-size: var(--pdc-fs24) !important;
+    line-height: var(--pdc-lh24) !important;
+  }
+
+  .photos {
+    font-size: var(--pdc-fs16) !important;
+    line-height: var(--pdc-lh40) !important;
+  }
 }
 </style>
 
 <div class="pdc-root">
 
-  <!-- ═══════════════════════════════════════════
-       NAVBAR  (from logic-olympiad.html)
-       ═══════════════════════════════════════════ -->
-  <nav class="pdc-nav">
+  <!-- ══════════════════════════════════════════════════
+       NAVBAR (Logic Olympiad style)
+  ══════════════════════════════════════════════════ -->
+  <nav class="pdc-nav" id="pdcNav">
     <button class="pdc-burger" id="pdcBurger" aria-label="Open menu">
       <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
     </button>
@@ -742,179 +930,217 @@ IMAGE PLACEHOLDERS:
     <a href="/signup"><button class="pdc-register-btn">Register Now!</button></a>
   </nav>
 
+  <!-- Drawer overlay -->
   <div class="pdc-drawer-overlay" id="pdcOverlay"></div>
+
+  <!-- Sliding drawer -->
   <div class="pdc-drawer" id="pdcDrawer">
-    <button class="pdc-drawer-close" id="pdcClose" aria-label="Close menu">
+    <button class="pdc-drawer-close" id="pdcDrawerClose" aria-label="Close menu">
       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
     </button>
     <a href="/home">Home</a>
-    <a href="/about">About</a>
+    <a href="/about" class="active">About</a>
     <a href="/competitions">Competitions</a>
     <a href="/faqs">FAQs</a>
   </div>
 
-  <!-- ═══════════════════════════════════════════
-       ABOUT US BODY CONTENT (unchanged)
-       ═══════════════════════════════════════════ -->
+  <!-- ══════════════════════════════════════════════════
+       MAIN PAGE CONTENT (unchanged layout)
+  ══════════════════════════════════════════════════ -->
   <div class="desktop-about-us">
-    <main class="background">
-      <div class="competition">
-        <div class="frame">
-          <section class="about-content">
-            <div class="about2">
-              <div class="about-panel"></div>
-              <div class="pradita-dirgantara-competition-container">
-                <span class="pradita-dirgantara-competition-container2">
-                  <span class="span"><br /><br /></span>
-                  <span class="pradita-dirgantara-competition">Pradita Dirgantara Competition (PDC)</span>
-                  <span class="span"> </span>
-                  <b class="merupakan-ajang-tahunan">merupakan ajang tahunan yang diselenggarakan oleh SMA
-                    Pradita Dirgantara sebagai wadah untuk menumbuhkan minat
-                    dan bakat generasi muda dalam bidang akademik, olahraga,
-                    dan kreativitas. Dengan mengajak seluruh siswa-siswi
-                    SMP/MTs di Indonesia untuk berpartisipasi, PDC menjadi
-                    sarana yang menyatukan semangat berjuang dan berprestasi
-                    para remaja dari berbagai penjuru negeri.<br /></b>
-                </span>
+
+    <!-- Home background image -->
+    <img
+      class="home-background-icon"
+      alt=""
+      src="https://pdc.praditadirgantara.sch.id/wp-content/uploads/2026/06/Background-Web-1-1.png"
+    />
+
+    <!-- Hero frame section -->
+    <section class="frame">
+
+      <!-- About text panel -->
+      <div class="about">
+        <div class="about-panel"></div>
+        <div class="pradita-dirgantara-competition-container">
+          <span class="pradita-dirgantara-competition-container2">
+            <span class="span"><br /><br /></span>
+            <span class="pradita-dirgantara-competition">Pradita Dirgantara Competition (PDC)</span>
+            <span class="span"> </span>
+            <b class="merupakan-ajang-tahunan">merupakan ajang tahunan yang diselenggarakan oleh SMA Pradita
+              Dirgantara sebagai wadah untuk menumbuhkan minat dan bakat
+              generasi muda dalam bidang akademik, olahraga, dan kreativitas.
+              Dengan mengajak seluruh siswa-siswi SMP/MTs di Indonesia untuk
+              berpartisipasi, PDC menjadi sarana yang menyatukan semangat
+              berjuang dan berprestasi para remaja dari berbagai penjuru
+              negeri.<br />
+            </b>
+          </span>
+        </div>
+      </div>
+
+      <!-- About Us heading image -->
+      <img
+        class="about-us-icon"
+        loading="lazy"
+        alt="About Us"
+        src="https://raw.githubusercontent.com/caatz38/pdc-gassin/main/assets/aboutus/About%20Uss.png?raw=true"
+      />
+
+    </section><!-- /frame -->
+
+    <!-- "Our Previous" text image -->
+    <img
+      class="our-previous-text"
+      loading="lazy"
+      alt=""
+      src="https://raw.githubusercontent.com/caatz38/pdc-gassin/main/assets/aboutus/Our%20Previous%20Text.png?raw=true"
+    />
+
+    <!-- Winners element section — CENTERED FIX applied -->
+    <section class="winners-element"></section>
+
+    <!-- Background overlay -->
+    <section class="background-color"></section>
+
+    <!-- Memories background -->
+    <img
+      class="memories-background-icon"
+      alt=""
+      src="https://pdc.praditadirgantara.sch.id/wp-content/uploads/2026/06/Memories-Background-scaled.png"
+    />
+
+    <!-- Gallery info card -->
+    <div class="gallery-info">
+      <div class="gallery-info-child"></div>
+      <div class="d-gallery">3D gallery</div>
+      <h2 class="pdc-2025">PDC 2025</h2>
+      <img
+        class="gallery-info-item"
+        loading="lazy"
+        alt=""
+        src="https://raw.githubusercontent.com/caatz38/pdc-gassin/main/assets/aboutus/Vector%202.png"
+      />
+      <div class="total-photos-row">
+        <div class="total-photos">Total Photos</div>
+        <b class="total-photos">2025</b>
+      </div>
+      <div class="gallery-info-inner">
+        <img
+          class="frame-child"
+          loading="lazy"
+          alt=""
+          src="https://raw.githubusercontent.com/caatz38/pdc-gassin/main/assets/aboutus/Vector%203.png"
+        />
+      </div>
+      <b class="album-separator">8</b>
+      <div class="my-album">My album</div>
+      <img
+        class="vector-icon"
+        loading="lazy"
+        alt=""
+        src="https://raw.githubusercontent.com/caatz38/pdc-gassin/main/assets/aboutus/Vector%204.png"
+      />
+    </div>
+
+    <!-- Memories photos grid -->
+    <section class="memories-photos"></section>
+
+    <!-- Last Year's Memories text -->
+    <div class="last-year-text">
+      <div class="last-years">
+        <h1 class="last-years2">Last Year's</h1>
+      </div>
+      <h2 class="memories">Memories</h2>
+      <b class="photos">9999+ photos</b>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         FOOTER (Logic Olympiad style)
+    ══════════════════════════════════════════════════ -->
+    <footer class="pdc-footer">
+
+      <div class="pdc-footer-left">
+        <img class="pdc-footer-logo" src="https://raw.githubusercontent.com/caatz38/pdc-gassin/main/assets/pdc%20logo.avif" alt="PDC Logo" />
+        <div class="pdc-footer-brand">
+          <h3>Pradita Dirgantara Competition 2026</h3>
+          <p>© IT Administration &amp; Creative Publication 2026</p>
+        </div>
+      </div>
+
+      <div class="pdc-footer-right">
+        <div class="pdc-footer-nav-row">
+          <div class="pdc-footer-nav-col">
+            <h3>Navigation</h3>
+            <a href="/home">Home</a>
+            <a href="/about">About</a>
+            <a href="/competitions">Competition</a>
+            <a href="/faqs">FAQs</a>
+          </div>
+
+          <div class="pdc-footer-comp-col">
+            <h3>Competitions</h3>
+            <div class="pdc-footer-comp-links">
+              <div>
+                <a href="/math-olympiade">Math Olympiad</a>
+                <a href="/logic-olympiade">Logic Olympiad</a>
+                <a href="/science-olympiade">Science Olympiad</a>
+                <a href="/basket">Basket</a>
+              </div>
+              <div>
+                <a href="/sw">Scientific Writing</a>
+                <a href="/solo-vocal">Solo Vocal</a>
+                <a href="/speechs">Speech</a>
               </div>
             </div>
-            <img class="about-us-icon" loading="lazy" alt="" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/aboutus/About%20Uss.png?raw=true" />
-          </section>
-        </div>
-      </div>
-
-      <img class="our-previous-text" loading="lazy" alt="" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/aboutus/Our%20Previous%20Text.png?raw=true" />
-
-      <div class="winners-element">
-        <img class="merged-asset-1-icon" alt="" src="YOUR_IMAGE_URL_MERGED_ASSET_1_2X_PNG" />
-      </div>
-      <div class="background-color"></div>
-      <img class="memories-background-icon" alt="" src="YOUR_IMAGE_URL_MEMORIES_BACKGROUND_2X_PNG" />
-
-      <div class="gallery-info">
-        <div class="gallery-info-child"></div>
-        <div class="d-gallery">3D gallery</div>
-        <h2 class="pdc-2025">PDC 2025</h2>
-        <img class="gallery-info-item" loading="lazy" alt="" src="YOUR_IMAGE_URL_VECTOR_2_2X_PNG" />
-        <div class="total-photos-row">
-          <div class="total-photos">Total Photos</div>
-          <b class="total-photos">2025</b>
-        </div>
-        <div class="gallery-info-inner">
-          <img class="frame-child" loading="lazy" alt="" src="YOUR_IMAGE_URL_VECTOR_3_2X_PNG" />
-        </div>
-        <b class="album-separator">8</b>
-        <div class="my-album">My album</div>
-        <img class="vector-icon" loading="lazy" alt="" src="YOUR_IMAGE_URL_VECTOR_4_2X_PNG" />
-      </div>
-
-      <div class="memories-photos">
-        <img class="merged-asset-2-icon" alt="" src="YOUR_IMAGE_URL_MERGED_ASSET_2_2X_PNG" />
-      </div>
-
-      <div class="last-year-text">
-        <div class="last-years">
-          <h1 class="last-years2">Last Year's</h1>
-        </div>
-        <h2 class="memories">Memories</h2>
-        <b class="photos">9999+ photos</b>
-      </div>
-
-      <!-- ═══════════════════════════════════════════
-           FOOTER  (from logic-olympiad.html)
-           ═══════════════════════════════════════════ -->
-      <footer class="pdc-footer">
-        <div class="pdc-footer-left pdc-animate pdc-slide-left">
-          <img class="pdc-footer-logo" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/pdc%20logo.avif?raw=true" alt="PDC Logo" />
-          <div class="pdc-footer-brand">
-            <h3>Pradita Dirgantara Competition 2026</h3>
-            <p>©️ IT Administration &amp; Creative Publication 2026</p>
           </div>
         </div>
 
-        <div class="pdc-footer-right pdc-animate pdc-slide-right">
-          <div class="pdc-footer-nav-row">
-            <div class="pdc-footer-nav-col">
-              <h3>Navigation</h3>
-              <a href="/home">Home</a>
-              <a href="/about">About</a>
-              <a href="/competitions">Competition</a>
-              <a href="/faqs">FAQs</a>
-            </div>
-
-            <div class="pdc-footer-comp-col">
-              <h3>Competitions</h3>
-              <div class="pdc-footer-comp-links">
-                <div>
-                  <a href="/math-olympiade">Math Olympiad</a>
-                  <a href="/logic-olympiade">Logic Olympiad</a>
-                  <a href="/science-olympiade">Science Olympiad</a>
-                  <a href="/basket">Basket</a>
-                </div>
-                <div>
-                  <a href="/sw">Scientific Writing</a>
-                  <a href="/solo-vocal">Solo Vocal</a>
-                  <a href="/speechs">Speech</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="pdc-footer-socials">
-            <a href="https://praditadirgantara.sch.id/id/" target="_blank">
-              <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/web.avif?raw=true" alt="Website" />
-            </a>
-            <a href="https://www.tiktok.com/@smapraditadirgantara" target="_blank">
-              <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/tiktk.avif?raw=true" alt="TikTok" />
-            </a>
-            <a href="https://www.instagram.com/smapraditadirgantara/" target="_blank">
-              <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/instag.avif?raw=true" alt="Instagram" />
-            </a>
-            <a href="https://www.youtube.com/@smapraditadirgantara" target="_blank">
-              <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/ytb.avif?raw=true" alt="YouTube" />
-            </a>
-          </div>
+        <div class="pdc-footer-socials">
+          <a href="https://praditadirgantara.sch.id/id/" target="_blank">
+            <img src="https://raw.githubusercontent.com/caatz38/pdc-gassin/main/assets/contacs/web.avif" alt="Website" />
+          </a>
+          <a href="https://www.tiktok.com/@smapraditadirgantara" target="_blank">
+            <img src="https://raw.githubusercontent.com/caatz38/pdc-gassin/main/assets/contacs/tiktk.avif" alt="TikTok" />
+          </a>
+          <a href="https://www.instagram.com/smapraditadirgantara/" target="_blank">
+            <img src="https://raw.githubusercontent.com/caatz38/pdc-gassin/main/assets/contacs/instag.avif" alt="Instagram" />
+          </a>
+          <a href="https://www.youtube.com/@smapraditadirgantara" target="_blank">
+            <img src="https://raw.githubusercontent.com/caatz38/pdc-gassin/main/assets/contacs/ytb.avif" alt="YouTube" />
+          </a>
         </div>
-      </footer>
+      </div>
 
-    </main>
-  </div>
+    </footer>
 
-</div>
+  </div><!-- /desktop-about-us -->
+</div><!-- /pdc-root -->
 
 <script>
-  // Burger Menu Logic
-  var pdcB = document.getElementById('pdcBurger');
-  var pdcD = document.getElementById('pdcDrawer');
-  var pdcO = document.getElementById('pdcOverlay');
-  var pdcC = document.getElementById('pdcClose');
-  function pdcOpen()  { pdcD.classList.add('pdc-open');    pdcO.style.display = 'block'; }
-  function pdcClose() { pdcD.classList.remove('pdc-open'); pdcO.style.display = 'none';  }
-  pdcB.addEventListener('click', pdcOpen);
-  pdcC.addEventListener('click', pdcClose);
-  pdcO.addEventListener('click', pdcClose);
+(function () {
+  // ── Burger / Drawer ──
+  var burger  = document.getElementById('pdcBurger');
+  var drawer  = document.getElementById('pdcDrawer');
+  var overlay = document.getElementById('pdcOverlay');
+  var close   = document.getElementById('pdcDrawerClose');
 
-  // Floating Navbar Scroll Logic
-  var nav = document.querySelector('.pdc-nav');
-  window.addEventListener('scroll', function() {
+  function openDrawer()  { drawer.classList.add('pdc-open'); overlay.style.display = 'block'; document.body.style.overflow = 'hidden'; }
+  function closeDrawer() { drawer.classList.remove('pdc-open'); overlay.style.display = 'none'; document.body.style.overflow = ''; }
+
+  if (burger)  burger.addEventListener('click', openDrawer);
+  if (close)   close.addEventListener('click', closeDrawer);
+  if (overlay) overlay.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDrawer(); });
+
+  // ── Floating navbar on scroll ──
+  var nav = document.getElementById('pdcNav');
+  window.addEventListener('scroll', function () {
     if (window.scrollY > 50) {
       nav.classList.add('pdc-scrolled');
     } else {
       nav.classList.remove('pdc-scrolled');
     }
   });
-
-  // Scroll-triggered animations using IntersectionObserver
-  (function() {
-    var animatedElements = document.querySelectorAll('.pdc-animate');
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('pdc-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { root: null, rootMargin: '0px 0px -80px 0px', threshold: 0.1 });
-    animatedElements.forEach(function(el) { observer.observe(el); });
-  })();
+})();
 </script>

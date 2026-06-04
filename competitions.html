@@ -1,0 +1,685 @@
+<!--
+  =====================================================
+  PDC 2026 - Competitions Page
+  Navbar & Footer from Logic Olympiad page
+  =====================================================
+-->
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+  .pdc-root,
+  .pdc-root * {
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: 'Nunito', Arial, sans-serif !important;
+  }
+
+  .pdc-root a,
+  .pdc-root a:hover,
+  .pdc-root a:focus,
+  .pdc-root a:active,
+  .pdc-root a:visited {
+    font-size: inherit !important;
+    font-family: 'Nunito', Arial, sans-serif !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    line-height: inherit !important;
+    transition: opacity 0.2s !important;
+  }
+
+  .pdc-root a:hover {
+    opacity: 0.8 !important;
+  }
+
+  .pdc-root {
+    width: 100% !important;
+    background: #3f3fa4 !important;
+    overflow-x: hidden !important;
+    padding-top: 63px !important;
+  }
+
+  /* ── NAVBAR (from Logic Olympiad) ── */
+  .pdc-nav { 
+    width: 100% !important; 
+    height: 71px !important;
+    background: #000 !important;
+    display: flex !important; 
+    align-items: center !important; 
+    justify-content: space-between !important; 
+    padding: 0 24px !important; 
+    position: fixed !important;
+    top: 0 !important; 
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 100 !important; 
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  }
+
+  .pdc-nav.pdc-scrolled {
+    top: 15px !important;
+    width: 90% !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 30px !important;
+    border-radius: 50px !important;
+    background: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .pdc-nav-links { display: flex !important; align-items: center !important; gap: 34px !important; list-style: none !important; padding-left: 12px !important; }
+  .pdc-nav-links li { list-style: none !important; }
+  .pdc-nav-links a { color: #fff !important; text-decoration: none !important; font-size: 18px !important; font-weight: 600 !important; letter-spacing: -0.02em !important; }
+  .pdc-nav-links a:hover { opacity: 0.8 !important; }
+  .pdc-nav-links a.active { text-decoration: underline !important; }
+
+  .pdc-burger { display: none !important; background: none !important; border: none !important; cursor: pointer !important; color: #fff !important; padding: 4px !important; }
+
+  .pdc-drawer-overlay { display: none !important; position: fixed !important; inset: 0 !important; background: rgba(0,0,0,0.5) !important; z-index: 200 !important; }
+  .pdc-drawer { position: fixed !important; top: 0 !important; left: -280px !important; width: 260px !important; height: 100vh !important; background: #111 !important; z-index: 201 !important; display: flex !important; flex-direction: column !important; padding: 20px !important; gap: 4px !important; transition: left 0.3s ease !important; }
+  .pdc-drawer.pdc-open { left: 0 !important; }
+  .pdc-drawer-close { background: none !important; border: none !important; cursor: pointer !important; color: #fff !important; align-self: flex-end !important; padding: 4px !important; margin-bottom: 16px !important; }
+  .pdc-drawer a { color: #fff !important; font-size: 18px !important; font-weight: 600 !important; text-decoration: none !important; padding: 12px 8px !important; border-bottom: 1px solid rgba(255,255,255,0.1) !important; display: block !important; }
+
+  .pdc-register-btn {
+    position: relative !important;
+    height: 41px !important;
+    width: 127px !important;
+    cursor: pointer !important;
+    background: rgba(255,255,255,0.02) !important;
+    border: 1px solid rgba(255,255,255,0.3) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 2px 4px rgba(255,255,255,0.25) inset !important;
+    backdrop-filter: blur(10px) !important;
+    color: #fff !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em !important;
+    white-space: nowrap !important;
+    transition: background 0.2s !important;
+  }
+
+  .pdc-register-btn:hover {
+    background: rgba(255,255,255,0.08) !important;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes pdcFadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pdcFadeInScale {
+    from { opacity: 0; transform: scale(0.92); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes pdcFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes pdcSlideInLeft {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes pdcSlideInRight {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .pdc-animate { opacity: 0; }
+  .pdc-animate.pdc-visible {
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .pdc-animate.pdc-fade-up.pdc-visible    { animation-name: pdcFadeInUp;    animation-duration: 0.8s; }
+  .pdc-animate.pdc-fade-scale.pdc-visible { animation-name: pdcFadeInScale; animation-duration: 0.7s; }
+  .pdc-animate.pdc-fade.pdc-visible       { animation-name: pdcFadeIn;      animation-duration: 0.6s; }
+  .pdc-animate.pdc-slide-left.pdc-visible  { animation-name: pdcSlideInLeft;  animation-duration: 0.8s; }
+  .pdc-animate.pdc-slide-right.pdc-visible { animation-name: pdcSlideInRight; animation-duration: 0.8s; }
+
+  .pdc-animate.pdc-delay-1 { animation-delay: 0.1s !important; }
+  .pdc-animate.pdc-delay-2 { animation-delay: 0.2s !important; }
+  .pdc-animate.pdc-delay-3 { animation-delay: 0.3s !important; }
+  .pdc-animate.pdc-delay-4 { animation-delay: 0.4s !important; }
+  .pdc-animate.pdc-delay-5 { animation-delay: 0.5s !important; }
+  .pdc-animate.pdc-delay-6 { animation-delay: 0.6s !important; }
+  .pdc-animate.pdc-delay-7 { animation-delay: 0.7s !important; }
+
+  /* Hero animates on load */
+  .pdc-hero-animate {
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .pdc-hero-animate.pdc-hero-asset {
+    animation: pdcFadeInScale 1s 0.2s forwards;
+  }
+
+  /* ── HERO ── */
+  .pdc-hero {
+    width: 100% !important;
+    min-height: 787px !important;
+    position: relative !important;
+    overflow: hidden !important;
+    background: #3f3fa4 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 99px 33px 120px 30px !important;
+  }
+
+  .pdc-hero-bg {
+    position: absolute !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    z-index: 0 !important;
+  }
+
+  .pdc-hero::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 300px !important;
+    background: linear-gradient(0deg, #3f3fa4 0%, rgba(63,63,164,0) 100%) !important;
+  }
+
+  .pdc-hero-inner {
+    max-width: 468px;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    min-height: 261px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-top: -186px !important;
+  }
+
+  .pdc-hero-inner img {
+    width: 100%;
+    max-width: 468px;
+    object-fit: contain;
+  }
+
+  /* ── COMPETITIONS SECTION ── */
+  .pdc-competitions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: visible;
+    margin-top: -200px !important;
+    z-index: 10 !important;
+  }
+  
+  .pdc-competitions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 320.8px);
+    gap: 37px 42px;
+    max-width: 726px;
+    justify-content: center;
+    overflow: visible;
+  }
+
+  .pdc-competitions-grid a {
+    display: block !important;
+    overflow: visible !important;
+    padding: 10px !important;
+    margin: -10px !important;
+  }
+
+  .pdc-competitions-grid img {
+    width: 320.8px;
+    height: 133.2px;
+    display: block;
+    cursor: pointer;
+    transition: all 0.4s, drop-shadow 0.2s;
+    overflow: visible;
+  }
+
+  .pdc-competitions-grid img:hover {
+    transform: translateX(-6px) translateY(-5px);
+  }
+
+  #math:hover { filter: drop-shadow(4px 6px 3px #FF7270); }
+  #scio:hover { filter: drop-shadow(4px 6px 3px #ADFFA5); }
+  #sciwri:hover { filter: drop-shadow(4px 6px 3px #71BCFF); }
+  #logic:hover { filter: drop-shadow(4px 6px 3px #FF72D0); }
+  #solvoc:hover { filter: drop-shadow(4px 6px 3px #8E71FF); }
+  #speech:hover { filter: drop-shadow(4px 6px 3px #FFE773); }
+  #basket:hover { filter: drop-shadow(4px 6px 3px #FECC72); }
+
+  .pdc-competitions-grid img:active, #math:active, #scio:active, #sciwri:active, #logic:active, #solvoc:active, #speech:active, #basket:active {
+    transform: translateX(6px) translateY(5px);
+    filter: drop-shadow(0px 0px 0px);
+  }
+
+  /* 7th button centered */
+  .pdc-competitions-grid .pdc-btn-last {
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+
+  /* ── FOOTER (from Logic Olympiad) ── */
+  .pdc-footer {
+    width: 100% !important;
+    background: url('https://github.com/caatz38/pdc-gassin/blob/main/assets/footer.avif?raw=true') center top / cover no-repeat !important;
+    padding: 190px 19px 40px !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+    gap: 20px !important;
+    color: #fff !important;
+    font-family: 'Nunito', Arial, sans-serif !important;
+  }
+
+  .pdc-footer-left {
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    min-width: 220px !important;
+    max-width: 305px !important;
+    flex: 1 !important;
+    padding: 14px 0 100px !important;
+    position: relative !important;
+  }
+
+  .pdc-footer-logo {
+    width: 220px !important;
+    object-fit: cover !important;
+  }
+
+  .pdc-footer-brand {
+    position: absolute !important;
+    bottom: 38px !important;
+    right: -117px !important;
+    width: 358px !important;
+  }
+
+  .pdc-footer-brand h3 {
+    color: #fff !important;
+    font-size: 20px !important;
+    font-weight: 800 !important;
+    line-height: 32px !important;
+    text-shadow: 0px 2px 6px rgba(0,0,0,0.25) !important;
+    margin: 0 !important;
+  }
+
+  .pdc-footer-brand p {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    line-height: 32px !important;
+    text-shadow: 0px 2px 6px rgba(0,0,0,0.25) !important;
+  }
+
+  .pdc-footer-right {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    gap: 15px !important;
+    min-width: 310px !important;
+    max-width: 625px !important;
+  }
+
+  .pdc-footer-nav-row {
+    display: flex !important;
+    align-items: flex-start !important;
+    flex-wrap: wrap !important;
+    gap: 0 !important;
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .pdc-footer-nav-col {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    min-width: 126px !important;
+    max-width: 126px !important;
+  }
+
+  .pdc-footer-nav-col h3 {
+    color: #fff !important;
+    font-size: 25px !important;
+    font-weight: 700 !important;
+    text-shadow: 0px 2px 7px rgba(0,0,0,0.2) !important;
+    margin: 0 !important;
+  }
+
+  .pdc-footer-nav-col a {
+    color: #fff !important;
+    text-decoration: none !important;
+    font-size: 17px !important;
+    font-weight: 600 !important;
+    text-shadow: 0px 2px 7px rgba(0,0,0,0.2) !important;
+    padding-bottom: 6px !important;
+    display: block !important;
+  }
+
+  .pdc-footer-comp-col {
+    color: #fff !important;
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px !important;
+    min-width: 289px !important;
+    padding: 0 3px !important;
+  }
+
+  .pdc-footer-comp-col h3 {
+    color: #fff !important;
+    font-size: 25px !important;
+    font-weight: 700 !important;
+    text-shadow: 0px 2px 7px rgba(0,0,0,0.2) !important;
+    width: 311px !important;
+    margin: 0 !important;
+  }
+
+  .pdc-footer-comp-links {
+    display: flex !important;
+    gap: 8px !important;
+    width: 311px !important;
+  }
+
+  .pdc-footer-comp-links div {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  .pdc-footer-comp-links a {
+    color: #fff !important;
+    text-decoration: none !important;
+    font-size: 17px !important;
+    font-weight: 600 !important;
+    text-shadow: 0px 2px 7px rgba(0,0,0,0.2) !important;
+  }
+
+  .pdc-footer-socials {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    width: 100% !important;
+    max-width: 379px !important;
+    flex-wrap: wrap !important;
+    padding-left: 20px !important;
+  }
+
+  .pdc-footer-socials img {
+    width: 42px !important;
+    height: 42px !important;
+    object-fit: contain !important;
+    cursor: pointer !important;
+    transition: transform 0.2s !important;
+  }
+
+  .pdc-footer-socials img:hover {
+    transform: scale(1.1) !important;
+  }
+
+  .pdc-root a,
+.pdc-root a:hover,
+.pdc-root a:focus,
+.pdc-root a:active,
+.pdc-root a:visited {
+  font-size: inherit !important;
+  font-family: 'Nunito', Arial, sans-serif !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  line-height: inherit !important;
+  transition: opacity 0.2s !important;
+}
+
+.pdc-root a:hover {
+  opacity: 0.8 !important;
+}
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 750px) {
+    .pdc-hero {
+      padding: 64px 20px 120px;
+    }
+    .pdc-competitions-grid {
+      grid-template-columns: 1fr;
+      max-width: 100%;
+    }
+    .pdc-competitions-grid img {
+      width: 100%;
+      height: auto;
+    }
+    .pdc-competitions-grid .pdc-btn-last {
+      grid-column: auto;
+      justify-self: auto;
+    }
+  }
+
+  @media (max-width: 675px) {
+    .pdc-nav-links { display: none !important; }
+    .pdc-burger { display: flex !important; align-items: center !important; justify-content: center !important; }
+
+    .pdc-footer {
+      flex-direction: column !important;
+      align-items: center !important;
+      text-align: center !important;
+      padding: 60px 20px !important;
+    }
+
+    .pdc-footer-left {
+      flex-direction: column !important;
+      align-items: center !important;
+      padding: 0 !important;
+    }
+
+    .pdc-footer-brand {
+      position: static !important;
+      width: 120% !important;
+      margin-top: 20px !important;
+      text-align: center !important;
+    }
+
+    .pdc-footer-right {
+      width: 100% !important;
+      min-width: unset !important;
+      align-items: center !important;
+    }
+
+    .pdc-footer-nav-row {
+      flex-direction: column !important;
+      align-items: center !important;
+      gap: 30px !important;
+    }
+
+    .pdc-footer-nav-col,
+    .pdc-footer-comp-col {
+      min-width: unset !important;
+      max-width: 100% !important;
+      text-align: left !important;
+    }
+
+    .pdc-footer-comp-col h3,
+    .pdc-footer-comp-links {
+      width: 100% !important;
+    }
+
+    .pdc-footer-socials {
+      justify-content: center !important;
+      padding-left: 0 !important;
+    }
+  }
+
+  @media (max-width: 450px) {
+    .pdc-nav-links { gap: 17px !important; }
+    .pdc-footer-nav-col h3, .pdc-footer-comp-col h3 { font-size: 20px !important; }
+    .pdc-footer-socials { flex-wrap: wrap !important; }
+  }
+</style>
+
+<div class="pdc-root">
+
+  <!-- ══ NAVBAR (from Logic Olympiad) ══ -->
+  <nav class="pdc-nav">
+    <button class="pdc-burger" id="pdcBurger" aria-label="Open menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+    </button>
+    <ul class="pdc-nav-links">
+      <li><a href="/home">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/competitions" class="active">Competitions</a></li>
+      <li><a href="/faqs">FAQs</a></li>
+    </ul>
+    <a href="/signup"><button class="pdc-register-btn">Register Now!</button></a>
+  </nav>
+
+  <div class="pdc-drawer-overlay" id="pdcOverlay"></div>
+  <div class="pdc-drawer" id="pdcDrawer">
+    <button class="pdc-drawer-close" id="pdcClose" aria-label="Close menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+    <a href="/home">Home</a>
+    <a href="/about">About</a>
+    <a href="/competitions">Competitions</a>
+    <a href="/faqs">FAQs</a>
+  </div>
+
+  <!-- ══ HERO ══ -->
+  <section class="pdc-hero">
+    <img class="pdc-hero-bg" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/bege%20ungu.avif?raw=true" alt="" />
+    <div class="pdc-hero-inner">
+      <img class="pdc-hero-animate pdc-hero-asset" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/pdc%20plus%20compe.avif?raw=true" alt="Pradita Dirgantara Competition 2026" />
+    </div>
+  </section>
+
+  <!-- ══ COMPETITIONS ══ -->
+  <main class="pdc-competitions">
+    <div class="pdc-competitions-grid">
+      <a href="/math-olympiade" class="pdc-animate pdc-fade-scale pdc-delay-1">
+        <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/comps/math%20olympiad.avif?raw=true" id="math" alt="Competition 1" />
+      </a>
+      <a href="/science-olympiade" class="pdc-animate pdc-fade-scale pdc-delay-2">
+        <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/comps/scienolymp.avif?raw=true" id="scio" alt="Competition 2" />
+      </a>
+      <a href="/sw" class="pdc-animate pdc-fade-scale pdc-delay-3">
+        <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/comps/sciriwirirr.avif?raw=true" id="sciwri" alt="Competition 3" />
+      </a>
+      <a href="/logic-olympiade" class="pdc-animate pdc-fade-scale pdc-delay-4">
+        <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/comps/logicz.avif?raw=true" id="logic" alt="Competition 4" />
+      </a>
+      <a href="/solo-vocal" class="pdc-animate pdc-fade-scale pdc-delay-5">
+        <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/comps/solvocc.avif?raw=true" id="solvoc" alt="Competition 5" />
+      </a>
+      <a href="/speechs" class="pdc-animate pdc-fade-scale pdc-delay-6">
+        <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/comps/speechv.avif?raw=true" id="speech" alt="Competition 6" />
+      </a>
+      <a href="/basket" class="pdc-animate pdc-fade-scale pdc-delay-7 pdc-btn-last">
+        <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/comps/b%20asqet.avif?raw=true" id="basket" alt="Competition 7" />
+      </a>
+    </div>
+  </main>
+
+  <!-- ══ FOOTER (from Logic Olympiad) ══ -->
+  <footer class="pdc-footer">
+    <div class="pdc-footer-left pdc-animate pdc-slide-left">
+      <img class="pdc-footer-logo" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/pdc%20logo.avif?raw=true" alt="PDC Logo" />
+      <div class="pdc-footer-brand">
+        <h3>Pradita Dirgantara Competition 2026</h3>
+        <p>© IT Administration &amp; Creative Publication 2026</p>
+      </div>
+    </div>
+
+    <div class="pdc-footer-right pdc-animate pdc-slide-right">
+      <div class="pdc-footer-nav-row">
+        <div class="pdc-footer-nav-col">
+          <h3>Navigation</h3>
+          <a href="/home">Home</a>
+          <a href="/about">About</a>
+          <a href="/competitions">Competition</a>
+          <a href="/faqs">FAQs</a>
+        </div>
+
+        <div class="pdc-footer-comp-col">
+          <h3>Competitions</h3>
+          <div class="pdc-footer-comp-links">
+            <div>
+              <a href="/math-olympiade">Math Olympiad</a>
+              <a href="/logic-olympiade">Logic Olympiad</a>
+              <a href="/science-olympiade">Science Olympiad</a>
+              <a href="/basket">Basket</a>
+            </div>
+            <div>
+              <a href="/sw">Scientific Writing</a>
+              <a href="/solo-vocal">Solo Vocal</a>
+              <a href="/speechs">Speech</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pdc-footer-socials">
+        <a href="https://praditadirgantara.sch.id/id/" target="_blank">
+          <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/web.avif?raw=true" alt="Website" />
+        </a>
+        <a href="https://www.tiktok.com/@smapraditadirgantara" target="_blank">
+          <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/tiktk.avif?raw=true" alt="TikTok" />
+        </a>
+        <a href="https://www.instagram.com/smapraditadirgantara/" target="_blank">
+          <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/instag.avif?raw=true" alt="Instagram" />
+        </a>
+        <a href="https://www.youtube.com/@smapraditadirgantara" target="_blank">
+          <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/ytb.avif?raw=true" alt="YouTube" />
+        </a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // Burger Menu Logic
+  var pdcB = document.getElementById('pdcBurger');
+  var pdcD = document.getElementById('pdcDrawer');
+  var pdcO = document.getElementById('pdcOverlay');
+  var pdcC = document.getElementById('pdcClose');
+  function pdcOpen() { pdcD.classList.add('pdc-open'); pdcO.style.display = 'block'; }
+  function pdcClose() { pdcD.classList.remove('pdc-open'); pdcO.style.display = 'none'; }
+  pdcB.addEventListener('click', pdcOpen);
+  pdcC.addEventListener('click', pdcClose);
+  pdcO.addEventListener('click', pdcClose);
+
+  // Scroll-triggered animations using IntersectionObserver
+  (function() {
+    var animatedElements = document.querySelectorAll('.pdc-animate');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('pdc-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { root: null, rootMargin: '0px 0px -80px 0px', threshold: 0.1 });
+    animatedElements.forEach(function(el) { observer.observe(el); });
+  })();
+
+  // Floating Navbar Scroll Logic
+  var nav = document.querySelector('.pdc-nav');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 50) {
+      nav.classList.add('pdc-scrolled');
+    } else {
+      nav.classList.remove('pdc-scrolled');
+    }
+  });
+</script>
