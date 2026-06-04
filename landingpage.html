@@ -1,5 +1,5 @@
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
 
   .pdc-root,
   .pdc-root * {
@@ -13,6 +13,7 @@
     background: #fff !important;
     margin: 0 !important;
     padding: 0 !important;
+    padding-top: 71px !important; /* Offset for fixed navbar */
   }
 
   .pdc-root a,
@@ -24,116 +25,105 @@
     text-decoration: none !important;
     font-size: inherit !important;
     line-height: inherit !important;
+    transition: opacity 0.2s !important;
   }
 
-  /* ══ NAVBAR ══ */
-  .pdc-nav {
-    width: 100% !important;
+  .pdc-root a:hover {
+    opacity: 0.8 !important;
+  }
+
+  /* ══ ANIMATIONS (From Logic Page) ══ */
+  @keyframes pdcSlideInLeft {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes pdcSlideInRight {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .pdc-animate { opacity: 0; }
+  .pdc-animate.pdc-visible {
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .pdc-animate.pdc-slide-left.pdc-visible {
+    animation-name: pdcSlideInLeft;
+    animation-duration: 0.8s;
+  }
+  .pdc-animate.pdc-slide-right.pdc-visible {
+    animation-name: pdcSlideInRight;
+    animation-duration: 0.8s;
+  }
+
+  /* ══ NAVBAR (From Logic Page) ══ */
+  .pdc-nav { 
+    width: 100% !important; 
     height: 71px !important;
     background: #000 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    padding: 0 34px !important;
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 999 !important;
+    display: flex !important; 
+    align-items: center !important; 
+    justify-content: space-between !important; 
+    padding: 0 24px !important; 
+    position: fixed !important;
+    top: 0 !important; 
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 999 !important; 
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
   }
-  .pdc-nav-links {
-    display: flex !important;
-    align-items: center !important;
-    gap: 34px !important;
-    list-style: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
+
+  .pdc-nav.pdc-scrolled {
+    top: 15px !important;
+    width: 90% !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 30px !important;
+    border-radius: 50px !important;
+    background: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
   }
+
+  .pdc-nav-links { display: flex !important; align-items: center !important; gap: 34px !important; list-style: none !important; padding-left: 12px !important;}
   .pdc-nav-links li { list-style: none !important; }
-  .pdc-nav-links a {
-    color: #fff !important;
-    font-size: 18px !important;
-    font-weight: 600 !important;
-    letter-spacing: -0.02em !important;
-    text-decoration: none !important;
-  }
-  .pdc-nav-links a:hover { opacity: 0.8 !important; }
+  .pdc-nav-links a { color: #fff !important; text-decoration: none !important; font-size: 18px !important; font-weight: 600 !important; letter-spacing: -0.02em !important; }
   .pdc-nav-links a.active { text-decoration: underline !important; }
-  .pdc-reg-btn {
+
+  .pdc-burger { display: none !important; background: none !important; border: none !important; cursor: pointer !important; color: #fff !important; padding: 4px !important; }
+
+  .pdc-drawer-overlay { display: none !important; position: fixed !important; inset: 0 !important; background: rgba(0,0,0,0.5) !important; z-index: 200 !important; }
+  .pdc-drawer { position: fixed !important; top: 0 !important; left: -280px !important; width: 260px !important; height: 100vh !important; background: #111 !important; z-index: 201 !important; display: flex !important; flex-direction: column !important; padding: 20px !important; gap: 4px !important; transition: left 0.3s ease !important; }
+  .pdc-drawer.pdc-open { left: 0 !important; }
+  .pdc-drawer-close { background: none !important; border: none !important; cursor: pointer !important; color: #fff !important; align-self: flex-end !important; padding: 4px !important; margin-bottom: 16px !important; }
+  .pdc-drawer a { color: #fff !important; font-size: 18px !important; font-weight: 600 !important; text-decoration: none !important; padding: 12px 8px !important; border-bottom: 1px solid rgba(255,255,255,0.1) !important; display: block !important; }
+
+  .pdc-register-btn {
+    position: relative !important;
     height: 41px !important;
     width: 127px !important;
     cursor: pointer !important;
     background: rgba(255,255,255,0.02) !important;
     border: 1px solid rgba(255,255,255,0.3) !important;
     border-radius: 16px !important;
+    box-shadow: 0 2px 4px rgba(255,255,255,0.25) inset !important;
+    backdrop-filter: blur(10px) !important;
     color: #fff !important;
     font-size: 16px !important;
     font-weight: 700 !important;
+    letter-spacing: -0.02em !important;
     white-space: nowrap !important;
     transition: background 0.2s !important;
   }
-  .pdc-reg-btn:hover { background: rgba(255,255,255,0.08) !important; }
 
-  /* burger */
-  .pdc-burger {
-    display: none !important;
-    background: none !important;
-    border: none !important;
-    cursor: pointer !important;
-    color: #fff !important;
-    padding: 4px !important;
-    align-items: center !important;
-    justify-content: center !important;
-  }
-  .pdc-drawer-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 200;
-  }
-  .pdc-drawer {
-    position: fixed !important;
-    top: 0 !important;
-    left: -280px !important;
-    width: 260px !important;
-    height: 100vh !important;
-    background: #111 !important;
-    z-index: 201 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    padding: 20px !important;
-    gap: 4px !important;
-    transition: left 0.3s ease !important;
-  }
-  .pdc-drawer.pdc-open { left: 0 !important; }
-  .pdc-drawer-close {
-    background: none !important;
-    border: none !important;
-    cursor: pointer !important;
-    color: #fff !important;
-    align-self: flex-end !important;
-    padding: 4px !important;
-    margin-bottom: 16px !important;
-  }
-  .pdc-drawer a {
-    color: #fff !important;
-    font-size: 18px !important;
-    font-weight: 600 !important;
-    text-decoration: none !important;
-    padding: 12px 8px !important;
-    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
-    display: block !important;
-  }
-  @media (max-width: 768px) {
-    .pdc-nav-links { display: none !important; }
-    .pdc-burger { display: flex !important; }
-  }
-  @media (min-width: 769px) {
-    .pdc-burger { display: none !important; }
-    .pdc-drawer { left: -280px !important; }
-    .pdc-drawer.pdc-open { left: -280px !important; }
+  .pdc-register-btn:hover {
+    background: rgba(255,255,255,0.08) !important;
   }
 
-  /* ══ HERO SECTION ══ */
+  /* ══ HERO SECTION (Original) ══ */
   .pdc-hero {
     width: 100% !important;
     min-height: 720px !important;
@@ -167,43 +157,68 @@
     object-fit: contain !important;
     margin-bottom: 20px !important;
   }
-  .pdc-hero-pill {
+  .pdc-math-pill {
     display: inline-flex !important;
     align-items: center !important;
-    gap: 5px !important;
+    gap: 3px !important;
     background: rgba(117,107,227,0.5) !important;
     border: 1px solid #a285f8 !important;
     border-radius: 999px !important;
-    padding: 3px 4px 3px 6px !important;
-    margin-top: 16px !important;
+    padding: 3px 3px 3px 3px !important;
+    margin-bottom: 60px !important;
+    cursor: pointer !important;
   }
-  .pdc-hero-pill-btn {
+
+  .pdc-math-pill-btn {
     display: flex !important;
     align-items: center !important;
-    gap: 6px !important;
     background: #aea6fd !important;
+    gap: 6px !important;
     border: none !important;
-    border-radius: 60px 10px 10px 60px !important;
-    padding: 6px 16px !important;
+    border-radius: 60px 30px 30px 60px !important;
+    padding: 7px 12px 7px 13px !important;
     color: #fff !important;
     font-size: 15px !important;
     font-weight: 700 !important;
     cursor: pointer !important;
     white-space: nowrap !important;
+    transition: transform 0.2s, box-shadow 0.2s !important;
   }
-  .pdc-hero-pill-btn2 {
+
+  .pdc-math-pill-btn:hover {
+    box-shadow: 0 4px 20px rgba(174, 166, 253, 0.4) !important;
+  }
+
+  .pdc-math-pill-btn2 {
     display: flex !important;
     align-items: center !important;
     gap: 6px !important;
     background: #aea6fd !important;
     border: none !important;
-    border-radius: 10px 60px 60px 10px !important;
-    padding: 6px 16px !important;
+    border-radius: 30px 60px 60px 30px !important;
+    padding: 7px 13px 7px 9px !important;
     color: #fff !important;
     font-size: 15px !important;
     font-weight: 700 !important;
     cursor: pointer !important;
     white-space: nowrap !important;
+    transition: transform 0.2s, box-shadow 0.2s !important;
+  }
+
+  .pdc-math-pill-btn2:hover {
+    box-shadow: 0 4px 20px rgba(174, 166, 253, 0.4) !important;
+  }
+
+  .pdc-math-pill-btn svg {
+    width: 16px !important;
+    height: 16px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .pdc-math-pill-btn2 svg {
+    width: 16px !important;
+    height: 16px !important;
+    flex-shrink: 0 !important;
   }
   .pdc-hero-timeline {
     width: 120% !important;
@@ -212,7 +227,7 @@
     margin-top: 40px !important;
   }
 
-  /* ══ PRIZE SECTION ══ */
+  /* ══ PRIZE SECTION (Original) ══ */
   .pdc-prize-section {
     width: 100% !important;
     position: relative !important;
@@ -243,7 +258,13 @@
   }
   .pdc-why-img {
     width: 100% !important;
-    max-width: 360px !important;
+    max-width: 280px !important;
+    object-fit: contain !important;
+  }
+
+  .pdc-timeline-img {
+    width: 100% !important;
+    max-width: 300px !important;
     object-fit: contain !important;
   }
   .pdc-prize-text {
@@ -257,7 +278,6 @@
     max-width: 900px !important;
   }
   .pdc-prize-text .gold { color: #ffdb00 !important; font-weight: 900 !important; }
-  .pdc-prize-text .bold-white { font-weight: 800 !important; }
   .pdc-prize-text .school { font-weight: 800 !important; }
   .pdc-prize-amount {
     font-size: 80px !important;
@@ -291,7 +311,7 @@
     line-height: 1.1 !important;
   }
 
-  /* ══ FAQ SECTION ══ */
+  /* ══ FAQ SECTION (Original) ══ */
   .pdc-faq-section {
     width: 100% !important;
     position: relative !important;
@@ -364,18 +384,20 @@
     margin-top: 8px !important;
   }
 
-  /* ══ FOOTER ══ */
+  /* ══ FOOTER (From Logic Page) ══ */
   .pdc-footer {
     width: 100% !important;
     background: url('https://github.com/caatz38/pdc-gassin/blob/main/assets/footer.avif?raw=true') center top / cover no-repeat !important;
-    padding: 190px 16px 40px !important;
+    padding: 190px 19px 40px !important;
     display: flex !important;
     align-items: flex-end !important;
     justify-content: space-between !important;
     flex-wrap: wrap !important;
     gap: 20px !important;
     color: #fff !important;
+    font-family: 'Nunito', Arial, sans-serif !important;
   }
+
   .pdc-footer-left {
     display: flex !important;
     align-items: flex-start !important;
@@ -386,33 +408,35 @@
     padding: 14px 0 100px !important;
     position: relative !important;
   }
+
   .pdc-footer-logo {
     width: 220px !important;
     object-fit: cover !important;
-    box-shadow: 0 6px 14px rgba(44,28,132,0.15) !important;
   }
+
   .pdc-footer-brand {
     position: absolute !important;
     bottom: 38px !important;
     right: -117px !important;
     width: 358px !important;
   }
+
   .pdc-footer-brand h3 {
     color: #fff !important;
     font-size: 20px !important;
     font-weight: 800 !important;
     line-height: 32px !important;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.25) !important;
+    text-shadow: 0px 2px 6px rgba(0,0,0,0.25) !important;
     margin: 0 !important;
   }
+
   .pdc-footer-brand p {
-    color: #fff !important;
     font-size: 15px !important;
     font-weight: 700 !important;
     line-height: 32px !important;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.25) !important;
-    margin: 0 !important;
+    text-shadow: 0px 2px 6px rgba(0,0,0,0.25) !important;
   }
+
   .pdc-footer-right {
     flex: 1 !important;
     display: flex !important;
@@ -422,6 +446,7 @@
     min-width: 310px !important;
     max-width: 625px !important;
   }
+
   .pdc-footer-nav-row {
     display: flex !important;
     align-items: flex-start !important;
@@ -430,6 +455,7 @@
     width: 100% !important;
     justify-content: center !important;
   }
+
   .pdc-footer-nav-col {
     flex: 1 !important;
     display: flex !important;
@@ -438,22 +464,25 @@
     min-width: 126px !important;
     max-width: 126px !important;
   }
+
   .pdc-footer-nav-col h3 {
     color: #fff !important;
     font-size: 25px !important;
     font-weight: 700 !important;
-    text-shadow: 0 2px 7px rgba(0,0,0,0.2) !important;
+    text-shadow: 0px 2px 7px rgba(0,0,0,0.2) !important;
     margin: 0 !important;
   }
+
   .pdc-footer-nav-col a {
     color: #fff !important;
+    text-decoration: none !important;
     font-size: 17px !important;
     font-weight: 600 !important;
-    text-shadow: 0 2px 7px rgba(0,0,0,0.2) !important;
+    text-shadow: 0px 2px 7px rgba(0,0,0,0.2) !important;
     padding-bottom: 6px !important;
     display: block !important;
-    text-decoration: none !important;
   }
+
   .pdc-footer-comp-col {
     color: #fff !important;
     flex: 1 !important;
@@ -464,32 +493,37 @@
     min-width: 289px !important;
     padding: 0 3px !important;
   }
+
   .pdc-footer-comp-col h3 {
     color: #fff !important;
     font-size: 25px !important;
     font-weight: 700 !important;
-    text-shadow: 0 2px 7px rgba(0,0,0,0.2) !important;
+    text-shadow: 0px 2px 7px rgba(0,0,0,0.2) !important;
     width: 311px !important;
     margin: 0 !important;
   }
+
   .pdc-footer-comp-links {
     display: flex !important;
     gap: 8px !important;
     width: 311px !important;
   }
+
   .pdc-footer-comp-links div {
     flex: 1 !important;
     display: flex !important;
     flex-direction: column !important;
     gap: 12px !important;
   }
+
   .pdc-footer-comp-links a {
     color: #fff !important;
+    text-decoration: none !important;
     font-size: 17px !important;
     font-weight: 600 !important;
-    text-shadow: 0 2px 7px rgba(0,0,0,0.2) !important;
-    text-decoration: none !important;
+    text-shadow: 0px 2px 7px rgba(0,0,0,0.2) !important;
   }
+
   .pdc-footer-socials {
     display: flex !important;
     align-items: center !important;
@@ -500,6 +534,7 @@
     flex-wrap: wrap !important;
     padding-left: 20px !important;
   }
+
   .pdc-footer-socials img {
     width: 42px !important;
     height: 42px !important;
@@ -507,21 +542,72 @@
     cursor: pointer !important;
     transition: transform 0.2s !important;
   }
-  .pdc-footer-socials img:hover { transform: scale(1.1) !important; }
+
+  .pdc-footer-socials img:hover {
+    transform: scale(1.1) !important;
+  }
 
   /* ══ RESPONSIVE ══ */
-  @media (max-width: 750px) {
+  @media (max-width: 768px) {
+    .pdc-nav-links { display: none !important; }
+    .pdc-burger { display: flex !important; align-items: center !important; justify-content: center !important; }
     .pdc-prize-amount { font-size: 48px !important; }
     .pdc-coming-soon { font-size: 48px !important; }
     .pdc-faq-title { font-size: 32px !important; }
-    .pdc-prize-text { font-size: 20px !important; }
-    .pdc-prize-sub { font-size: 20px !important; }
+    .pdc-prize-text, .pdc-prize-sub { font-size: 20px !important; }
   }
+
+  @media (min-width: 769px) {
+    .pdc-drawer { left: -280px !important; }
+    .pdc-drawer.pdc-open { left: -280px !important; }
+  }
+
   @media (max-width: 675px) {
-    .pdc-footer { padding: 45px 16px !important; }
-    .pdc-footer-left, .pdc-footer-right { max-width: 100% !important; }
-    .pdc-footer-brand { position: static !important; width: 100% !important; margin-top: 12px !important; }
+    .pdc-footer {
+      flex-direction: column !important;
+      align-items: center !important;
+      text-align: center !important;
+      padding: 45px 16px !important;
+    }
+    .pdc-footer-left {
+      flex-direction: column !important;
+      align-items: center !important;
+      padding: 0 !important;
+      max-width: 100% !important;
+    }
+    .pdc-footer-brand {
+      position: static !important;
+      width: 120% !important;
+      margin-top: 20px !important;
+      text-align: center !important;
+    }
+    .pdc-footer-right {
+      width: 100% !important;
+      min-width: unset !important;
+      max-width: 100% !important;
+      align-items: center !important;
+    }
+    .pdc-footer-nav-row {
+      flex-direction: column !important;
+      align-items: center !important;
+      gap: 30px !important;
+    }
+    .pdc-footer-nav-col,
+    .pdc-footer-comp-col {
+      min-width: unset !important;
+      max-width: 100% !important;
+      text-align: left !important;
+    }
+    .pdc-footer-comp-col h3,
+    .pdc-footer-comp-links {
+      width: 100% !important;
+    }
+    .pdc-footer-socials {
+      justify-content: center !important;
+      padding-left: 0 !important;
+    }
   }
+
   @media (max-width: 450px) {
     .pdc-nav-links { gap: 17px !important; }
     .pdc-prize-amount { font-size: 34px !important; }
@@ -529,15 +615,16 @@
     .pdc-faq-title { font-size: 27px !important; }
     .pdc-faq-item { font-size: 16px !important; }
     .pdc-footer-nav-col h3, .pdc-footer-comp-col h3 { font-size: 20px !important; }
+    .pdc-footer-socials { flex-wrap: wrap !important; }
   }
 </style>
 
 <div class="pdc-root">
 
-  <!-- ══ NAVBAR ══ -->
+  <!-- ══ NAVBAR (From Logic Page) ══ -->
   <nav class="pdc-nav">
     <button class="pdc-burger" id="pdcBurger" aria-label="Open menu">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
     </button>
     <ul class="pdc-nav-links">
       <li><a href="/home" class="active">Home</a></li>
@@ -545,13 +632,13 @@
       <li><a href="/competitions">Competitions</a></li>
       <li><a href="/faqs">FAQs</a></li>
     </ul>
-    <a href="/signup"><button class="pdc-reg-btn">Register Now!</button></a>
+    <a href="/signup"><button class="pdc-register-btn">Register Now!</button></a>
   </nav>
 
   <div class="pdc-drawer-overlay" id="pdcOverlay"></div>
   <div class="pdc-drawer" id="pdcDrawer">
     <button class="pdc-drawer-close" id="pdcClose" aria-label="Close menu">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
     </button>
     <a href="/home">Home</a>
     <a href="/about">About</a>
@@ -559,41 +646,35 @@
     <a href="/faqs">FAQs</a>
   </div>
 
-  <!-- ══ HERO SECTION ══ -->
+  <!-- ══ HERO SECTION (Original Landing) ══ -->
   <section class="pdc-hero">
-    <!-- 📌 REPLACE with your hero background image -->
     <img class="pdc-hero-bg" src="https://raw.githubusercontent.com/caatz38/pdc-gassin/refs/heads/main/assets/landingpage/Background%20Web%201_converted.avif" alt="" />
-
     <div class="pdc-hero-content">
-      <!-- 📌 REPLACE with your PDC logo -->
       <img class="pdc-hero-logo" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/pdc%20logo.avif?raw=true" alt="PDC Logo" />
-
-
-      <div class="pdc-hero-pill">
-        <button class="pdc-hero-pill-btn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Explore
-        </button>
-        <button class="pdc-hero-pill-btn2">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/><polyline points="9 11 12 14 22 4"/></svg>
-          Guidebook
-        </button>
+      <div class="pdc-math-pill pdc-hero-animate pdc-hero-pill">
+        <a href="/dashboard">
+          <button class="pdc-math-pill-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-icon lucide-map"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/></svg>
+            Explore
+          </button>
+        </a>
+        <a href="#">
+          <button class="pdc-math-pill-btn2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-check-icon lucide-book-check"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/><path d="m9 9.5 2 2 4-4"/></svg>
+            Guidebook
+          </button>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- ══ WHY / PRIZE SECTION ══ -->
+  <!-- ══ WHY / PRIZE SECTION (Original Landing) ══ -->
   <section class="pdc-prize-section">
     <img class="pdc-prize-bg" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/landingpage/bg1.png?raw=true" alt="" />
-      
-    <!-- 📌 REPLACE with your prize section background -->
-    
-
     <div class="pdc-prize-content">
       <img class="pdc-why-img" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/timeline.png?raw=true" alt="Why PDC 2026" />
-      <img class="pdc-hero-timeline" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/landingpage/Timeline.png?raw=true" alt="Timeline PDC 2026" />
-      <!-- 📌 REPLACE with your "Why PDC 2026" image -->
-      <img class="pdc-why-img" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/whypdc.avif?raw=true" alt="Why PDC 2026" />
+      <img class="pdc-hero-timeline" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/Timeline%20Picture.png?raw=true" alt="Timeline PDC 2026" />
+      <img class="pdc-timeline-img" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/whypdc.avif?raw=true" alt="Why PDC 2026" />
 
       <p class="pdc-prize-text">
         Peraih juara olimpiade akan mendapatkan <span class="gold">GOLDEN TICKET</span> ke <span class="school">Pradita Open House 4.0 (POH 4.0)</span> yang dapat menjadi kesempatan untuk mengenal lebih dekat lingkungan, budaya, dan pengalaman belajar di <span class="school">SMA Pradita Dirgantara.</span>
@@ -605,21 +686,17 @@
         Raih kesempatan memenangkan total hadiah <span class="highlight">lebih dari Rp40 juta</span>, sertifikat nasional, medali, dan berbagai penghargaan bergengsi lainnya.
       </p>
 
-      <!-- 📌 REPLACE with your prize/timeline image -->
       <img class="pdc-prize-img" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/prize.avif?raw=true" alt="Prize" />
 
       <div class="pdc-coming-soon">COMING<br/>SOON...</div>
     </div>
   </section>
 
-  <!-- ══ FAQ SECTION ══ -->
+  <!-- ══ FAQ SECTION (Original Landing) ══ -->
   <section class="pdc-faq-section">
-    <!-- 📌 REPLACE with your FAQ section background -->
     <img class="pdc-faq-bg" src="YOUR_IMAGE_URL_FAQ_BG" alt="" />
-
     <div class="pdc-faq-content">
       <h2 class="pdc-faq-title">Frequently Asked Questions</h2>
-
       <div class="pdc-faq-list">
         <div class="pdc-faq-item">
           Siapa saja yang dapat mengikuti PDC 2026?
@@ -638,14 +715,13 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
       </div>
-
       <button class="pdc-faq-more" onclick="window.location.href='/faqs'">More Questions &gt;</button>
     </div>
   </section>
 
-  <!-- ══ FOOTER ══ -->
+  <!-- ══ FOOTER (From Logic Page) ══ -->
   <footer class="pdc-footer">
-    <div class="pdc-footer-left">
+    <div class="pdc-footer-left pdc-animate pdc-slide-left">
       <img class="pdc-footer-logo" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/pdc%20logo.avif?raw=true" alt="PDC Logo" />
       <div class="pdc-footer-brand">
         <h3>Pradita Dirgantara Competition 2026</h3>
@@ -653,7 +729,7 @@
       </div>
     </div>
 
-    <div class="pdc-footer-right">
+    <div class="pdc-footer-right pdc-animate pdc-slide-right">
       <div class="pdc-footer-nav-row">
         <div class="pdc-footer-nav-col">
           <h3>Navigation</h3>
@@ -662,42 +738,87 @@
           <a href="/competitions">Competition</a>
           <a href="/faqs">FAQs</a>
         </div>
+
         <div class="pdc-footer-comp-col">
           <h3>Competitions</h3>
           <div class="pdc-footer-comp-links">
             <div>
-              <a href="/math">Math Olympiad</a>
-              <a href="/logic">Logic Olympiad</a>
-              <a href="/science">Science Olympiad</a>
+              <a href="/math-olympiade">Math Olympiad</a>
+              <a href="/logic-olympiade">Logic Olympiad</a>
+              <a href="/science-olympiade">Science Olympiad</a>
+              <a href="/basket">Basket</a>
             </div>
             <div>
               <a href="/sw">Scientific Writing</a>
-              <a href="/solvoc">Solo Vocal</a>
-              <a href="/speech">Speech</a>
+              <a href="/solo-vocal">Solo Vocal</a>
+              <a href="/speechs">Speech</a>
             </div>
           </div>
         </div>
       </div>
 
       <div class="pdc-footer-socials">
-        <a href="https://praditadirgantara.sch.id/id/"><img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/web.avif?raw=true" alt="Website" /></a>
-        <a href="https://www.tiktok.com/@smapraditadirgantara"><img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/tiktk.avif?raw=true" alt="TikTok" /></a>
-        <a href="https://www.instagram.com/smapraditadirgantara/"><img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/instag.avif?raw=true" alt="Instagram" /></a>
-        <a href="https://www.youtube.com/@smapraditadirgantara"><img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/ytb.avif?raw=true" alt="YouTube" /></a>
+        <a href="https://praditadirgantara.sch.id/id/" target="_blank">
+          <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/web.avif?raw=true" alt="Website" />
+        </a>
+        <a href="https://www.tiktok.com/@smapraditadirgantara" target="_blank">
+          <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/tiktk.avif?raw=true" alt="TikTok" />
+        </a>
+        <a href="https://www.instagram.com/smapraditadirgantara/" target="_blank">
+          <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/instag.avif?raw=true" alt="Instagram" />
+        </a>
+        <a href="https://www.youtube.com/@smapraditadirgantara" target="_blank">
+          <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/ytb.avif?raw=true" alt="YouTube" />
+        </a>
       </div>
     </div>
   </footer>
 
-  <script>
-    var pdcB = document.getElementById('pdcBurger');
-    var pdcD = document.getElementById('pdcDrawer');
-    var pdcO = document.getElementById('pdcOverlay');
-    var pdcC = document.getElementById('pdcClose');
-    function pdcOpen() { pdcD.classList.add('pdc-open'); pdcO.style.display = 'block'; }
-    function pdcClose() { pdcD.classList.remove('pdc-open'); pdcO.style.display = 'none'; }
-    pdcB.addEventListener('click', pdcOpen);
-    pdcC.addEventListener('click', pdcClose);
-    pdcO.addEventListener('click', pdcClose);
-  </script>
-
 </div>
+
+<script>
+  // Burger Menu Logic
+  var pdcB = document.getElementById('pdcBurger');
+  var pdcD = document.getElementById('pdcDrawer');
+  var pdcO = document.getElementById('pdcOverlay');
+  var pdcC = document.getElementById('pdcClose');
+  function pdcOpen() { pdcD.classList.add('pdc-open'); pdcO.style.display = 'block'; }
+  function pdcClose() { pdcD.classList.remove('pdc-open'); pdcO.style.display = 'none'; }
+  pdcB.addEventListener('click', pdcOpen);
+  pdcC.addEventListener('click', pdcClose);
+  pdcO.addEventListener('click', pdcClose);
+
+  // Floating Navbar Scroll Logic
+  var nav = document.querySelector('.pdc-nav');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 50) {
+      nav.classList.add('pdc-scrolled');
+    } else {
+      nav.classList.remove('pdc-scrolled');
+    }
+  });
+
+  // Scroll-triggered animations for Footer elements using IntersectionObserver
+  (function() {
+    var animatedElements = document.querySelectorAll('.pdc-animate');
+    
+    var observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -80px 0px',
+      threshold: 0.1
+    };
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('pdc-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    animatedElements.forEach(function(el) {
+      observer.observe(el);
+    });
+  })();
+</script>
