@@ -1,0 +1,920 @@
+<!-- 
+IMAGE PLACEHOLDERS:
+  - ./public/About-Us@2x.png -> YOUR_IMAGE_URL_ABOUT_US_2X_PNG
+  - ./public/Footer-Background@2x.png -> YOUR_IMAGE_URL_FOOTER_BACKGROUND_2X_PNG
+  - ./public/Footer@3x.png -> YOUR_IMAGE_URL_FOOTER_3X_PNG
+  - ./public/Frame@3x.png -> YOUR_IMAGE_URL_FRAME_3X_PNG
+  - ./public/Memories-Background@2x.png -> YOUR_IMAGE_URL_MEMORIES_BACKGROUND_2X_PNG
+  - ./public/Memories-Photos@3x.png -> YOUR_IMAGE_URL_MEMORIES_PHOTOS_3X_PNG
+  - ./public/Our-Previous-Text@2x.png -> YOUR_IMAGE_URL_OUR_PREVIOUS_TEXT_2X_PNG
+  - ./public/PDC-logo-scaled-1@2x.png -> YOUR_IMAGE_URL_PDC_LOGO_SCALED_1_2X_PNG
+  - ./public/Placeholder-Values.svg -> YOUR_IMAGE_URL_PLACEHOLDER_VALUES_SVG
+  - ./public/Vector-2@2x.png -> YOUR_IMAGE_URL_VECTOR_2_2X_PNG
+  - ./public/Vector-3@2x.png -> YOUR_IMAGE_URL_VECTOR_3_2X_PNG
+  - ./public/Vector-4@2x.png -> YOUR_IMAGE_URL_VECTOR_4_2X_PNG
+  - ./public/Winners-Element@3x.png -> YOUR_IMAGE_URL_WINNERS_ELEMENT_3X_PNG
+  - ./public/merged-asset-1@2x.png -> YOUR_IMAGE_URL_MERGED_ASSET_1_2X_PNG
+  - ./public/merged-asset-2@2x.png -> YOUR_IMAGE_URL_MERGED_ASSET_2_2X_PNG
+-->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+/* ══════════════════════════════════════════════════════════
+   BASE RESET & SCOPING
+   ══════════════════════════════════════════════════════════ */
+.pdc-root,
+.pdc-root * {
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-family: 'Nunito', Arial, sans-serif !important;
+}
+
+.pdc-root a,
+.pdc-root a:hover,
+.pdc-root a:focus,
+.pdc-root a:active,
+.pdc-root a:visited {
+  font-size: inherit !important;
+  font-family: 'Nunito', Arial, sans-serif !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  line-height: inherit !important;
+  transition: opacity 0.2s !important;
+}
+
+.pdc-root a:hover {
+  opacity: 0.8 !important;
+}
+
+.pdc-root {
+  width: 100% !important;
+  background: linear-gradient(180deg, #26266a 24.52%, #4b4bd0) !important;
+  overflow-x: hidden !important;
+  padding-top: 71px !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   ANIMATIONS
+   ══════════════════════════════════════════════════════════ */
+@keyframes pdcFadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pdcFadeInScale {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes pdcFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes pdcSlideInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes pdcSlideInRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.pdc-animate { opacity: 0; }
+.pdc-animate.pdc-visible {
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+.pdc-animate.pdc-fade-up.pdc-visible      { animation-name: pdcFadeInUp;    animation-duration: 0.8s; }
+.pdc-animate.pdc-fade-scale.pdc-visible   { animation-name: pdcFadeInScale; animation-duration: 0.7s; }
+.pdc-animate.pdc-fade.pdc-visible         { animation-name: pdcFadeIn;      animation-duration: 0.6s; }
+.pdc-animate.pdc-slide-left.pdc-visible   { animation-name: pdcSlideInLeft; animation-duration: 0.8s; }
+.pdc-animate.pdc-slide-right.pdc-visible  { animation-name: pdcSlideInRight; animation-duration: 0.8s; }
+
+.pdc-animate.pdc-delay-1 { animation-delay: 0.1s !important; }
+.pdc-animate.pdc-delay-2 { animation-delay: 0.2s !important; }
+.pdc-animate.pdc-delay-3 { animation-delay: 0.3s !important; }
+.pdc-animate.pdc-delay-4 { animation-delay: 0.4s !important; }
+.pdc-animate.pdc-delay-5 { animation-delay: 0.5s !important; }
+
+/* ══════════════════════════════════════════════════════════
+   NAVBAR  (from logic-olympiad.html)
+   ══════════════════════════════════════════════════════════ */
+.pdc-nav {
+  width: 100% !important;
+  height: 71px !important;
+  background: #000 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 24px !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 100 !important;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+.pdc-nav.pdc-scrolled {
+  top: 15px !important;
+  width: 90% !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 30px !important;
+  border-radius: 50px !important;
+  background: rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+.pdc-nav-links { display: flex !important; align-items: center !important; gap: 34px !important; list-style: none !important; padding-left: 12px !important; }
+.pdc-nav-links li { list-style: none !important; }
+.pdc-nav-links a { color: #fff !important; text-decoration: none !important; font-size: 18px !important; font-weight: 600 !important; letter-spacing: -0.02em !important; }
+.pdc-nav-links a:hover { opacity: 0.8 !important; }
+.pdc-nav-links a.active { text-decoration: underline !important; }
+
+.pdc-register-btn {
+  position: relative !important;
+  height: 41px !important;
+  width: 127px !important;
+  cursor: pointer !important;
+  background: rgba(255,255,255,0.02) !important;
+  border: 1px solid rgba(255,255,255,0.3) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 2px 4px rgba(255,255,255,0.25) inset !important;
+  backdrop-filter: blur(10px) !important;
+  color: #fff !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  white-space: nowrap !important;
+  transition: background 0.2s !important;
+}
+.pdc-register-btn:hover {
+  background: rgba(255,255,255,0.08) !important;
+}
+
+/* Burger */
+.pdc-burger {
+  display: none !important;
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  color: #fff !important;
+  padding: 0px !important;
+}
+
+/* Drawer */
+.pdc-drawer-overlay {
+  display: none !important;
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(0,0,0,0.5) !important;
+  z-index: 200 !important;
+}
+.pdc-drawer {
+  position: fixed !important;
+  top: 0 !important;
+  left: -280px !important;
+  width: 260px !important;
+  height: 100vh !important;
+  background: #111 !important;
+  z-index: 201 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 20px !important;
+  gap: 4px !important;
+  transition: left 0.3s ease !important;
+}
+.pdc-drawer.pdc-open { left: 0 !important; }
+.pdc-drawer-close {
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  color: #fff !important;
+  align-self: flex-end !important;
+  padding: 4px !important;
+  margin-bottom: 16px !important;
+}
+.pdc-drawer a {
+  color: #fff !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  padding: 12px 8px !important;
+  border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+  display: block !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   FOOTER  (from logic-olympiad.html)
+   ══════════════════════════════════════════════════════════ */
+.pdc-footer {
+  width: 100% !important;
+  background: #000 !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+  flex-wrap: wrap !important;
+  gap: 40px !important;
+  padding: 48px 40px 48px 40px !important;
+}
+
+.pdc-footer-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 20px !important;
+  position: relative !important;
+  min-width: 260px !important;
+}
+
+.pdc-footer-logo {
+  width: 80px !important;
+  height: auto !important;
+  object-fit: contain !important;
+  flex-shrink: 0 !important;
+}
+
+.pdc-footer-brand {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+}
+
+.pdc-footer-brand h3 {
+  color: #fff !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 130% !important;
+  max-width: 220px !important;
+}
+
+.pdc-footer-brand p {
+  color: rgba(255,255,255,0.7) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.pdc-footer-right {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 24px !important;
+  min-width: 380px !important;
+  max-width: 600px !important;
+}
+
+.pdc-footer-nav-row {
+  display: flex !important;
+  gap: 40px !important;
+  flex-wrap: wrap !important;
+}
+
+.pdc-footer-nav-col {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  min-width: 100px !important;
+}
+
+.pdc-footer-nav-col h3 {
+  color: #fff !important;
+  font-size: 25px !important;
+  font-weight: 700 !important;
+  text-shadow: 0px 2px 7px rgba(0,0,0,0.2) !important;
+  margin-bottom: 4px !important;
+}
+
+.pdc-footer-nav-col a {
+  color: #fff !important;
+  font-size: 17px !important;
+  font-weight: 600 !important;
+  text-shadow: 0px 2px 7px rgba(0,0,0,0.2) !important;
+}
+
+.pdc-footer-comp-col {
+  color: #fff !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  min-width: 200px !important;
+}
+
+.pdc-footer-comp-col h3 {
+  color: #fff !important;
+  font-size: 25px !important;
+  font-weight: 700 !important;
+  text-shadow: 0px 2px 7px rgba(0,0,0,0.2) !important;
+  margin-bottom: 4px !important;
+}
+
+.pdc-footer-comp-links {
+  display: flex !important;
+  gap: 8px !important;
+}
+
+.pdc-footer-comp-links div {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+}
+
+.pdc-footer-comp-links a {
+  color: #fff !important;
+  font-size: 17px !important;
+  font-weight: 600 !important;
+  text-shadow: 0px 2px 7px rgba(0,0,0,0.2) !important;
+}
+
+.pdc-footer-socials {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+}
+
+.pdc-footer-socials img {
+  width: 42px !important;
+  height: 42px !important;
+  object-fit: contain !important;
+  cursor: pointer !important;
+  transition: transform 0.2s !important;
+}
+.pdc-footer-socials img:hover { transform: scale(1.1) !important; }
+
+/* ══════════════════════════════════════════════════════════
+   ABOUT US BODY CONTENT (unchanged from about_us.html)
+   ══════════════════════════════════════════════════════════ */
+.pdc-root {
+  --color-white: #fff;
+  --gap-20: 20px;
+  --padding-0: 0px; --padding-1: 1px; --padding-2: 2px; --padding-8: 8px; --padding-24: 24px;
+  --br-100: 100px;
+  --font-nunito: Nunito, Arial, sans-serif;
+  --fs-15: 15px; --fs-16: 16px; --fs-17: 17px; --fs-18: 18px; --fs-20: 20px;
+  --fs-24: 24px; --fs-32: 32px; --fs-40: 40px;
+  --border-1: 1px solid transparent;
+  --shadow-drop: 0px 6px 4px rgba(0,0,0,0.25);
+  --shadow-drop-1: 0px 4px 4px rgba(0,0,0,0.25);
+  --shadow-drop-2: 0px 5px 4px rgba(0,0,0,0.25);
+  --shadow-drop-3: 0px 7px 4px rgba(0,0,0,0.25);
+  --shadow-inner: 0px 2px 4px rgba(255,255,255,0.25) inset;
+  --text-shadow-1: 0px 0px 10px rgba(0,0,0,0.25);
+  --text-shadow-2: 0px 2px 6px rgba(0,0,0,0.25);
+  --text-shadow-3: 0px 2px 7px rgba(0,0,0,0.2);
+  --gradient-1: rgba(255,255,255,0.02) padding-box,
+    linear-gradient(264.53deg, rgba(255,255,255,0.03), rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.03)) border-box;
+  --gradient-2: linear-gradient(180deg, rgba(45,39,209,0), #14356b) padding-box,
+    linear-gradient(180deg, rgba(45,39,209,0), #2d27d1) border-box;
+  --gradient-3: linear-gradient(180deg, rgba(45,39,209,0), rgba(20,53,107,0.88));
+  --gradient-4: linear-gradient(180deg, rgba(39,118,209,0), #143d6b) padding-box,
+    linear-gradient(180deg, rgba(39,118,209,0), #2776d1) border-box;
+  --height-36: 36px; --width-200: 200px; --width-203: 203px;
+  --lh-24: 24px; --lh-26: 26px; --lh-32: 32px; --lh-40: 40px;
+  --ls--0_02: -0.02;
+  --left-0: 0px; --top-0: 0px;
+}
+
+.pdc-root .desktop-about-us {
+  width: 100% !important;
+  height: 3141px !important;
+  position: relative !important;
+  background: linear-gradient(180deg, #26266a 24.52%, #4b4bd0) !important;
+  overflow-y: auto !important;
+  min-height: 1080px !important;
+  line-height: normal !important;
+  letter-spacing: normal !important;
+}
+.pdc-root .background {
+  position: absolute !important;
+  top: 0 !important;
+  left: calc(50% - 1310.8px) !important;
+  width: 3007.4px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  isolation: isolate !important;
+  gap: 616.6px !important;
+  z-index: 0 !important;
+  flex-shrink: 0 !important;
+  text-align: left !important;
+  font-size: var(--fs-17) !important;
+  color: var(--color-white) !important;
+  font-family: var(--font-nunito) !important;
+}
+.pdc-root .competition {
+  width: 100% !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  padding: var(--padding-0) 385px var(--padding-0) var(--padding-0) !important;
+  box-sizing: border-box !important;
+  max-width: 1664.7px !important;
+  z-index: 2 !important;
+}
+.pdc-root .frame, .pdc-root .about-header-placeholder {
+  display: flex !important;
+  align-items: center !important;
+}
+.pdc-root .frame {
+  flex: 1 !important;
+  padding: 60px var(--padding-0) 280px !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  isolation: isolate !important;
+  background-image: url(https://raw.githubusercontent.com/caatz38/pdc-gassin/refs/heads/main/assets/bege%20ungu.avif) !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: top !important;
+  max-width: 100% !important;
+}
+.pdc-root .about-content {
+  height: 270px !important;
+  flex: 1 !important;
+  position: relative !important;
+  max-width: 100% !important;
+  z-index: 1 !important;
+  flex-shrink: 0 !important;
+  text-align: center !important;
+  font-size: var(--fs-17) !important;
+  color: var(--color-white) !important;
+  font-family: var(--font-nunito) !important;
+}
+.pdc-root .about-panel, .pdc-root .about2 {
+  position: absolute !important;
+  width: 776px !important;
+}
+.pdc-root .about2 {
+  bottom: 0 !important;
+  left: calc(50% - 383.6px) !important;
+  height: 200px !important;
+}
+.pdc-root .about-panel {
+  top: 26px !important;
+  left: 255.95px !important;
+  box-shadow: var(--shadow-inner) !important;
+  backdrop-filter: blur(20px) !important;
+  border-radius: 35px !important;
+  background: var(--gradient-1) !important;
+  border: var(--border-1) !important;
+  box-sizing: border-box !important;
+  height: 170px !important;
+  flex-shrink: 0 !important;
+}
+.pdc-root .pradita-dirgantara-competition-container {
+  position: absolute !important;
+  top: 0 !important;
+  left: 273.95px !important;
+  letter-spacing: -0.02em !important;
+  line-height: 145% !important;
+  display: flex !important;
+  align-items: center !important;
+  width: 739.7px !important;
+  text-shadow: var(--text-shadow-1) !important;
+  opacity: 0.8 !important;
+  flex-shrink: 0 !important;
+}
+.pdc-root .pradita-dirgantara-competition-container2 { width: 100% !important; }
+.pdc-root .span { font-weight: 800 !important; line-height: 145% !important; }
+.pdc-root .pradita-dirgantara-competition { font-weight: 900 !important; line-height: 145% !important; }
+.pdc-root .merupakan-ajang-tahunan { line-height: 145% !important; }
+.pdc-root .about-us-icon {
+  position: absolute !important;
+  top: 0 !important;
+  left: 502.9px !important;
+  width: 264px !important;
+  height: 72px !important;
+  object-fit: cover !important;
+}
+.pdc-root .our-previous-text {
+  width: 706px !important;
+  position: absolute !important;
+  margin: 0 !important;
+  top: 735px !important;
+  left: calc(50% - 545.4px) !important;
+  max-height: 100% !important;
+  object-fit: cover !important;
+  z-index: 8 !important;
+}
+.pdc-root .winners-element {
+  width: 1264px !important;
+  height: 666.7px !important;
+  position: absolute !important;
+  margin: 0 !important;
+  top: calc(50% - 880.8px) !important;
+  left: calc(50% - 789.4px) !important;
+  background-image: url(https://github.com/caatz38/pdc-gassin/blob/main/assets/aboutus/Winners%20Element.png?raw=true) !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: top !important;
+  z-index: 7 !important;
+}
+.pdc-root .merged-asset-1-icon {
+  position: absolute !important;
+  top: -3px !important; left: -3px !important;
+  width: 100% !important; height: 100% !important;
+  object-fit: cover !important;
+  display: none !important;
+  flex-shrink: 0 !important;
+}
+.pdc-root .background-color {
+  width: 1279px !important;
+  height: 2336px !important;
+  position: absolute !important;
+  margin: 0 !important;
+  bottom: 213.6px !important;
+  left: calc(50% - 832.4px) !important;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(128,90,255,0.13) 29.81%, rgba(94,69,255,0.13) 74.52%, rgba(36,24,255,0.1)),
+    linear-gradient(180deg, #28285d 24.52%, #4b4bd0) !important;
+  z-index: 1 !important;
+}
+.pdc-root .memories-background-icon {
+  align-self: stretch !important;
+  height: 2011px !important;
+  position: relative !important;
+  filter: blur(10px) !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  flex-shrink: 0 !important;
+  object-fit: contain !important;
+  z-index: 3 !important;
+}
+.pdc-root .gallery-info, .pdc-root .gallery-info-child {
+  position: absolute !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+.pdc-root .gallery-info {
+  width: 242px !important;
+  height: 170px !important;
+  top: calc(50% - 216.8px) !important;
+  left: calc(50% - 786.4px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  padding: var(--padding-24) var(--padding-0) !important;
+  isolation: isolate !important;
+  gap: 6px !important;
+  z-index: 9 !important;
+}
+.pdc-root .gallery-info-child {
+  width: 100% !important; height: 100% !important;
+  top: 0 !important; right: 0 !important; bottom: 0 !important; left: 0 !important;
+  box-shadow: var(--shadow-inner) !important;
+  backdrop-filter: blur(20px) !important;
+  border-radius: 25px !important;
+  background: var(--gradient-1) !important;
+  border: var(--border-1) !important;
+  z-index: 0 !important;
+  flex-shrink: 0 !important;
+}
+.pdc-root .d-gallery {
+  top: 15px !important; left: 23px !important;
+  font-size: 13px !important;
+  display: inline-block !important;
+  min-width: 62px !important;
+  z-index: 4 !important;
+}
+.pdc-root .d-gallery, .pdc-root .gallery-info-item, .pdc-root .pdc-2025 {
+  position: absolute !important;
+  margin: 0 !important;
+  flex-shrink: 0 !important;
+}
+.pdc-root .pdc-2025 {
+  top: 30px !important; left: 22px !important;
+  font-size: 27px !important; font-weight: 700 !important;
+  font-family: inherit !important;
+  display: inline-block !important;
+  min-width: 129px !important;
+  z-index: 5 !important;
+}
+.pdc-root .gallery-info-item {
+  width: var(--width-200) !important;
+  top: calc(50% - 15px) !important;
+  left: calc(50% - 100px) !important;
+  border-radius: var(--br-100) !important;
+  max-height: 100% !important;
+  object-fit: cover !important;
+  z-index: 2 !important;
+}
+.pdc-root .total-photos-row {
+  width: 100% !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+  padding: var(--padding-1) 3px var(--padding-1) var(--padding-0) !important;
+  box-sizing: border-box !important;
+  gap: var(--gap-20) !important;
+  max-width: 196.2px !important;
+  z-index: 6 !important;
+  flex-shrink: 0 !important;
+}
+.pdc-root .total-photos { position: relative !important; }
+.pdc-root .gallery-info-inner {
+  width: var(--width-200) !important;
+  height: 3px !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  z-index: 7 !important;
+  flex-shrink: 0 !important;
+}
+.pdc-root .frame-child {
+  width: var(--width-200) !important;
+  position: relative !important;
+  border-radius: var(--br-100) !important;
+  max-height: 100% !important;
+  object-fit: cover !important;
+}
+.pdc-root .album-separator {
+  position: absolute !important;
+  margin: 0 !important;
+  right: 26px !important; bottom: 30px !important;
+  display: inline-block !important;
+  min-width: 11px !important;
+  z-index: 3 !important;
+  flex-shrink: 0 !important;
+}
+.pdc-root .my-album, .pdc-root .vector-icon {
+  width: var(--width-200) !important;
+  position: relative !important;
+  flex-shrink: 0 !important;
+}
+.pdc-root .my-album { display: inline-block !important; max-width: 200px !important; z-index: 7 !important; }
+.pdc-root .vector-icon { border-radius: var(--br-100) !important; max-height: 100% !important; object-fit: cover !important; z-index: 8 !important; }
+.pdc-root .memories-photos {
+  width: 1220px !important; height: 1060px !important;
+  position: absolute !important; margin: 0 !important;
+  top: calc(50% - 169.1px) !important;
+  left: calc(50% - 793px) !important;
+  background-image: url(https://github.com/caatz38/pdc-gassin/blob/main/assets/aboutus/Memories%20Photos.png?raw=true) !important;
+  background-size: cover !important; background-repeat: no-repeat !important; background-position: top !important;
+  z-index: 6 !important;
+}
+.pdc-root .merged-asset-2-icon {
+  position: absolute !important; top: -0.05px !important; left: -4px !important;
+  width: 100% !important; height: 100% !important;
+  object-fit: cover !important; display: none !important; flex-shrink: 0 !important;
+}
+.pdc-root .last-year-text, .pdc-root .last-years { display: flex !important; align-items: flex-start !important; }
+.pdc-root .last-year-text {
+  width: 255px !important; margin: 0 !important;
+  position: absolute !important;
+  top: calc(50% - 11.1px) !important;
+  left: calc(50% - 668px) !important;
+  flex-direction: column !important;
+  padding: var(--padding-0) var(--padding-2) !important;
+  box-sizing: border-box !important;
+  z-index: 5 !important;
+  text-align: right !important;
+  font-size: var(--fs-40) !important;
+}
+.pdc-root .last-years { align-self: stretch !important; padding: var(--padding-0) var(--padding-0) var(--padding-8) !important; z-index: 1 !important; }
+.pdc-root .last-years2 { margin: 0 !important; flex: 1 !important; font-size: inherit !important; font-weight: 800 !important; font-family: inherit !important; position: relative !important; line-height: var(--lh-40) !important; }
+.pdc-root .memories { margin: 0 !important; align-self: stretch !important; position: relative !important; font-size: inherit !important; font-weight: 800 !important; font-family: inherit !important; }
+.pdc-root .photos { position: relative !important; font-size: var(--fs-20) !important; font-weight: 800 !important; }
+
+/* Footer from about_us (replaced by pdc-footer above, keeping .footer selector for layout) */
+.pdc-root .footer {
+  width: 100% !important;
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 24px !important;
+  padding: 48px 40px !important;
+  box-sizing: border-box !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: top !important;
+  z-index: 4 !important;
+  text-align: left !important;
+  font-size: var(--fs-15) !important;
+  color: var(--color-white) !important;
+  font-family: var(--font-nunito) !important;
+  background: #000 !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════ */
+@media (max-width: 675px) {
+  .pdc-nav-links { display: none !important; }
+  .pdc-burger { display: flex !important; align-items: center !important; justify-content: center !important; }
+
+  .pdc-footer { flex-direction: column !important; align-items: center !important; text-align: center !important; }
+  .pdc-footer-left { flex-direction: column !important; align-items: center !important; padding: 0 !important; }
+  .pdc-footer-brand { text-align: center !important; }
+  .pdc-footer-right { width: 100% !important; min-width: unset !important; align-items: center !important; }
+  .pdc-footer-nav-row { flex-direction: column !important; align-items: center !important; gap: 30px !important; }
+  .pdc-footer-nav-col, .pdc-footer-comp-col { min-width: unset !important; max-width: 100% !important; text-align: left !important; }
+  .pdc-footer-socials { justify-content: center !important; padding-left: 0 !important; }
+}
+@media (max-width: 750px) {
+  .pdc-root .last-years2, .pdc-root .memories { font-size: var(--fs-32) !important; line-height: var(--lh-32) !important; }
+}
+@media (max-width: 450px) {
+  .pdc-nav-links { gap: 17px !important; }
+  .pdc-root .desktop-about-us { height: auto !important; min-height: 3141px !important; }
+  .pdc-root .pdc-2025 { font-size: 22px !important; }
+  .pdc-root .last-years2, .pdc-root .memories { font-size: var(--fs-24) !important; line-height: var(--lh-24) !important; }
+  .pdc-root .photos { font-size: var(--fs-16) !important; line-height: var(--lh-40) !important; }
+}
+</style>
+
+<div class="pdc-root">
+
+  <!-- ═══════════════════════════════════════════
+       NAVBAR  (from logic-olympiad.html)
+       ═══════════════════════════════════════════ -->
+  <nav class="pdc-nav">
+    <button class="pdc-burger" id="pdcBurger" aria-label="Open menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+    </button>
+    <ul class="pdc-nav-links">
+      <li><a href="/home">Home</a></li>
+      <li><a href="/about" class="active">About</a></li>
+      <li><a href="/competitions">Competitions</a></li>
+      <li><a href="/faqs">FAQs</a></li>
+    </ul>
+    <a href="/signup"><button class="pdc-register-btn">Register Now!</button></a>
+  </nav>
+
+  <div class="pdc-drawer-overlay" id="pdcOverlay"></div>
+  <div class="pdc-drawer" id="pdcDrawer">
+    <button class="pdc-drawer-close" id="pdcClose" aria-label="Close menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+    <a href="/home">Home</a>
+    <a href="/about">About</a>
+    <a href="/competitions">Competitions</a>
+    <a href="/faqs">FAQs</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       ABOUT US BODY CONTENT (unchanged)
+       ═══════════════════════════════════════════ -->
+  <div class="desktop-about-us">
+    <main class="background">
+      <div class="competition">
+        <div class="frame">
+          <section class="about-content">
+            <div class="about2">
+              <div class="about-panel"></div>
+              <div class="pradita-dirgantara-competition-container">
+                <span class="pradita-dirgantara-competition-container2">
+                  <span class="span"><br /><br /></span>
+                  <span class="pradita-dirgantara-competition">Pradita Dirgantara Competition (PDC)</span>
+                  <span class="span"> </span>
+                  <b class="merupakan-ajang-tahunan">merupakan ajang tahunan yang diselenggarakan oleh SMA
+                    Pradita Dirgantara sebagai wadah untuk menumbuhkan minat
+                    dan bakat generasi muda dalam bidang akademik, olahraga,
+                    dan kreativitas. Dengan mengajak seluruh siswa-siswi
+                    SMP/MTs di Indonesia untuk berpartisipasi, PDC menjadi
+                    sarana yang menyatukan semangat berjuang dan berprestasi
+                    para remaja dari berbagai penjuru negeri.<br /></b>
+                </span>
+              </div>
+            </div>
+            <img class="about-us-icon" loading="lazy" alt="" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/aboutus/About%20Uss.png?raw=true" />
+          </section>
+        </div>
+      </div>
+
+      <img class="our-previous-text" loading="lazy" alt="" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/aboutus/Our%20Previous%20Text.png?raw=true" />
+
+      <div class="winners-element">
+        <img class="merged-asset-1-icon" alt="" src="YOUR_IMAGE_URL_MERGED_ASSET_1_2X_PNG" />
+      </div>
+      <div class="background-color"></div>
+      <img class="memories-background-icon" alt="" src="YOUR_IMAGE_URL_MEMORIES_BACKGROUND_2X_PNG" />
+
+      <div class="gallery-info">
+        <div class="gallery-info-child"></div>
+        <div class="d-gallery">3D gallery</div>
+        <h2 class="pdc-2025">PDC 2025</h2>
+        <img class="gallery-info-item" loading="lazy" alt="" src="YOUR_IMAGE_URL_VECTOR_2_2X_PNG" />
+        <div class="total-photos-row">
+          <div class="total-photos">Total Photos</div>
+          <b class="total-photos">2025</b>
+        </div>
+        <div class="gallery-info-inner">
+          <img class="frame-child" loading="lazy" alt="" src="YOUR_IMAGE_URL_VECTOR_3_2X_PNG" />
+        </div>
+        <b class="album-separator">8</b>
+        <div class="my-album">My album</div>
+        <img class="vector-icon" loading="lazy" alt="" src="YOUR_IMAGE_URL_VECTOR_4_2X_PNG" />
+      </div>
+
+      <div class="memories-photos">
+        <img class="merged-asset-2-icon" alt="" src="YOUR_IMAGE_URL_MERGED_ASSET_2_2X_PNG" />
+      </div>
+
+      <div class="last-year-text">
+        <div class="last-years">
+          <h1 class="last-years2">Last Year's</h1>
+        </div>
+        <h2 class="memories">Memories</h2>
+        <b class="photos">9999+ photos</b>
+      </div>
+
+      <!-- ═══════════════════════════════════════════
+           FOOTER  (from logic-olympiad.html)
+           ═══════════════════════════════════════════ -->
+      <footer class="pdc-footer">
+        <div class="pdc-footer-left pdc-animate pdc-slide-left">
+          <img class="pdc-footer-logo" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/pdc%20logo.avif?raw=true" alt="PDC Logo" />
+          <div class="pdc-footer-brand">
+            <h3>Pradita Dirgantara Competition 2026</h3>
+            <p>©️ IT Administration &amp; Creative Publication 2026</p>
+          </div>
+        </div>
+
+        <div class="pdc-footer-right pdc-animate pdc-slide-right">
+          <div class="pdc-footer-nav-row">
+            <div class="pdc-footer-nav-col">
+              <h3>Navigation</h3>
+              <a href="/home">Home</a>
+              <a href="/about">About</a>
+              <a href="/competitions">Competition</a>
+              <a href="/faqs">FAQs</a>
+            </div>
+
+            <div class="pdc-footer-comp-col">
+              <h3>Competitions</h3>
+              <div class="pdc-footer-comp-links">
+                <div>
+                  <a href="/math-olympiade">Math Olympiad</a>
+                  <a href="/logic-olympiade">Logic Olympiad</a>
+                  <a href="/science-olympiade">Science Olympiad</a>
+                  <a href="/basket">Basket</a>
+                </div>
+                <div>
+                  <a href="/sw">Scientific Writing</a>
+                  <a href="/solo-vocal">Solo Vocal</a>
+                  <a href="/speechs">Speech</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pdc-footer-socials">
+            <a href="https://praditadirgantara.sch.id/id/" target="_blank">
+              <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/web.avif?raw=true" alt="Website" />
+            </a>
+            <a href="https://www.tiktok.com/@smapraditadirgantara" target="_blank">
+              <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/tiktk.avif?raw=true" alt="TikTok" />
+            </a>
+            <a href="https://www.instagram.com/smapraditadirgantara/" target="_blank">
+              <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/instag.avif?raw=true" alt="Instagram" />
+            </a>
+            <a href="https://www.youtube.com/@smapraditadirgantara" target="_blank">
+              <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/ytb.avif?raw=true" alt="YouTube" />
+            </a>
+          </div>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+
+</div>
+
+<script>
+  // Burger Menu Logic
+  var pdcB = document.getElementById('pdcBurger');
+  var pdcD = document.getElementById('pdcDrawer');
+  var pdcO = document.getElementById('pdcOverlay');
+  var pdcC = document.getElementById('pdcClose');
+  function pdcOpen()  { pdcD.classList.add('pdc-open');    pdcO.style.display = 'block'; }
+  function pdcClose() { pdcD.classList.remove('pdc-open'); pdcO.style.display = 'none';  }
+  pdcB.addEventListener('click', pdcOpen);
+  pdcC.addEventListener('click', pdcClose);
+  pdcO.addEventListener('click', pdcClose);
+
+  // Floating Navbar Scroll Logic
+  var nav = document.querySelector('.pdc-nav');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 50) {
+      nav.classList.add('pdc-scrolled');
+    } else {
+      nav.classList.remove('pdc-scrolled');
+    }
+  });
+
+  // Scroll-triggered animations using IntersectionObserver
+  (function() {
+    var animatedElements = document.querySelectorAll('.pdc-animate');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('pdc-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { root: null, rootMargin: '0px 0px -80px 0px', threshold: 0.1 });
+    animatedElements.forEach(function(el) { observer.observe(el); });
+  })();
+</script>
