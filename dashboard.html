@@ -1,393 +1,461 @@
-<div class="pdc-root">
-
-  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PDC 2026 — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&display=swap" rel="stylesheet" />
   <style>
-    /* ORIGINAL DASHBOARD HOME PAGE FILE */
-    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght=700;800&display=swap');
-
-    /* Global resets forced within root wrapper */
-    .pdc-root, .pdc-root * {
-      font-family: Nunito, Arial, sans-serif !important;
-      box-sizing: border-box !important;
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Nunito, Arial, sans-serif;
     }
 
-    /* Link State Rules */
-    .pdc-root a, 
-    .pdc-root a:hover, 
-    .pdc-root a:focus, 
-    .pdc-root a:active, 
-    .pdc-root a:visited {
-      color: #323289 !important;
-      font-size: 16px !important;
-      text-decoration: none !important;
-      font-family: Nunito, Arial, sans-serif !important;
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #a5c4ff 0%, #4d81e3 100%);
     }
 
-    .pdc-root .desktop {
-      width: 100% !important;
-      height: 713px !important;
-      position: relative !important;
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
-      background: linear-gradient(180deg, #a5c4ff 66.83%, #4d81e3 97.2%) !important;
-      overflow-y: auto !important;
-      overflow-x: hidden !important;
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: center !important;
-      isolation: isolate !important;
-      line-height: normal !important;
-      letter-spacing: normal !important;
+    a, a:hover, a:visited, a:focus, a:active {
+      color: #323289;
+      text-decoration: none;
     }
 
-    .pdc-root .background,
-    .pdc-root .background1-icon {
-      position: absolute !important;
-      margin: 0 !important;
-      width: 100% !important;
-      left: 0 !important;
+    /* ─────────────────────────────────────────────
+       BACKGROUND LAYERS
+    ───────────────────────────────────────────── */
+    .bg-top {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 50%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .bg-top img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .bg-bottom {
+      position: fixed;
+      bottom: 0; left: 0;
+      width: 100%; height: 50%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .bg-bottom img {
+      width: 100%; height: 100%;
+      object-fit: cover;
     }
 
-    .pdc-root .background1-icon {
-      height: 358px !important;
-      bottom: 0 !important;
-      top: auto !important;
-      object-fit: cover !important; 
-      z-index: 0 !important;
+    /* ─────────────────────────────────────────────
+       DESKTOP LAYOUT — sidebar on left
+    ───────────────────────────────────────────── */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 120px;
+      height: 100vh;
+      background: #3F3FA4;
+      box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 10;
+      padding-top: 15px;
     }
 
-    .pdc-root .background {
-      height: 355px !important;
-      top: 0 !important;
-      box-shadow: none !important;
-      z-index: 1 !important;
+    .sidebar-logo {
+      width: 92px;
+      height: 92px;
+      object-fit: contain;
     }
 
-    .pdc-root .calling-1-icon {
-      position: absolute !important;
-      top: 0 !important;
-      left: 0 !important;
-      width: 100% !important;
-      height: 100% !important;
-      object-fit: cover !important;
+    .sidebar-title {
+      font-size: 8px;
+      font-weight: 700;
+      color: #fff;
+      text-align: center;
+      line-height: 12px;
+      margin-top: 8px;
+      padding: 0 5px;
     }
 
-    .pdc-root .sidebar {
-      position: absolute !important;
-      width: 120px !important;
-      height: 100% !important;
-      min-height: 713px !important;
-      margin: 0 !important;
-      top: 0 !important;
-      left: 0 !important;
-      flex-shrink: 0 !important;
-      z-index: 2 !important;
-      text-align: center !important;
-      font-size: 8px !important;
-      color: #fff !important;
-      background-color: #3F3FA4 !important;
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
+    .nav-btn {
+      width: 100%;
+      height: 90px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: #fff;
+      transition: background 0.15s;
+      margin-top: 2px;
+    }
+    .nav-btn:hover,
+    .nav-btn.active {
+      background: #323289;
+    }
+    .nav-btn svg {
+      width: 24px;
+      height: 24px;
+      stroke: #fff;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .nav-btn span {
+      font-size: 11px;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 1.8px 5.5px rgba(0,0,0,0.25);
     }
 
-    .pdc-root .pdc-logo-scaled-1-icon {
-      position: absolute !important;
-      top: 15px !important;
-      left: calc(50% - 46px) !important;
-      width: 92px !important;
-      height: 92px !important;
-      object-fit: contain !important;
+    /* ─────────────────────────────────────────────
+       MAIN CONTENT AREA
+    ───────────────────────────────────────────── */
+    .page {
+      margin-left: 120px;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      padding: 100px 24px 48px;
+      position: relative;
+      z-index: 2;
     }
 
-    .pdc-root .pradita-dirgantara-competition {
-      position: absolute !important;
-      top: 115px !important;
-      left: 5px !important;
-      line-height: 12px !important;
-      display: inline-block !important;
-      width: 110px !important;
-      text-align: center !important;
+    /* ─────────────────────────────────────────────
+       PROFILE CARD
+    ───────────────────────────────────────────── */
+    .profile-card {
+      width: 256px;
+      flex-shrink: 0;
+      background: #fff;
+      border-radius: 30px;
+      box-shadow: 0 5px 0 #3f3fa4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 0 28px;
+      overflow: hidden;
+      margin-top: 73px; /* pushes down to align with profile icon overlap */
     }
 
-    .pdc-root .home-menu,
-    .pdc-root .profile-menu,
-    .pdc-root .logout-menu {
-      cursor: pointer !important;
-      border: 0 !important;
-      padding: 0 !important;
-      background-color: transparent !important;
-      position: absolute !important;
-      left: 0 !important;
-      width: 100% !important;
-      height: 90px !important;
+    .profile-avatar-bar {
+      width: 100%;
+      background: #3F3FA4;
+      display: flex;
+      justify-content: center;
+      padding: 0 0 0;
     }
 
-    .pdc-root .home-menu {
-      top: 170px !important;
+    .profile-icon {
+      width: 147px;
+      height: 146px;
+      margin-top: -73px;
+      display: block;
+      object-fit: contain;
     }
 
-    .pdc-root .profile-menu {
-      top: 260px !important;
+    .profile-name {
+      font-size: 26px;
+      font-weight: 800;
+      color: #323289;
+      text-align: center;
+      margin-top: 12px;
+      line-height: 1.3;
+      padding: 0 12px;
     }
 
-    .pdc-root .logout-menu {
-      top: 350px !important;
+    .profile-fields {
+      width: 100%;
+      padding: 8px 20px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
 
-    .pdc-root .home-menu-child {
-      position: absolute !important;
-      top: 0 !important;
-      left: 0 !important;
-      background-color: transparent !important;
-      width: 100% !important;
-      height: 100% !important;
+    .field-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      color: #323289;
+      border-bottom: 0.5px solid #e0e0f0;
+      padding: 6px 0;
+    }
+    .field-row:last-child { border-bottom: none; }
+    .field-label {
+      font-weight: 800;
+      color: #6666bb;
+      min-width: 60px;
+    }
+    .field-value {
+      text-align: right;
+      color: #323289;
     }
 
-    .pdc-root .frame-parent,
-    .pdc-root .frame-group,
-    .pdc-root .frame-logout {
-      position: absolute !important;
-      top: 0 !important;
-      left: 0 !important;
-      width: 100% !important;
-      height: 100% !important;
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: center !important;
-      justify-content: center !important;
-      background-color: #323289;
+    .status-badge {
+      margin-top: 20px;
+      background: #797980;
+      border-radius: 12px;
+      padding: 8px 32px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
     }
 
-    .pdc-root .frame-parent svg,
-    .pdc-root .frame-group svg,
-    .pdc-root .frame-logout svg {
-      stroke: #ffffff !important;
-      width: 24px !important;
-      height: 24px !important;
-      margin-bottom: 6px !important;
+    /* ─────────────────────────────────────────────
+       WIDGET CARD
+    ───────────────────────────────────────────── */
+    .widget-card {
+      flex: 1 1 300px;
+      max-width: 760px;
+      min-height: 438px;
+      background: #fff;
+      border-radius: 30px;
+      box-shadow: 0 5px 0 #3f3fa4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      text-align: center;
+      font-size: 32px;
+      font-weight: 800;
+      color: #323289;
+      line-height: 1.35;
     }
 
-    .pdc-root .home,
-    .pdc-root .profile,
-    .pdc-root .logout {
-      font-size: 11px !important;
-      line-height: normal !important;
-      color: #fff !important;
-      text-align: center !important;
-      text-shadow: 0px 1.8px 5.5px rgba(0, 0, 0, 0.25) !important;
+    /* ─────────────────────────────────────────────
+       MOBILE — bottom bar, no sidebar
+    ───────────────────────────────────────────── */
+    .top-bar {
+      display: none;
     }
 
-    /* FIX: Changed to Flexbox to center contents dynamically */
-    .pdc-root .card {
-      width: calc(100% - 120px) !important; /* Fills remaining space next to sidebar */
-      position: absolute !important;
-      margin: 0 !important;
-      top: 100px !important;
-      left: 120px !important; /* Starts exactly after the sidebar */
-      z-index: 3 !important;
-      display: flex !important;
-      justify-content: center !important;
-      flex-wrap: wrap !important;
-      gap: 24px !important; /* Spacing between cards */
-      padding: 0 20px 40px 20px !important;
+    .bottom-bar {
+      display: none;
     }
 
-    /* FIX: Relative positioning allows it to align gracefully within Flexbox */
-    .pdc-root .profile2 {
-      position: relative !important;
-      width: 256px !important;
-      height: 513px !important;
-      flex-shrink: 0 !important;
-    }
+    /* ─────────────────────────────────────────────
+       RESPONSIVE BREAKPOINT
+    ───────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      /* hide desktop sidebar */
+      .sidebar { display: none; }
 
-    .pdc-root .profile-card-bg {
-      position: absolute !important;
-      top: 75px !important;
-      left: 0 !important;
-      width: 256px !important;
-      box-shadow: 0px 5px 0px #3f3fa4 !important;
-      border-radius: 30px !important;
-      height: 438px !important;
-      background-color: #ffffff !important;
-    }
+      /* show mobile top bar */
+      .top-bar {
+        display: flex;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: #3F3FA4;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 16px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      }
+      .top-bar img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+      }
+      .top-bar-title {
+        font-size: 13px;
+        font-weight: 800;
+        color: #fff;
+        line-height: 1.3;
+      }
 
-    .pdc-root .profile-icon {
-      position: absolute !important;
-      top: 0 !important;
-      left: calc(50% - 73.5px) !important;
-      width: 147px !important;
-      height: 146px !important;
-    }
+      /* show mobile bottom nav */
+      .bottom-bar {
+        display: flex;
+        position: fixed;
+        bottom: 0; left: 0;
+        width: 100%;
+        height: 60px;
+        background: #3F3FA4;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.25);
+        z-index: 20;
+      }
+      .bottom-bar .nav-btn {
+        height: 100%;
+        margin-top: 0;
+        flex: 1;
+      }
+      .bottom-bar .nav-btn svg {
+        width: 22px;
+        height: 22px;
+      }
+      .bottom-bar .nav-btn span {
+        font-size: 10px;
+      }
 
-    .pdc-root .name {
-      margin: 0 !important;
-      position: absolute !important;
-      top: 157px !important;
-      left: 0 !important;
-      width: 100% !important;
-      font-size: 26px !important;
-      line-height: 40px !important;
-      font-weight: 800 !important;
-      text-align: center !important;
-      color: #323289 !important;
-    }
+      /* reflow main content */
+      .page {
+        margin-left: 0;
+        padding: 20px 16px 80px;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
 
-    .pdc-root .grade,
-    .pdc-root .nisn,
-    .pdc-root .phone-number,
-    .pdc-root .school {
-      position: absolute !important;
-      left: 0 !important;
-      width: 100% !important;
-      line-height: 34px !important;
-      text-align: center !important;
-      font-size: 15px !important;
-      color: #323289 !important;
-    }
+      /* profile card adjustments */
+      .profile-card {
+        width: 100%;
+        max-width: 420px;
+        margin-top: 0;
+        border-radius: 24px;
+      }
+      .profile-avatar-bar {
+        padding: 20px 0 0;
+        background: #3F3FA4;
+      }
+      .profile-icon {
+        width: 90px;
+        height: 90px;
+        margin-top: 0;
+        border-radius: 50%;
+        background: #fff;
+        object-fit: cover;
+      }
 
-    .pdc-root .school { top: 235px !important; }
-    .pdc-root .nisn { top: 265px !important; }
-    .pdc-root .phone-number { top: 295px !important; }
-    .pdc-root .grade { top: 325px !important; }
+      .profile-name {
+        font-size: 22px;
+      }
 
-    .pdc-root .profile-item {
-      position: absolute !important;
-      top: 420px !important;
-      left: calc(50% - 85px) !important;
-      border-radius: 12px !important;
-      background-color: #797980 !important;
-      width: 170px !important;
-      height: 40px !important;
-    }
-
-    .pdc-root .status {
-      position: absolute !important;
-      top: 420px !important;
-      left: 0 !important;
-      width: 100% !important;
-      font-size: 16px !important;
-      line-height: 40px !important;
-      text-align: center !important;
-      color: #fff !important;
-    }
-
-    /* FIX: Made responsive. Takes up available space but maxes out cleanly */
-    .pdc-root .widget {
-      position: relative !important;
-      width: 100% !important;
-      max-width: 760px !important; /* Caps width so it doesn't stretch infinitely */
-      flex: 1 1 300px !important; /* Can grow and shrink */
-      height: 438px !important;
-      margin-top: 75px !important; /* Pushes it down to perfectly align with the profile card's background */
-    }
-
-    .pdc-root .widget-card-bg {
-      position: absolute !important;
-      top: 0 !important;
-      left: 0 !important;
-      width: 100% !important;
-      height: 100% !important;
-      box-shadow: 0px 5px 0px #3f3fa4 !important;
-      border-radius: 30px !important;
-      background-color: #ffffff !important;
-    }
-
-    .pdc-root .please-complete-your {
-      position: absolute !important;
-      top: 0 !important;
-      left: 0 !important;
-      width: 100% !important;
-      height: 100% !important;
-      padding: 40px !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      text-align: center !important;
-      font-weight: 800 !important;
-      font-size: 32px !important;
-      line-height: 42px !important;
-      color: #323289 !important;
-    }
-
-    /* MEDIA QUERIES */
-    @media screen and (max-width: 850px) {
-      .pdc-root .widget {
-        margin-top: 0 !important; /* Removes alignment gap if the cards stack on small screens */
+      /* widget card adjustments */
+      .widget-card {
+        width: 100%;
+        max-width: 420px;
+        min-height: 200px;
+        font-size: 22px;
+        border-radius: 24px;
+        padding: 32px 24px;
       }
     }
 
-    @media screen and (max-width: 750px) {
-      .pdc-root .name {
-        font-size: 22px !important;
-      }
-      .pdc-root .please-complete-your {
-        font-size: 24px !important;
-        line-height: 32px !important;
+    @media (max-width: 480px) {
+      .widget-card {
+        font-size: 18px;
+        line-height: 1.4;
       }
     }
 
-    @media screen and (max-width: 450px) {
-      .pdc-root .please-complete-your {
-        font-size: 20px !important;
-        line-height: 28px !important;
+    /* desktop alignment: align profile card bottom with widget card */
+    @media (min-width: 769px) {
+      .profile-card {
+        align-self: flex-start;
+      }
+      .widget-card {
+        align-self: flex-start;
+        margin-top: 73px;
       }
     }
   </style>
+</head>
+<body>
 
-  <div class="desktop">
-    <section class="background">
-      <img class="calling-1-icon" alt="" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/dashboard/Vector.png?raw=true" />
-    </section>
+  <!-- Background layers -->
+  <div class="bg-top">
+    <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/dashboard/Vector.png?raw=true" alt="" />
+  </div>
+  <div class="bg-bottom">
+    <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/dashboard/bottom.png?raw=true" alt="" />
+  </div>
 
-    <img class="background1-icon" alt="" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/dashboard/bottom.png?raw=true" />
-    
-    <section class="sidebar">
-      <img class="pdc-logo-scaled-1-icon" alt="PDC Logo" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/pdc%20logo.avif?raw=true" />
+  <!-- ── DESKTOP SIDEBAR ── -->
+  <aside class="sidebar">
+    <img class="sidebar-logo"
+      src="https://github.com/caatz38/pdc-gassin/blob/main/assets/pdc%20logo.avif?raw=true"
+      alt="PDC Logo" />
+    <p class="sidebar-title">Pradita Dirgantara<br />Competition 2026</p>
 
-      <b class="pradita-dirgantara-competition">Pradita Dirgantara<br />Competition 2026</b>
-      
-      <button class="home-menu">
-        <div class="home-menu-child"></div>
-        <div class="frame-parent">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-          <b class="home">Home</b>
+    <button class="nav-btn active" aria-label="Dashboard">
+      <svg viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      <span>Dashboard</span>
+    </button>
+
+    <button class="nav-btn" aria-label="Profile">
+      <svg viewBox="0 0 24 24"><path d="M11.5 15H7a4 4 0 0 0-4 4v2"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="7" r="4"/></svg>
+      <span>Profile</span>
+    </button>
+
+    <button class="nav-btn" aria-label="Logout">
+      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      <span>Logout</span>
+    </button>
+  </aside>
+
+  <!-- ── MOBILE TOP BAR ── -->
+  <header class="top-bar">
+    <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/pdc%20logo.avif?raw=true" alt="PDC Logo" />
+    <div class="top-bar-title">Pradita Dirgantara<br/>Competition 2026</div>
+  </header>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="page">
+    <section class="profile-card">
+      <div class="profile-avatar-bar">
+        <img class="profile-icon"
+          src="https://github.com/caatz38/pdc-gassin/blob/main/assets/dashboard/profile%20icon.png?raw=true"
+          alt="Profile Icon" />
+      </div>
+      <h2 class="profile-name">name</h2>
+      <div class="profile-fields">
+        <div class="field-row">
+          <span class="field-label">School</span>
+          <span class="field-value">school</span>
         </div>
-      </button>
-      
-      <button class="profile-menu">
-        <div class="home-menu-child"></div>
-        <div class="frame-group">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.5 15H7a4 4 0 0 0-4 4v2"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="7" r="4"/></svg>
-          <b class="profile">Profile</b>
+        <div class="field-row">
+          <span class="field-label">NISN</span>
+          <span class="field-value">nisn</span>
         </div>
-      </button>
-
-      <button class="logout-menu">
-        <div class="home-menu-child"></div>
-        <div class="frame-logout">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-          <b class="logout">Logout</b>
+        <div class="field-row">
+          <span class="field-label">Phone</span>
+          <span class="field-value">phone number</span>
         </div>
-      </button>
-    </section>
-    
-    <main class="card">
-      <section class="profile2">
-        <div class="profile-card-bg"></div>
-
-        <h3 class="name">name</h3>
-        <b class="school">school</b>
-        <b class="nisn">nisn</b>
-        <b class="phone-number">phone number</b>
-        <b class="grade">grade</b>
-        <div class="profile-item"></div>
-        <b class="status">status</b>
-      </section>
-      
-      <div class="widget">
-        <div class="widget-card-bg"></div>
-        <div class="please-complete-your">
-          Please complete your profile to register a competition!
+        <div class="field-row">
+          <span class="field-label">Grade</span>
+          <span class="field-value">grade</span>
         </div>
       </div>
-    </main>
-  </div>
-</div>
+      <div class="status-badge">status</div>
+    </section>
+
+    <div class="widget-card">
+      Please complete your profile to register a competition!
+    </div>
+  </main>
+
+  <!-- ── MOBILE BOTTOM BAR ── -->
+  <nav class="bottom-bar">
+    <button class="nav-btn active" aria-label="Dashboard">
+      <svg viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      <span>Dashboard</span>
+    </button>
+    <button class="nav-btn" aria-label="Profile">
+      <svg viewBox="0 0 24 24"><path d="M11.5 15H7a4 4 0 0 0-4 4v2"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="7" r="4"/></svg>
+      <span>Profile</span>
+    </button>
+    <button class="nav-btn" aria-label="Logout">
+      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      <span>Logout</span>
+    </button>
+  </nav>
+
+</body>
+</html>

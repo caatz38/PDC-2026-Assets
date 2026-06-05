@@ -238,7 +238,7 @@
 .desktop-about-us {
   background: linear-gradient(180deg,#26266a 24.52%,#4b4bd0) !important;
   overflow-x: hidden !important;
-  overflow-y: auto !important;
+  overflow-y: hidden !important; /* CHANGED FROM AUTO TO HIDDEN */
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
@@ -827,7 +827,7 @@
 /* ══════════════════════════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════════════════════════ */
-@media screen and (max-width: 675px) {
+@media screen and (max-width: 775px) {
   .pdc-nav-links { display: none !important; }
   .pdc-burger { display: flex !important; }
 
@@ -879,35 +879,12 @@
     padding-left: 0 !important;
   }
 
-  .frame {
-    min-width: 100% !important;
-    height: auto !important;
-    min-height: 520px !important;
-  }
-}
-
-@media screen and (max-width: 750px) {
-  .last-years2,
-  .memories {
-    line-height: var(--pdc-lh32) !important;
-  }
 }
 
 @media screen and (max-width: 450px) {
   .pdc-footer-nav-col h3,
   .pdc-footer-comp-col h3 { font-size: 20px !important; }
   .pdc-footer-socials { flex-wrap: wrap !important; }
-
-  .last-years2,
-  .memories {
-    font-size: var(--pdc-fs24) !important;
-    line-height: var(--pdc-lh24) !important;
-  }
-
-  .photos {
-    font-size: var(--pdc-fs16) !important;
-    line-height: var(--pdc-lh40) !important;
-  }
 }
 </style>
 
@@ -993,7 +970,7 @@
       class="our-previous-text"
       loading="lazy"
       alt=""
-      src="https://raw.githubusercontent.com/caatz38/pdc-gassin/main/assets/aboutus/Our%20Previous%20Text.png?raw=true"
+      src="https://raw.githubusercontent.com/caatz38/pdc-gassin/main/assets/aboutus/Our%20Previous%20Text2.png?raw=true"
     />
 
     <!-- Winners element section — CENTERED FIX applied -->
