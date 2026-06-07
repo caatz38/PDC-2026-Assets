@@ -3,371 +3,389 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PDC 2026 — Dashboard</title>
+  <title>Dashboard - Pradita Dirgantara Competition 2026</title>
+ 
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+ 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&display=swap" rel="stylesheet" />
+ 
   <style>
     *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Nunito, Arial, sans-serif;
+      box-sizing: border-box !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      font-family: Nunito, Arial, sans-serif !important;
     }
-
+ 
     html, body {
-      width: 100%;
-      min-height: 100vh;
-      background: linear-gradient(180deg, #a5c4ff 0%, #4d81e3 100%);
+      width: 100% !important;
+      min-height: 100vh !important;
+      background: linear-gradient(180deg, #a5c4ff 0%, #4d81e3 100%) !important;
     }
-
+ 
     a, a:hover, a:visited, a:focus, a:active {
-      color: #323289;
-      text-decoration: none;
+      color: #323289 !important;
+      text-decoration: none !important;
     }
-
-    /* ─────────────────────────────────────────────
-       BACKGROUND LAYERS
-    ───────────────────────────────────────────── */
+ 
+    /* ── BACKGROUND LAYERS ── */
     .bg-top {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 50%;
-      z-index: 0;
-      pointer-events: none;
+      position: fixed !important;
+      top: 0 !important; left: 0 !important;
+      width: 100% !important; height: 50% !important;
+      z-index: 0 !important;
+      pointer-events: none !important;
     }
     .bg-top img {
-      width: 100%; height: 100%;
-      object-fit: cover;
+      width: 100% !important; height: 100% !important;
+      object-fit: cover !important;
     }
     .bg-bottom {
-      position: fixed;
-      bottom: 0; left: 0;
-      width: 100%; height: 50%;
-      z-index: 0;
-      pointer-events: none;
+      position: fixed !important;
+      bottom: 0 !important; left: 0 !important;
+      width: 100% !important; height: 50% !important;
+      z-index: 0 !important;
+      pointer-events: none !important;
     }
     .bg-bottom img {
-      width: 100%; height: 100%;
-      object-fit: cover;
+      width: 100% !important; height: 100% !important;
+      object-fit: cover !important;
     }
-
-    /* ─────────────────────────────────────────────
-       DESKTOP LAYOUT — sidebar on left
-    ───────────────────────────────────────────── */
+ 
+    /* ── DESKTOP SIDEBAR ── */
     .sidebar {
-      position: fixed;
-      top: 0; left: 0;
-      width: 120px;
-      height: 100vh;
-      background: #3F3FA4;
-      box-shadow: 0 4px 4px rgba(0,0,0,0.25);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      z-index: 10;
-      padding-top: 15px;
+      position: fixed !important;
+      top: 0 !important; left: 0 !important;
+      width: 120px !important;
+      height: 100vh !important;
+      background: #3F3FA4 !important;
+      box-shadow: 0 4px 4px rgba(0,0,0,0.25) !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      z-index: 10 !important;
+      padding-top: 15px !important;
     }
-
+ 
     .sidebar-logo {
-      width: 92px;
-      height: 92px;
-      object-fit: contain;
+      width: 92px !important;
+      height: 92px !important;
+      object-fit: contain !important;
     }
-
+ 
     .sidebar-title {
-      font-size: 8px;
-      font-weight: 700;
-      color: #fff;
-      text-align: center;
-      line-height: 12px;
-      margin-top: 8px;
-      padding: 0 5px;
+      font-size: 8px !important;
+      font-weight: 700 !important;
+      color: #fff !important;
+      text-align: center !important;
+      line-height: 12px !important;
+      margin-top: 8px !important;
+      padding: 0 5px !important;
     }
-
+ 
     .nav-btn {
-      width: 100%;
-      height: 90px;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      color: #fff;
-      transition: background 0.15s;
-      margin-top: 2px;
+      width: 100% !important;
+      height: 90px !important;
+      border: none !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      cursor: pointer !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 6px !important;
+      color: #fff !important;
+      transition: background 0.15s !important;
+      margin-top: 2px !important;
+      outline: none !important;
+      -webkit-appearance: none !important;
+      appearance: none !important;
     }
     .nav-btn:hover,
     .nav-btn.active {
-      background: #323289;
+      background: #323289 !important;
     }
     .nav-btn svg {
-      width: 24px;
-      height: 24px;
-      stroke: #fff;
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+      width: 24px !important;
+      height: 24px !important;
+      stroke: #fff !important;
+      fill: none !important;
+      stroke-width: 2 !important;
+      stroke-linecap: round !important;
+      stroke-linejoin: round !important;
     }
     .nav-btn span {
-      font-size: 11px;
-      font-weight: 800;
-      color: #fff;
-      text-shadow: 0 1.8px 5.5px rgba(0,0,0,0.25);
+      font-size: 11px !important;
+      font-weight: 800 !important;
+      color: #fff !important;
+      text-shadow: 0 1.8px 5.5px rgba(0,0,0,0.25) !important;
     }
-
-    /* ─────────────────────────────────────────────
-       MAIN CONTENT AREA
-    ───────────────────────────────────────────── */
+ 
+    /* ── MAIN CONTENT AREA ── */
     .page {
-      margin-left: 120px;
-      min-height: 100vh;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 24px;
-      padding: 100px 24px 48px;
-      position: relative;
-      z-index: 2;
+      margin-left: 120px !important;
+      min-height: 100vh !important;
+      display: flex !important;
+      align-items: flex-start !important;
+      justify-content: center !important;
+      flex-wrap: wrap !important;
+      gap: 24px !important;
+      padding: 100px 24px 48px !important;
+      position: relative !important;
+      z-index: 2 !important;
     }
-
-    /* ─────────────────────────────────────────────
-       PROFILE CARD
-    ───────────────────────────────────────────── */
+ 
+    /* Header row (email display) */
+    .page-header {
+      position: fixed !important;
+      top: 25px !important;
+      left: 160px !important;
+      right: 40px !important;
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      z-index: 5 !important;
+      color: #323289 !important;
+      pointer-events: none !important;
+    }
+    .page-header h2 {
+      font-size: 28px !important;
+      font-weight: 800 !important;
+    }
+    .page-header p {
+      font-size: 15px !important;
+      font-weight: 700 !important;
+    }
+ 
+    /* ── PROFILE CARD ── */
     .profile-card {
-      width: 256px;
-      flex-shrink: 0;
-      background: #fff;
-      border-radius: 30px;
-      box-shadow: 0 5px 0 #3f3fa4;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 0 0 28px;
-      overflow: hidden;
-      margin-top: 73px; /* pushes down to align with profile icon overlap */
+      width: 256px !important;
+      flex-shrink: 0 !important;
+      background: #fff !important;
+      border-radius: 30px !important;
+      box-shadow: 0 5px 0 #3f3fa4 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      padding: 0 0 28px !important;
+      overflow: hidden !important;
+      margin-top: 73px !important;
+      align-self: flex-start !important;
     }
-
+ 
     .profile-avatar-bar {
-      width: 100%;
-      background: #3F3FA4;
-      display: flex;
-      justify-content: center;
-      padding: 0 0 0;
+      width: 100% !important;
+      background: #3F3FA4 !important;
+      display: flex !important;
+      justify-content: center !important;
     }
 
-    .profile-icon {
-      width: 147px;
-      height: 146px;
-      margin-top: -73px;
-      display: block;
-      object-fit: contain;
-    }
-
+ 
     .profile-name {
-      font-size: 26px;
-      font-weight: 800;
-      color: #323289;
-      text-align: center;
-      margin-top: 12px;
-      line-height: 1.3;
-      padding: 0 12px;
+      font-size: 20px !important;
+      font-weight: 800 !important;
+      color: #323289 !important;
+      text-align: center !important;
+      margin-top: 12px !important;
+      line-height: 1.3 !important;
+      padding: 0 12px !important;
+      word-break: break-word !important;
     }
-
+ 
     .profile-fields {
-      width: 100%;
-      padding: 8px 20px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+      width: 100% !important;
+      padding: 8px 20px 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 4px !important;
     }
-
+ 
     .field-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 14px;
-      color: #323289;
-      border-bottom: 0.5px solid #e0e0f0;
-      padding: 6px 0;
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      font-size: 14px !important;
+      color: #323289 !important;
+      border-bottom: 0.5px solid #e0e0f0 !important;
+      padding: 6px 0 !important;
     }
-    .field-row:last-child { border-bottom: none; }
+    .field-row:last-child { border-bottom: none !important; };
     .field-label {
-      font-weight: 800;
-      color: #6666bb;
-      min-width: 60px;
+      font-weight: 800 !important;
+      color: #6666bb !important;
+      min-width: 60px !important;
+      flex-shrink: 0 !important;
     }
     .field-value {
-      text-align: right;
-      color: #323289;
+      text-align: right !important;
+      color: #323289 !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      white-space: nowrap !important;
+      max-width: 140px !important;
     }
-
+ 
     .status-badge {
-      margin-top: 20px;
-      background: #797980;
-      border-radius: 12px;
-      padding: 8px 32px;
-      color: #fff;
-      font-size: 16px;
-      font-weight: 700;
+      margin-top: 20px !important;
+      border-radius: 12px !important;
+      padding: 8px 32px !important;
+      color: #fff !important;
+      font-size: 14px !important;
+      font-weight: 700 !important;
+      background: #797980 !important;
     }
-
-    /* ─────────────────────────────────────────────
-       WIDGET CARD
-    ───────────────────────────────────────────── */
+ 
+    /* ── WIDGET CARD ── */
     .widget-card {
-      flex: 1 1 300px;
-      max-width: 760px;
-      min-height: 438px;
-      background: #fff;
-      border-radius: 30px;
-      box-shadow: 0 5px 0 #3f3fa4;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px;
-      text-align: center;
-      font-size: 32px;
-      font-weight: 800;
-      color: #323289;
-      line-height: 1.35;
+      flex: 1 1 300px !important;
+      max-width: 760px !important;
+      min-height: 438px !important;
+      background: #fff !important;
+      border-radius: 30px !important;
+      box-shadow: 0 5px 0 #3f3fa4 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 40px !important;
+      text-align: center !important;
+      font-size: 32px !important;
+      font-weight: 800 !important;
+      color: #323289 !important;
+      line-height: 1.35 !important;
+      align-self: flex-start !important;
+      margin-top: 73px !important;
     }
-
-    /* ─────────────────────────────────────────────
-       MOBILE — bottom bar, no sidebar
-    ───────────────────────────────────────────── */
+ 
+    /* ── MOBILE TOP BAR ── */
     .top-bar {
-      display: none;
+      display: none !important;
     }
-
+ 
+    /* ── MOBILE BOTTOM BAR ── */
     .bottom-bar {
-      display: none;
+      display: none !important;
     }
-
-    /* ─────────────────────────────────────────────
-       RESPONSIVE BREAKPOINT
-    ───────────────────────────────────────────── */
+ 
+    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      /* hide desktop sidebar */
-      .sidebar { display: none; }
-
-      /* show mobile top bar */
+      .sidebar { display: none !important; }
+      .page-header { display: none; }
+ 
       .top-bar {
-        display: flex;
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        background: #3F3FA4;
-        align-items: center;
-        gap: 12px;
-        padding: 10px 16px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        display: flex !important;
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 10 !important;
+        background: #3F3FA4 !important;
+        align-items: center !important;
+        gap: 12px !important;
+        padding: 10px 16px !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
       }
       .top-bar img {
-        width: 40px;
-        height: 40px;
-        object-fit: contain;
+        width: 40px !important;
+        height: 40px !important;
+        object-fit: contain !important;
       }
       .top-bar-title {
-        font-size: 13px;
-        font-weight: 800;
-        color: #fff;
-        line-height: 1.3;
+        font-size: 13px !important;
+        font-weight: 800 !important;
+        color: #fff !important;
+        line-height: 1.3 !important;
       }
-
-      /* show mobile bottom nav */
+      .top-bar-email {
+        margin-left: auto !important;
+        font-size: 11px !important;
+        font-weight: 700 !important;
+        color: rgba(255,255,255,0.8) !important;
+        text-align: right !important;
+        max-width: 140px !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+      }
+ 
       .bottom-bar {
-        display: flex;
-        position: fixed;
-        bottom: 0; left: 0;
-        width: 100%;
-        height: 60px;
-        background: #3F3FA4;
-        box-shadow: 0 -2px 10px rgba(0,0,0,0.25);
-        z-index: 20;
+        display: flex !important;
+        position: fixed !important;
+        bottom: 0 !important; left: 0 !important;
+        width: 100% !important;
+        height: 60px !important;
+        background: #3F3FA4 !important;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.25) !important;
+        z-index: 20 !important;
       }
       .bottom-bar .nav-btn {
-        height: 100%;
-        margin-top: 0;
-        flex: 1;
+        height: 100% !important;
+        margin-top: 0 !important;
+        flex: 1 !important;
+        border-radius: 0 !important;
       }
       .bottom-bar .nav-btn svg {
-        width: 22px;
-        height: 22px;
+        width: 22px !important;
+        height: 22px !important;
       }
       .bottom-bar .nav-btn span {
-        font-size: 10px;
+        font-size: 10px !important;
       }
-
-      /* reflow main content */
+ 
       .page {
-        margin-left: 0;
-        padding: 20px 16px 80px;
-        flex-direction: column;
-        align-items: center;
-        gap: 16px;
+        margin-left: 0 !important;
+        padding: 20px 16px 80px !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 16px !important;
       }
-
-      /* profile card adjustments */
+ 
       .profile-card {
-        width: 100%;
-        max-width: 420px;
-        margin-top: 0;
-        border-radius: 24px;
+        width: 100% !important;
+        max-width: 420px !important;
+        margin-top: 0 !important;
+        border-radius: 24px !important;
       }
       .profile-avatar-bar {
-        padding: 20px 0 0;
-        background: #3F3FA4;
+        padding: 25px 0 0 !important;
       }
       .profile-icon {
-        width: 90px;
-        height: 90px;
-        margin-top: 0;
-        border-radius: 50%;
-        background: #fff;
-        object-fit: cover;
+        width: 90px !important;
+        height: 90px !important;
+        margin-top: 0 !important;
+        border-radius: 50% !important;
+        background: #fff !important;
+        object-fit: cover !important;
       }
-
       .profile-name {
-        font-size: 22px;
+        font-size: 20px !important;
       }
-
-      /* widget card adjustments */
+ 
       .widget-card {
-        width: 100%;
-        max-width: 420px;
-        min-height: 200px;
-        font-size: 22px;
-        border-radius: 24px;
-        padding: 32px 24px;
+        width: 100% !important;
+        max-width: 420px !important;
+        min-height: 200px !important;
+        font-size: 22px !important;
+        border-radius: 24px !important;
+        padding: 32px 24px !important;
+        margin-top: 0 !important;
       }
     }
-
+ 
     @media (max-width: 480px) {
       .widget-card {
-        font-size: 18px;
-        line-height: 1.4;
-      }
-    }
-
-    /* desktop alignment: align profile card bottom with widget card */
-    @media (min-width: 769px) {
-      .profile-card {
-        align-self: flex-start;
-      }
-      .widget-card {
-        align-self: flex-start;
-        margin-top: 73px;
+        font-size: 18px !important;
+        line-height: 1.4 !important;
       }
     }
   </style>
 </head>
 <body>
+
+       
 
   <!-- Background layers -->
   <div class="bg-top">
@@ -376,86 +394,141 @@
   <div class="bg-bottom">
     <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/dashboard/bottom.png?raw=true" alt="" />
   </div>
-
+ 
   <!-- ── DESKTOP SIDEBAR ── -->
   <aside class="sidebar">
     <img class="sidebar-logo"
       src="https://github.com/caatz38/pdc-gassin/blob/main/assets/pdc%20logo.avif?raw=true"
       alt="PDC Logo" />
     <p class="sidebar-title">Pradita Dirgantara<br />Competition 2026</p>
-
-    <button class="nav-btn active" aria-label="Dashboard">
+ 
+    <button class="nav-btn active" aria-label="Home" onclick="window.location.href='/dashboard'">
       <svg viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-      <span>Dashboard</span>
+      <span>Home</span>
     </button>
-
-    <button class="nav-btn" aria-label="Profile">
+ 
+    <button class="nav-btn" aria-label="Profile" onclick="window.location.href='/profile'">
       <svg viewBox="0 0 24 24"><path d="M11.5 15H7a4 4 0 0 0-4 4v2"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="7" r="4"/></svg>
       <span>Profile</span>
     </button>
-
-    <button class="nav-btn" aria-label="Logout">
+ 
+    <button class="nav-btn" aria-label="Logout" id="logoutBtn">
       <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
       <span>Logout</span>
     </button>
   </aside>
-
+ 
   <!-- ── MOBILE TOP BAR ── -->
   <header class="top-bar">
     <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/pdc%20logo.avif?raw=true" alt="PDC Logo" />
     <div class="top-bar-title">Pradita Dirgantara<br/>Competition 2026</div>
+    <div class="top-bar-email" id="userEmailMobile">Checking session...</div>
   </header>
-
+ 
+  <!-- ── PAGE HEADER (desktop) ── -->
+  <div class="page-header">
+    <h2>Dashboard</h2>
+    <p>Logged in as: <span id="userEmail">Checking session...</span></p>
+  </div>
+ 
   <!-- ── MAIN CONTENT ── -->
   <main class="page">
+ 
     <section class="profile-card">
-      <div class="profile-avatar-bar">
-        <img class="profile-icon"
-          src="https://github.com/caatz38/pdc-gassin/blob/main/assets/dashboard/profile%20icon.png?raw=true"
-          alt="Profile Icon" />
-      </div>
-      <h2 class="profile-name">name</h2>
+      <h2 class="profile-name" id="displayFullName">Loading profile...</h2>
       <div class="profile-fields">
         <div class="field-row">
           <span class="field-label">School</span>
-          <span class="field-value">school</span>
+          <span class="field-value" id="displaySchool">Loading...</span>
         </div>
         <div class="field-row">
           <span class="field-label">NISN</span>
-          <span class="field-value">nisn</span>
+          <span class="field-value" id="displayNisn">Loading...</span>
         </div>
         <div class="field-row">
           <span class="field-label">Phone</span>
-          <span class="field-value">phone number</span>
+          <span class="field-value" id="displayPhone">Loading...</span>
         </div>
         <div class="field-row">
           <span class="field-label">Grade</span>
-          <span class="field-value">grade</span>
+          <span class="field-value" id="displayGrade">Loading...</span>
         </div>
       </div>
-      <div class="status-badge">status</div>
+      <div class="status-badge" id="displayStatus">Checking...</div>
     </section>
-
+ 
     <div class="widget-card">
-      Please complete your profile to register a competition!
+      <div id="widgetMainText">Please complete your profile to register a competition!</div>
     </div>
+ 
   </main>
-
+ 
   <!-- ── MOBILE BOTTOM BAR ── -->
   <nav class="bottom-bar">
-    <button class="nav-btn active" aria-label="Dashboard">
+    <button class="nav-btn active" aria-label="Home" onclick="window.location.href='/dashboard'">
       <svg viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-      <span>Dashboard</span>
+      <span>Home</span>
     </button>
-    <button class="nav-btn" aria-label="Profile">
+    <button class="nav-btn" aria-label="Profile" onclick="window.location.href='/profile'">
       <svg viewBox="0 0 24 24"><path d="M11.5 15H7a4 4 0 0 0-4 4v2"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="7" r="4"/></svg>
       <span>Profile</span>
     </button>
-    <button class="nav-btn" aria-label="Logout">
+    <button class="nav-btn" aria-label="Logout" id="logoutBtnMobile">
       <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
       <span>Logout</span>
     </button>
   </nav>
-
+ 
+  <!-- ── YOUR EXISTING FIREBASE / JQUERY LOGIC GOES HERE ── -->
+  <script>
+    // Sync email to mobile top bar as well
+    const _origEmailSetter = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'textContent');
+    // Mirror #userEmail → #userEmailMobile whenever it updates
+    const emailEl = document.getElementById('userEmail');
+    const emailMobileEl = document.getElementById('userEmailMobile');
+ 
+    const emailObserver = new MutationObserver(() => {
+      if (emailMobileEl) emailMobileEl.textContent = emailEl.textContent;
+    });
+    if (emailEl) {
+      emailObserver.observe(emailEl, { childList: true, subtree: true, characterData: true });
+    }
+ 
+    // Wire up both logout buttons
+    function handleLogout() {
+      if (typeof firebase !== 'undefined' && firebase.auth) {
+        firebase.auth().signOut().then(() => {
+          window.location.href = '/';
+        }).catch(console.error);
+      }
+    }
+    document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+    document.getElementById('logoutBtnMobile').addEventListener('click', handleLogout);
+ 
+    // ── PASTE YOUR FIREBASE CONFIG & DATA-LOADING LOGIC BELOW ──
+    // e.g.:
+    // const firebaseConfig = { ... };
+    // firebase.initializeApp(firebaseConfig);
+    // const db = firebase.firestore();
+    // const auth = firebase.auth();
+    //
+    // auth.onAuthStateChanged(user => {
+    //   if (!user) { window.location.href = '/login'; return; }
+    //   document.getElementById('userEmail').textContent = user.email;
+    //   db.collection('users').doc(user.uid).get().then(doc => {
+    //     if (doc.exists) {
+    //       const d = doc.data();
+    //       document.getElementById('displayFullName').textContent = d.fullName || '—';
+    //       document.getElementById('displaySchool').textContent   = d.school   || '—';
+    //       document.getElementById('displayNisn').textContent     = d.nisn     || '—';
+    //       document.getElementById('displayPhone').textContent    = d.phone    || '—';
+    //       document.getElementById('displayGrade').textContent    = d.grade    || '—';
+    //       document.getElementById('displayStatus').textContent   = d.status   || 'Pending';
+    //       // update widget text based on profile completeness, etc.
+    //     }
+    //   });
+    // });
+  </script>
+ 
 </body>
 </html>

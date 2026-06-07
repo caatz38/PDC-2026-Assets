@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PDC 2026 — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Nunito, Arial, sans-serif;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #a5c4ff 0%, #4d81e3 100%);
+    }
+
+    a, a:hover, a:visited, a:focus, a:active {
+      color: #323289;
+      text-decoration: none;
+    }
+
+    /* ─────────────────────────────────────────────
+       BACKGROUND LAYERS
+    ───────────────────────────────────────────── */
+    .bg-top {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 50%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .bg-top img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .bg-bottom {
+      position: fixed;
+      bottom: 0; left: 0;
+      width: 100%; height: 50%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .bg-bottom img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    /* ─────────────────────────────────────────────
+       DESKTOP LAYOUT — sidebar on left
+    ───────────────────────────────────────────── */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 120px;
+      height: 100vh;
+      background: #3F3FA4;
+      box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 10;
+      padding-top: 15px;
+    }
+
+    .sidebar-logo {
+      width: 92px;
+      height: 92px;
+      object-fit: contain;
+    }
+
+    .sidebar-title {
+      font-size: 8px;
+      font-weight: 700;
+      color: #fff;
+      text-align: center;
+      line-height: 12px;
+      margin-top: 8px;
+      padding: 0 5px;
+    }
+
+    .nav-btn {
+      width: 100%;
+      height: 90px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: #fff;
+      transition: background 0.15s;
+      margin-top: 2px;
+    }
+    .nav-btn:hover,
+    .nav-btn.active {
+      background: #323289;
+    }
+    .nav-btn svg {
+      width: 24px;
+      height: 24px;
+      stroke: #fff;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .nav-btn span {
+      font-size: 11px;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 1.8px 5.5px rgba(0,0,0,0.25);
+    }
+
+    /* ─────────────────────────────────────────────
+       MAIN CONTENT AREA
+    ───────────────────────────────────────────── */
+    .page {
+      margin-left: 120px;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      padding: 100px 24px 48px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ─────────────────────────────────────────────
+       PROFILE CARD
+    ───────────────────────────────────────────── */
+    .profile-card {
+      width: 256px;
+      flex-shrink: 0;
+      background: #fff;
+      border-radius: 30px;
+      box-shadow: 0 5px 0 #3f3fa4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 0 28px;
+      overflow: hidden;
+      margin-top: 73px; /* pushes down to align with profile icon overlap */
+    }
+
+    .profile-avatar-bar {
+      width: 100%;
+      background: #3F3FA4;
+      display: flex;
+      justify-content: center;
+      padding: 0 0 0;
+    }
+
+    .profile-icon {
+      width: 147px;
+      height: 146px;
+      margin-top: -73px;
+      display: block;
+      object-fit: contain;
+    }
+
+    .profile-name {
+      font-size: 26px;
+      font-weight: 800;
+      color: #323289;
+      text-align: center;
+      margin-top: 12px;
+      line-height: 1.3;
+      padding: 0 12px;
+    }
+
+    .profile-fields {
+      width: 100%;
+      padding: 8px 20px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .field-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      color: #323289;
+      border-bottom: 0.5px solid #e0e0f0;
+      padding: 6px 0;
+    }
+    .field-row:last-child { border-bottom: none; }
+    .field-label {
+      font-weight: 800;
+      color: #6666bb;
+      min-width: 60px;
+    }
+    .field-value {
+      text-align: right;
+      color: #323289;
+    }
+
+    .status-badge {
+      margin-top: 20px;
+      background: #797980;
+      border-radius: 12px;
+      padding: 8px 32px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    /* ─────────────────────────────────────────────
+       WIDGET CARD
+    ───────────────────────────────────────────── */
+    .widget-card {
+      flex: 1 1 300px;
+      max-width: 760px;
+      min-height: 438px;
+      background: #fff;
+      border-radius: 30px;
+      box-shadow: 0 5px 0 #3f3fa4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      text-align: center;
+      font-size: 32px;
+      font-weight: 800;
+      color: #323289;
+      line-height: 1.35;
+    }
+
+    /* ─────────────────────────────────────────────
+       MOBILE — bottom bar, no sidebar
+    ───────────────────────────────────────────── */
+    .top-bar {
+      display: none;
+    }
+
+    .bottom-bar {
+      display: none;
+    }
+
+    /* ─────────────────────────────────────────────
+       RESPONSIVE BREAKPOINT
+    ───────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      /* hide desktop sidebar */
+      .sidebar { display: none; }
+
+      /* show mobile top bar */
+      .top-bar {
+        display: flex;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: #3F3FA4;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 16px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      }
+      .top-bar img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+      }
+      .top-bar-title {
+        font-size: 13px;
+        font-weight: 800;
+        color: #fff;
+        line-height: 1.3;
+      }
+
+      /* show mobile bottom nav */
+      .bottom-bar {
+        display: flex;
+        position: fixed;
+        bottom: 0; left: 0;
+        width: 100%;
+        height: 60px;
+        background: #3F3FA4;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.25);
+        z-index: 20;
+      }
+      .bottom-bar .nav-btn {
+        height: 100%;
+        margin-top: 0;
+        flex: 1;
+      }
+      .bottom-bar .nav-btn svg {
+        width: 22px;
+        height: 22px;
+      }
+      .bottom-bar .nav-btn span {
+        font-size: 10px;
+      }
+
+      /* reflow main content */
+      .page {
+        margin-left: 0;
+        padding: 20px 16px 80px;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+
+      /* profile card adjustments */
+      .profile-card {
+        width: 100%;
+        max-width: 420px;
+        margin-top: 0;
+        border-radius: 24px;
+      }
+      .profile-avatar-bar {
+        padding: 20px 0 0;
+        background: #3F3FA4;
+      }
+      .profile-icon {
+        width: 90px;
+        height: 90px;
+        margin-top: 0;
+        border-radius: 50%;
+        background: #fff;
+        object-fit: cover;
+      }
+
+      .profile-name {
+        font-size: 22px;
+      }
+
+      /* widget card adjustments */
+      .widget-card {
+        width: 100%;
+        max-width: 420px;
+        min-height: 200px;
+        font-size: 22px;
+        border-radius: 24px;
+        padding: 32px 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .widget-card {
+        font-size: 18px;
+        line-height: 1.4;
+      }
+    }
+
+    /* desktop alignment: align profile card bottom with widget card */
+    @media (min-width: 769px) {
+      .profile-card {
+        align-self: flex-start;
+      }
+      .widget-card {
+        align-self: flex-start;
+        margin-top: 73px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background layers -->
+  <div class="bg-top">
+    <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/dashboard/Vector.png?raw=true" alt="" />
+  </div>
+  <div class="bg-bottom">
+    <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/dashboard/bottom.png?raw=true" alt="" />
+  </div>
+
+  <!-- ── DESKTOP SIDEBAR ── -->
+  <aside class="sidebar">
+    <img class="sidebar-logo"
+      src="https://github.com/caatz38/pdc-gassin/blob/main/assets/pdc%20logo.avif?raw=true"
+      alt="PDC Logo" />
+    <p class="sidebar-title">Pradita Dirgantara<br />Competition 2026</p>
+
+    <button class="nav-btn active" aria-label="Dashboard">
+      <svg viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      <span>Dashboard</span>
+    </button>
+
+    <button class="nav-btn" aria-label="Profile">
+      <svg viewBox="0 0 24 24"><path d="M11.5 15H7a4 4 0 0 0-4 4v2"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="7" r="4"/></svg>
+      <span>Profile</span>
+    </button>
+
+    <button class="nav-btn" aria-label="Logout">
+      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      <span>Logout</span>
+    </button>
+  </aside>
+
+  <!-- ── MOBILE TOP BAR ── -->
+  <header class="top-bar">
+    <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/pdc%20logo.avif?raw=true" alt="PDC Logo" />
+    <div class="top-bar-title">Pradita Dirgantara<br/>Competition 2026</div>
+  </header>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="page">
+    <section class="profile-card">
+      <div class="profile-avatar-bar">
+        <img class="profile-icon"
+          src="https://github.com/caatz38/pdc-gassin/blob/main/assets/dashboard/profile%20icon.png?raw=true"
+          alt="Profile Icon" />
+      </div>
+      <h2 class="profile-name">name</h2>
+      <div class="profile-fields">
+        <div class="field-row">
+          <span class="field-label">School</span>
+          <span class="field-value">school</span>
+        </div>
+        <div class="field-row">
+          <span class="field-label">NISN</span>
+          <span class="field-value">nisn</span>
+        </div>
+        <div class="field-row">
+          <span class="field-label">Phone</span>
+          <span class="field-value">phone number</span>
+        </div>
+        <div class="field-row">
+          <span class="field-label">Grade</span>
+          <span class="field-value">grade</span>
+        </div>
+      </div>
+      <div class="status-badge">status</div>
+    </section>
+
+    <div class="widget-card">
+      Please complete your profile to register a competition!
+    </div>
+  </main>
+
+  <!-- ── MOBILE BOTTOM BAR ── -->
+  <nav class="bottom-bar">
+    <button class="nav-btn active" aria-label="Dashboard">
+      <svg viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      <span>Dashboard</span>
+    </button>
+    <button class="nav-btn" aria-label="Profile">
+      <svg viewBox="0 0 24 24"><path d="M11.5 15H7a4 4 0 0 0-4 4v2"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="7" r="4"/></svg>
+      <span>Profile</span>
+    </button>
+    <button class="nav-btn" aria-label="Logout">
+      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      <span>Logout</span>
+    </button>
+  </nav>
+
+</body>
+</html>

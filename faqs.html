@@ -1,0 +1,730 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+  .pdc-root,
+  .pdc-root * {
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: 'Nunito', Arial, sans-serif !important;
+  }
+
+  .pdc-root a,
+  .pdc-root a:hover,
+  .pdc-root a:focus,
+  .pdc-root a:active,
+  .pdc-root a:visited {
+    font-size: inherit !important;
+    font-family: 'Nunito', Arial, sans-serif !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    line-height: inherit !important;
+    transition: opacity 0.2s !important;
+  }
+
+  .pdc-root a:hover {
+    opacity: 0.8 !important;
+  }
+
+  .pdc-root {
+    width: 100% !important;
+    background: #3f3fa4 !important;
+    overflow-x: hidden !important;
+    padding-top: 63px !important;
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     ANIMATIONS
+     ══════════════════════════════════════════════════════════ */
+
+  @keyframes pdcFadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pdcFadeInScale {
+    from { opacity: 0; transform: scale(0.92); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes pdcFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes pdcSlideInLeft {
+    from { opacity: 0; transform: translateX(-50px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes pdcSlideInRight {
+    from { opacity: 0; transform: translateX(50px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  .pdc-animate { opacity: 0; }
+
+  .pdc-animate.pdc-visible {
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .pdc-animate.pdc-fade-up.pdc-visible    { animation-name: pdcFadeInUp;    animation-duration: 0.8s; }
+  .pdc-animate.pdc-fade-scale.pdc-visible { animation-name: pdcFadeInScale; animation-duration: 0.7s; }
+  .pdc-animate.pdc-fade.pdc-visible       { animation-name: pdcFadeIn;      animation-duration: 0.6s; }
+  .pdc-animate.pdc-slide-left.pdc-visible  { animation-name: pdcSlideInLeft;  animation-duration: 0.8s; }
+  .pdc-animate.pdc-slide-right.pdc-visible { animation-name: pdcSlideInRight; animation-duration: 0.8s; }
+
+  .pdc-animate.pdc-delay-1 { animation-delay: 0.1s !important; }
+  .pdc-animate.pdc-delay-2 { animation-delay: 0.2s !important; }
+  .pdc-animate.pdc-delay-3 { animation-delay: 0.3s !important; }
+  .pdc-animate.pdc-delay-4 { animation-delay: 0.4s !important; }
+  .pdc-animate.pdc-delay-5 { animation-delay: 0.5s !important; }
+
+  .pdc-hero-animate {
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .pdc-hero-animate.pdc-hero-asset { animation: pdcFadeInScale 1s 0.2s forwards; }
+  .pdc-hero-animate.pdc-hero-desc  { animation: pdcFadeInUp 0.9s 0.5s forwards; }
+  .pdc-hero-animate.pdc-hero-pill  { animation: pdcFadeInUp 0.8s 0.8s forwards; }
+
+  /* ══════════════════════════════════════════════════════════
+     NAVBAR
+     ══════════════════════════════════════════════════════════ */
+
+  .pdc-nav {
+    width: 100% !important;
+    height: 71px !important;
+    background: #000 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 24px !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 100 !important;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  }
+
+  .pdc-nav.pdc-scrolled {
+    top: 15px !important;
+    width: 90% !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 30px !important;
+    border-radius: 50px !important;
+    background: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .pdc-nav-links { display: flex !important; align-items: center !important; gap: 34px !important; list-style: none !important; padding-left: 12px !important; }
+  .pdc-nav-links li { list-style: none !important; }
+  .pdc-nav-links a { color: #fff !important; text-decoration: none !important; font-size: 18px !important; font-weight: 600 !important; letter-spacing: -0.02em !important; }
+  .pdc-nav-links a:hover { opacity: 0.8 !important; }
+  .pdc-nav-links a.active { text-decoration: underline !important; }
+
+  .pdc-burger { display: none !important; background: none !important; border: none !important; cursor: pointer !important; color: #fff !important; padding: 0px !important; }
+
+  .pdc-drawer-overlay { display: none !important; position: fixed !important; inset: 0 !important; background: rgba(0,0,0,0.5) !important; z-index: 200 !important; }
+  .pdc-drawer { position: fixed !important; top: 0 !important; left: -280px !important; width: 260px !important; height: 100vh !important; background: #111 !important; z-index: 201 !important; display: flex !important; flex-direction: column !important; padding: 20px !important; gap: 4px !important; transition: left 0.3s ease !important; }
+  .pdc-drawer.pdc-open { left: 0 !important; }
+  .pdc-drawer-close { background: none !important; border: none !important; cursor: pointer !important; color: #fff !important; align-self: flex-end !important; padding: 4px !important; margin-bottom: 16px !important; }
+  .pdc-drawer a { color: #fff !important; font-size: 18px !important; font-weight: 600 !important; text-decoration: none !important; padding: 12px 8px !important; border-bottom: 1px solid rgba(255,255,255,0.1) !important; display: block !important; }
+
+  .pdc-register-btn {
+    position: relative !important;
+    height: 41px !important;
+    width: 127px !important;
+    cursor: pointer !important;
+    background: rgba(255,255,255,0.02) !important;
+    border: 1px solid rgba(255,255,255,0.3) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 2px 4px rgba(255,255,255,0.25) inset !important;
+    backdrop-filter: blur(10px) !important;
+    color: #fff !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em !important;
+    white-space: nowrap !important;
+    transition: background 0.2s !important;
+  }
+
+  .pdc-register-btn:hover { background: rgba(255,255,255,0.08) !important; }
+
+  /* ══════════════════════════════════════════════════════════
+     HERO — same structure as .pdc-math-hero in Logic Olympiad
+     ══════════════════════════════════════════════════════════ */
+
+  .pdc-faq-hero {
+    width: 100% !important;
+    min-height: 100vh !important;
+    position: relative !important;
+    overflow: hidden !important;
+    background: #3f3fa4 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
+  /* The bg image: identical CSS to .pdc-math-hero-bg */
+  .pdc-faq-hero-bg {
+    position: absolute !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    z-index: 0 !important;
+  }
+
+  /* Bottom fade: identical to .pdc-math-hero::after */
+  .pdc-faq-hero::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 300px !important;
+    background: linear-gradient(0deg, #3f3fa4 0%, rgba(63,63,164,0) 100%) !important;
+    z-index: 1 !important;
+  }
+
+  /* Hero content wrapper: identical to .pdc-math-hero-content */
+  .pdc-faq-hero-content {
+    position: relative !important;
+    z-index: 2 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+    padding-top: 170px !important;
+    padding-bottom: 60px !important;
+  }
+
+  .pdc-faq-title-img {
+    width: 100% !important;
+    max-width: 400px !important;
+    object-fit: contain !important;
+    margin-bottom: 10px !important;
+  }
+
+  .pdc-faq-subtitle {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    color: #fff !important;
+    opacity: 0.9 !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     MAIN — same structure as .pdc-math-main in Logic Olympiad
+     ══════════════════════════════════════════════════════════ */
+
+  .pdc-faq-main {
+    width: 100% !important;
+    background: #3f3fa4 !important;
+    padding: 0px 20px 120px !important;
+    margin-top: -120px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+  /* ══════════════════════════════════════════════════════════
+     FAQ CONTROLS
+     ══════════════════════════════════════════════════════════ */
+
+  .pdc-faq-controls {
+    max-width: 875px !important;
+    width: 100% !important;
+    margin: 0 auto 30px !important;
+    text-align: center !important;
+  }
+
+  .pdc-search-wrapper { margin-bottom: 20px !important; }
+
+  .pdc-search-input {
+    width: 100% !important;
+    padding: 16px 30px !important;
+    border-radius: 40px !important;
+    border: none !important;
+    background: url('https://github.com/caatz38/pdc-gassin/blob/main/assets/faqs/Rectangle%2048.webp?raw=true') center/cover !important;
+    color: #FFFFFF !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    outline: none !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3) !important;
+  }
+
+  .pdc-filter-container {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 10px !important;
+  }
+
+  .pdc-filter-pill {
+    padding: 8px 20px !important;
+    border-radius: 25px !important;
+    background: url('https://github.com/caatz38/pdc-gassin/blob/main/assets/faqs/group%2019.webp?raw=true') center/cover !important;
+    color: #FFFADF !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    border: 1px solid transparent !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .pdc-filter-pill:hover, .pdc-filter-pill.active {
+    transform: scale(1.05) !important;
+    box-shadow: 0 0 15px rgba(59, 153, 255, 0.4) !important;
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     FAQ CARD
+     ══════════════════════════════════════════════════════════ */
+
+  .pdc-faq-glass-card {
+  max-width: 875px !important;
+  width: 100% !important;
+  height: 600px !important;
+  background: url('https://github.com/caatz38/pdc-gassin/blob/main/assets/faqs/Questions-bg.webp?raw=true') center/cover !important;
+  border-radius: 40px !important;
+  padding: 40px 30px !important;
+  overflow-y: auto !important;
+  backdrop-filter: blur(10px) !important;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4) !important;
+}
+
+  .pdc-faq-glass-card::-webkit-scrollbar { width: 6px !important; }
+  .pdc-faq-glass-card::-webkit-scrollbar-track { background: rgba(0,0,0,0.2) !important; border-radius: 10px !important; }
+  .pdc-faq-glass-card::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3) !important; border-radius: 10px !important; }
+
+  .pdc-faq-item { margin-bottom: 12px !important; }
+
+  .pdc-faq-header {
+    width: 100% !important;
+    padding: 20px 30px !important;
+    background: url('https://github.com/caatz38/pdc-gassin/blob/main/assets/faqs/frame-item.webp?raw=true') center/cover !important;
+    border-radius: 18px !important;
+    cursor: pointer !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    font-weight: 700 !important;
+    font-size: 18px !important;
+    color: #FFFADF !important;
+    text-shadow: 0 0 10px rgba(255, 245, 190, 0.5) !important;
+    border: none !important;
+    text-align: left !important;
+  }
+
+  .pdc-faq-body {
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: all 0.3s ease !important;
+    background: rgba(255,255,255,0.02) !important;
+    border-radius: 0 0 18px 18px !important;
+    padding: 0 30px !important;
+    color: #fff !important;
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    letter-spacing: -0.02em !important;
+    line-height: 145% !important;
+  }
+
+  .pdc-faq-item.active .pdc-faq-body {
+    max-height: 300px !important;
+    padding: 20px 30px !important;
+    border: 1px solid rgba(255,255,255,0.05) !important;
+    border-top: none !important;
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════════════════════════ */
+
+  .pdc-footer {
+    width: 100% !important;
+    background: url('https://github.com/caatz38/pdc-gassin/blob/main/assets/footer.avif?raw=true') center top / cover no-repeat !important;
+    padding: 190px 19px 40px !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+    gap: 20px !important;
+    color: #fff !important;
+  }
+
+  .pdc-footer-left {
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    min-width: 220px !important;
+    max-width: 305px !important;
+    flex: 1 !important;
+    padding: 14px 0 100px !important;
+    position: relative !important;
+  }
+
+  .pdc-footer-logo { width: 220px !important; object-fit: cover !important; }
+
+  .pdc-footer-brand {
+    position: absolute !important;
+    bottom: 38px !important;
+    right: -117px !important;
+    width: 358px !important;
+  }
+
+  .pdc-footer-brand h3 {
+    color: #fff !important;
+    font-size: 20px !important;
+    font-weight: 800 !important;
+    line-height: 32px !important;
+    text-shadow: 0px 2px 6px rgba(0,0,0,0.25) !important;
+    margin: 0 !important;
+  }
+
+  .pdc-footer-brand p {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    line-height: 32px !important;
+    text-shadow: 0px 2px 6px rgba(0,0,0,0.25) !important;
+  }
+
+  .pdc-footer-right {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    gap: 15px !important;
+    min-width: 310px !important;
+    max-width: 625px !important;
+  }
+
+  .pdc-footer-nav-row {
+    display: flex !important;
+    align-items: flex-start !important;
+    flex-wrap: wrap !important;
+    gap: 0 !important;
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .pdc-footer-nav-col {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    min-width: 126px !important;
+    max-width: 126px !important;
+  }
+
+  .pdc-footer-nav-col h3 { color: #fff !important; font-size: 25px !important; font-weight: 700 !important; text-shadow: 0px 2px 7px rgba(0,0,0,0.2) !important; margin: 0 !important; }
+  .pdc-footer-nav-col a  { color: #fff !important; text-decoration: none !important; font-size: 17px !important; font-weight: 600 !important; text-shadow: 0px 2px 7px rgba(0,0,0,0.2) !important; padding-bottom: 6px !important; display: block !important; }
+
+  .pdc-footer-comp-col {
+    color: #fff !important;
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px !important;
+    min-width: 289px !important;
+    padding: 0 3px !important;
+  }
+
+  .pdc-footer-comp-col h3 { color: #fff !important; font-size: 25px !important; font-weight: 700 !important; text-shadow: 0px 2px 7px rgba(0,0,0,0.2) !important; width: 311px !important; margin: 0 !important; }
+
+  .pdc-footer-comp-links { display: flex !important; gap: 8px !important; width: 311px !important; }
+  .pdc-footer-comp-links div { flex: 1 !important; display: flex !important; flex-direction: column !important; gap: 12px !important; }
+  .pdc-footer-comp-links a { color: #fff !important; text-decoration: none !important; font-size: 17px !important; font-weight: 600 !important; text-shadow: 0px 2px 7px rgba(0,0,0,0.2) !important; }
+
+  .pdc-footer-socials {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    width: 100% !important;
+    max-width: 379px !important;
+    flex-wrap: wrap !important;
+    padding-left: 20px !important;
+  }
+
+  .pdc-footer-socials img { width: 42px !important; height: 42px !important; object-fit: contain !important; cursor: pointer !important; transition: transform 0.2s !important; }
+  .pdc-footer-socials img:hover { transform: scale(1.1) !important; }
+
+  .pdc-root a,
+.pdc-root a:hover,
+.pdc-root a:focus,
+.pdc-root a:active,
+.pdc-root a:visited {
+  font-size: inherit !important;
+  font-family: 'Nunito', Arial, sans-serif !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  line-height: inherit !important;
+  transition: opacity 0.2s !important;
+}
+
+.pdc-root a:hover {
+  opacity: 0.8 !important;
+}
+
+  /* ══════════════════════════════════════════════════════════
+     RESPONSIVE
+     ══════════════════════════════════════════════════════════ */
+
+  @media (max-width: 675px) {
+    .pdc-nav-links { display: none !important; }
+    .pdc-burger { display: flex !important; align-items: center !important; justify-content: center !important; }
+
+    .pdc-footer { flex-direction: column !important; align-items: center !important; text-align: center !important; }
+    .pdc-footer-left { flex-direction: column !important; align-items: center !important; padding: 0 !important; }
+    .pdc-footer-brand { position: static !important; width: 120% !important; margin-top: px !important; text-align: center !important; }
+    .pdc-footer-right { width: 100% !important; min-width: unset !important; align-items: center !important; }
+    .pdc-footer-nav-row { flex-direction: column !important; align-items: center !important; gap: 30px !important; }
+    .pdc-footer-nav-col, .pdc-footer-comp-col { min-width: unset !important; max-width: 100% !important; text-align: left !important; }
+    .pdc-footer-comp-col h3, .pdc-footer-comp-links { width: 100% !important; }
+    .pdc-footer-socials { justify-content: center !important; padding-left: 0 !important; }
+
+    .pdc-faq-glass-card { padding: 20px 15px !important; }
+    .pdc-faq-header { font-size: 16px !important; padding: 15px 20px !important; }
+    .pdc-faq-title-img { max-width: 240px !important; }
+  }
+
+  @media (max-width: 450px) {
+    .pdc-faq-subtitle { font-size: 20px !important; }
+  }
+</style>
+
+<div class="pdc-root">
+
+  <!-- ═══ NAVBAR ═══ -->
+  <nav class="pdc-nav">
+    <button class="pdc-burger" id="pdcBurger" aria-label="Open menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+    </button>
+    <ul class="pdc-nav-links">
+      <li><a href="/home">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/competitions">Competitions</a></li>
+      <li><a href="/faqs" class="active">FAQs</a></li>
+    </ul>
+    <a href="/signup"><button class="pdc-register-btn">Register Now!</button></a>
+  </nav>
+
+  <!-- ═══ MOBILE DRAWER ═══ -->
+  <div class="pdc-drawer-overlay" id="pdcOverlay"></div>
+  <div class="pdc-drawer" id="pdcDrawer">
+    <button class="pdc-drawer-close" id="pdcClose" aria-label="Close menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+    <a href="/home">Home</a>
+    <a href="/about">About</a>
+    <a href="/competitions">Competitions</a>
+    <a href="/faqs">FAQs</a>
+  </div>
+
+  <!-- ═══ HERO — same structure as .pdc-math-hero ═══ -->
+  <section class="pdc-faq-hero">
+    <img class="pdc-faq-hero-bg" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/bege%20ungu.avif?raw=true" alt="" />
+
+    <div class="pdc-faq-hero-content">
+      <img
+        class="pdc-faq-title-img pdc-hero-animate pdc-hero-asset"
+        src="https://github.com/caatz38/pdc-gassin/blob/main/assets/faqs/faq%20text.webp?raw=true"
+        alt="FAQs"
+      />
+      <p class="pdc-faq-subtitle pdc-hero-animate pdc-hero-desc">Frequently Asked Questions</p>
+    </div>
+  </section>
+
+  <!-- ═══ MAIN — same structure as .pdc-math-main ═══ -->
+  <main class="pdc-faq-main">
+
+    <!-- Search & Filters -->
+    <div class="pdc-faq-controls pdc-animate pdc-fade-up">
+      <div class="pdc-search-wrapper">
+        <input type="text" class="pdc-search-input" placeholder="Cari Pertanyaan..." id="finalSearch">
+      </div>
+      <div class="pdc-filter-container">
+        <button class="pdc-filter-pill active" data-cat="all">Semua</button>
+        <button class="pdc-filter-pill" data-cat="umum">Umum</button>
+        <button class="pdc-filter-pill" data-cat="math">Math</button>
+        <button class="pdc-filter-pill" data-cat="logic">Logic</button>
+        <button class="pdc-filter-pill" data-cat="science">Science</button>
+        <button class="pdc-filter-pill" data-cat="writing">Writing</button>
+        <button class="pdc-filter-pill" data-cat="basket">Basket</button>
+        <button class="pdc-filter-pill" data-cat="speech">Speech</button>
+        <button class="pdc-filter-pill" data-cat="vocal">Solo Vocal</button>
+      </div>
+    </div>
+
+    <!-- FAQ List -->
+    <div class="pdc-faq-glass-card pdc-animate pdc-fade-scale pdc-delay-1" id="finalFaqList">
+      <!-- Injected via JS -->
+    </div>
+
+  </main>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="pdc-footer">
+    <div class="pdc-footer-left pdc-animate pdc-slide-left">
+      <img class="pdc-footer-logo" src="https://github.com/caatz38/pdc-gassin/blob/main/assets/pdc%20logo.avif?raw=true" alt="PDC Logo" />
+      <div class="pdc-footer-brand">
+        <h3>Pradita Dirgantara Competition 2026</h3>
+        <p>© IT Administration &amp; Creative Publication 2026</p>
+      </div>
+    </div>
+
+    <div class="pdc-footer-right pdc-animate pdc-slide-right">
+      <div class="pdc-footer-nav-row">
+        <div class="pdc-footer-nav-col">
+          <h3>Navigation</h3>
+          <a href="/home">Home</a>
+          <a href="/about">About</a>
+          <a href="/competitions">Competition</a>
+          <a href="/faqs">FAQs</a>
+        </div>
+
+        <div class="pdc-footer-comp-col">
+          <h3>Competitions</h3>
+          <div class="pdc-footer-comp-links">
+            <div>
+              <a href="/math-olympiade">Math Olympiad</a>
+              <a href="/logic-olympiade">Logic Olympiad</a>
+              <a href="/science-olympiade">Science Olympiad</a>
+              <a href="/basket">Basket</a>
+            </div>
+            <div>
+              <a href="/sw">Scientific Writing</a>
+              <a href="/solo-vocal">Solo Vocal</a>
+              <a href="/speechs">Speech</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pdc-footer-socials">
+        <a href="https://praditadirgantara.sch.id/id/" target="_blank">
+          <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/web.avif?raw=true" alt="Website" />
+        </a>
+        <a href="https://www.tiktok.com/@smapraditadirgantara" target="_blank">
+          <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/tiktk.avif?raw=true" alt="TikTok" />
+        </a>
+        <a href="https://www.instagram.com/smapraditadirgantara/" target="_blank">
+          <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/instag.avif?raw=true" alt="Instagram" />
+        </a>
+        <a href="https://www.youtube.com/@smapraditadirgantara" target="_blank">
+          <img src="https://github.com/caatz38/pdc-gassin/blob/main/assets/contacs/ytb.avif?raw=true" alt="YouTube" />
+        </a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // ═══ Burger Menu ═══
+  var pdcB = document.getElementById('pdcBurger');
+  var pdcD = document.getElementById('pdcDrawer');
+  var pdcO = document.getElementById('pdcOverlay');
+  var pdcC = document.getElementById('pdcClose');
+  function pdcOpenMenu()  { pdcD.classList.add('pdc-open');    pdcO.style.display = 'block'; }
+  function pdcCloseMenu() { pdcD.classList.remove('pdc-open'); pdcO.style.display = 'none';  }
+  pdcB.addEventListener('click', pdcOpenMenu);
+  pdcC.addEventListener('click', pdcCloseMenu);
+  pdcO.addEventListener('click', pdcCloseMenu);
+
+  // ═══ Floating Navbar on Scroll ═══
+  var nav = document.querySelector('.pdc-nav');
+  window.addEventListener('scroll', function() {
+    nav.classList.toggle('pdc-scrolled', window.scrollY > 50);
+  });
+
+  // ═══ Scroll-triggered Animations ═══
+  (function() {
+    var animatedEls = document.querySelectorAll('.pdc-animate');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('pdc-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { root: null, rootMargin: '0px 0px -80px 0px', threshold: 0.1 });
+    animatedEls.forEach(function(el) { observer.observe(el); });
+  })();
+
+  // ═══ FAQ Logic ═══
+  (function() {
+    var faqData = [
+      { cat: 'umum',    q: 'Siapa saja yang dapat mengikuti PDC 2026?',                    a: 'PDC 2026 terbuka untuk seluruh siswa-siswi tingkat SMP/MTs sederajat di seluruh Indonesia.' },
+      { cat: 'umum',    q: 'Apakah peserta boleh mengikuti lebih dari satu cabang lomba?', a: 'Peserta diperbolehkan mengikuti lebih dari satu cabang lomba selama jadwal tidak bentrok.' },
+      { cat: 'umum',    q: 'Cabang lomba apa saja yang tersedia?',                         a: 'Tersedia 8 cabang lomba: Math, Logic, Science, Scientific Writing, Basket, Speech, dan Solo Vocal.' },
+      { cat: 'umum',    q: 'Apakah PDC dilaksanakan Online atau Offline?',                 a: 'Pelaksanaan PDC 2026 dilakukan secara hybrid (Online & Offline).' },
+      { cat: 'umum',    q: 'Apakah ada biaya pendaftaran?',                                a: 'Informasi biaya pendaftaran tercantum pada buku panduan masing-masing bidang lomba.' },
+      { cat: 'umum',    q: 'Di mana saya bisa melihat buku panduan lomba?',                a: 'Buku panduan dapat diunduh melalui website resmi di bagian masing-masing lomba.' },
+      { cat: 'umum',    q: 'Kapan pengumuman pemenang dilaksanakan?',                      a: 'Pengumuman pemenang akan dilaksanakan pada acara Closing Ceremony PDC 2026.' },
+      { cat: 'math',    q: 'Materi apa yang diujikan di Math Olympiad?',                   a: 'Materi meliputi Aljabar, Geometri, Kombinatori, dan Teori Bilangan tingkat SMP.' },
+      { cat: 'logic',   q: 'Apa itu Logic Olympiad?',                                      a: 'Kompetisi yang menguji kemampuan berpikir kritis dan logika formal.' },
+      { cat: 'science', q: 'Bidang sains apa saja yang diujikan?',                         a: 'Meliputi Fisika, Biologi, dan Kimia dasar tingkat SMP.' },
+      { cat: 'writing', q: 'Apa tema karya tulis tahun ini?',                              a: 'Tema besar berkaitan dengan inovasi teknologi untuk masa depan berkelanjutan.' },
+      { cat: 'basket',  q: 'Di mana lokasi pertandingan basket?',                          a: 'Pertandingan dilaksanakan secara offline di GOR Pradita Dirgantara.' },
+      { cat: 'speech',  q: 'Berapa durasi pidato?',                                        a: 'Pidato berdurasi antara 5 hingga 7 menit.' },
+      { cat: 'vocal',   q: 'Lagu apa yang harus dinyanyikan?',                             a: 'Terdapat daftar lagu wajib dan lagu pilihan yang disediakan panitia.' }
+    ];
+
+    var list   = document.getElementById('finalFaqList');
+    var search = document.getElementById('finalSearch');
+    var pills  = document.querySelectorAll('.pdc-filter-pill');
+
+    function render(filter, term) {
+      filter = filter || 'all';
+      term   = term   || '';
+      list.innerHTML = '';
+      faqData
+        .filter(function(i) {
+          return (filter === 'all' || i.cat === filter) &&
+                 (i.q.toLowerCase().includes(term.toLowerCase()) || i.a.toLowerCase().includes(term.toLowerCase()));
+        })
+        .forEach(function(item) {
+          var el = document.createElement('div');
+          el.className = 'pdc-faq-item';
+          el.innerHTML =
+            '<button class="pdc-faq-header"><span>' + item.q + '</span><span>+</span></button>' +
+            '<div class="pdc-faq-body"><p>' + item.a + '</p></div>';
+          el.querySelector('.pdc-faq-header').addEventListener('click', function() {
+            var isActive = el.classList.contains('active');
+            document.querySelectorAll('.pdc-faq-item').forEach(function(x) { x.classList.remove('active'); });
+            if (!isActive) el.classList.add('active');
+          });
+          list.appendChild(el);
+        });
+    }
+
+    search.addEventListener('input', function(e) {
+      render(document.querySelector('.pdc-filter-pill.active').dataset.cat, e.target.value);
+    });
+
+    pills.forEach(function(p) {
+      p.addEventListener('click', function() {
+        pills.forEach(function(c) { c.classList.remove('active'); });
+        p.classList.add('active');
+        render(p.dataset.cat, search.value);
+      });
+    });
+
+    render();
+  })();
+</script>
